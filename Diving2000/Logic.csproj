@@ -43,14 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\CategoryData.cs" />
+    <Compile Include="Interface\ICategory.cs" />
+    <Compile Include="Object\Booking.cs" />
     <Compile Include="Object\Category.cs" />
+    <Compile Include="Object\Property.cs" />
     <Compile Include="Repository\CategoryRepo.cs" />
     <Compile Include="dbconn.cs" />
     <Compile Include="Interface\IRepo.cs" />
-    <Compile Include="Object\Item.cs" />
+    <Compile Include="Object\Equipment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Object\SubCategory.cs" />
-    <Compile Include="Repository\SubCategoryRepo.cs" />
+    <Compile Include="Repository\EquipmentRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
