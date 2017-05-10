@@ -33,6 +33,8 @@ namespace Logic
             cat._name = obj._name;
             cat._thumbnail = obj._thumbnail;
             cat._values = obj._values;
+            cat._service = obj._service;
+            cat._alarm = obj._alarm;
         }
 
         public Category GetById(int id)

@@ -9,7 +9,7 @@ namespace Logic
     public class Booking
     {
         public int _id { get; set; }
-        private List<Equipment> _equipment { get; set; }
+        public List<Equipment> _equipment { get; set; }
         public DateTime _startDate { get; set; }
         public DateTime _endDate { get; set; }
         public int _phone { get; set; }

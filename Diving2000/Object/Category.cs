@@ -16,29 +16,34 @@ namespace Logic
         public string _thumbnail { get; set; }
         public bool _service { get; set; }
 
-        public Category (int id, string name, List<Property> prop, string thumb, bool service)
+        public int _alarm { get; set; }
+
+        public Category (int id, string name, List<Property> prop, string thumb, bool service, int alarm)
         {
             _id = id;
             _name = name;
             _values = prop;
             _thumbnail = thumb;
             _service = service;
+            _alarm = alarm;
         }
 
-        public Category (int id, string name, string thumb, bool service)
+        public Category (int id, string name, string thumb, bool service, int alarm)
         {
             _id = id;
             _name = name;
             _thumbnail = thumb;
             _service = service;
+            _alarm = alarm;
         }
 
-        public Category(string name, string thumb, List<Property> prop, bool service)
+        public Category(string name, string thumb, List<Property> prop, bool service, int alarm)
         {
             _name = name;
             _values = prop;
             _thumbnail = thumb;
             _service = service;
+            _alarm = alarm;
         }
 
     }

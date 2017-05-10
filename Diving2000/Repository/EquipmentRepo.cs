@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Repository
 {
-    class EquipmentRepo 
+    class EquipmentRepo : IRepo<Equipment>
     {
 
         private List<Equipment> EquipmentList = new List<Equipment>();
@@ -16,38 +16,36 @@ namespace Logic.Repository
 
         public void Add(Equipment obj)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO Equipment ");
+            EquipmentList.Add(obj);
             
-        }
-
-        public void AddToRepo(Equipment obj)
-        {
-            throw new NotImplementedException();
         }
 
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
-        }
+            Equipment eq = GetById(id);
 
-        public void DeleteByIdRepo(int id)
-        {
-            throw new NotImplementedException();
+            EquipmentList.Remove(eq);
         }
 
         public Equipment GetById(int id)
         {
-            throw new NotImplementedException();
+            return EquipmentList.Find(x => x._id == id);
+
         }
 
-        public void Save(Equipment obj)
+        public void Edit(Equipment obj)
         {
-            throw new NotImplementedException();
+            Equipment OldObj = GetById(obj._id);
+
+            OldObj._name = obj._name;
+            OldObj._description = obj._description;
+            OldObj._catId = obj._catId;
+            OldObj._values = obj._values;
+            OldObj._service = obj._service;
+
+           
+            
         }
 
-        public void SaveRepo(Equipment obj)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

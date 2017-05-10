@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic
+namespace Logic.Data
 {
     public class CategoryData
     {
@@ -14,10 +14,27 @@ namespace Logic
         dbConn db = new dbConn();
         public void Add(Category obj)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO Category (Name, Description) VALUES (@name, @desc)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO Category (Name, Thumbnail, Service, Alarm) VALUES (@name, @thumb, @serv, @alarm)");
             cmd.Parameters.AddWithValue("@name", obj._name);
+            cmd.Parameters.AddWithValue("@thumb", obj._thumbnail);
+            cmd.Parameters.AddWithValue("@serv", obj._service);
+            cmd.Parameters.AddWithValue("@alarm", obj._alarm);
+
+
 
             int id = db.InsertDataGetNewID(cmd);
+
+            foreach (Property item in obj._values)
+            {
+                MySqlCommand cmdtwo = new MySqlCommand("INSERT INTO CategoryValues (CategoryId, ValueId) VALUES (@catid, @valid)");
+                cmd.Parameters.AddWithValue("@catid", id);
+                cmd.Parameters.AddWithValue("@valid", item._id);
+                db.ModifyData(cmd);
+            }
+
+            rep.Add(obj);
+            
+
 
         }
 
