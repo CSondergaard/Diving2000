@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Repository
 {
-    class EquipmentRepo 
+    class EquipmentRepo : IRepo<Equipment>
     {
 
         private List<Equipment> EquipmentList = new List<Equipment>();

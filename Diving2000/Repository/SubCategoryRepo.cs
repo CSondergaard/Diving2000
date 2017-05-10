@@ -7,49 +7,46 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class CategoryRepo : IRepo<Category>
+    public class SubCategoryRepo : IRepo<SubCategory>
     {
-        private List<Category> CategoryList = new List<Category>();
+        private List<SubCategory> SubCategoryList = new List<SubCategory>();
 
         dbConn db = new dbConn();
 
-        public void Add(Category obj)
+        public void Add (SubCategory obj)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO Category (Name, Description) VALUES (@name, @desc)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO SubCategory (Name, catId) VALUES (@name, @catid)");
             cmd.Parameters.AddWithValue("@name", obj._name);
-            cmd.Parameters.AddWithValue("@desc", obj._Description);
+            cmd.Parameters.AddWithValue("@catid", obj._catId);
 
             int id = db.InsertDataGetNewID(cmd);
 
-            AddToRepo(new Category(id, obj._name, obj._Description));
+            AddToRepo(new SubCategory(id, obj._name, obj._catId));
 
         }
-
-
-        public void AddToRepo(Category obj)
+        public void AddToRepo(SubCategory obj)
         {
-            CategoryList.Add(obj);
+            SubCategoryList.Add(obj);
         }
 
         public void DeleteById(int id)
         {
-            MySqlCommand cmd = new MySqlCommand("DELETE FROM Category WHERE Id = @id");
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM SubCategory WHERE Id = @id");
             cmd.Parameters.AddWithValue("@id", id);
 
             db.ModifyData(cmd);
             DeleteByIdRepo(id);
         }
 
+
         public void DeleteByIdRepo(int id)
         {
-            Category cat = GetById(id);
-            CategoryList.Remove(cat);
-
+            SubCategory cat = GetById(id);
+            SubCategoryList.Remove(cat);
         }
-
-        public Category GetById(int id)
+        public SubCategory GetById(int id)
         {
-            Category cat = CategoryList.Find(x => x._id == id);
+            SubCategory cat = SubCategoryList.Find(x => x._id == id);
             if (cat == null)
             {
                 return null;
@@ -58,32 +55,29 @@ namespace Logic
             {
                 return cat;
             }
-
-
         }
 
-        public void Save(Category obj)
+        public void Save(SubCategory obj)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE Category Name = @name, Desc = @desc WHERE Id = @id");
+            MySqlCommand cmd = new MySqlCommand("UPDATE SubCategory Name = @name, CatId WHERE Id = @id");
             cmd.Parameters.AddWithValue("@name", obj._name);
-            cmd.Parameters.AddWithValue("@desc", obj._Description);
+            cmd.Parameters.AddWithValue("@desc", obj._catId);
             cmd.Parameters.AddWithValue("@id", obj._id);
 
             db.ModifyData(cmd);
             SaveRepo(obj);
-
         }
 
-        public void SaveRepo(Category obj)
+        public void SaveRepo(SubCategory obj)
         {
-            Category cat = GetById(obj._id);
+            SubCategory cat = GetById(obj._id);
             if (cat == null)
             {
-                
+
             }
             else
             {
-                cat._Description = obj._Description;
+                cat._catId = obj._catId;
                 cat._name = obj._name;
             }
 

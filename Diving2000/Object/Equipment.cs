@@ -6,45 +6,30 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class Equipment
+    class Equipment
     {
-        public int _id { get; set; }
-        public string _name { get; set; }
+        private string _id { get; set; }
+        private string _name { get; set; }
 
-        public string _description { get; set; }
-        public int _catId { get; set; }
-        public Dictionary<string, string> _values { get; set; }
-        public DateTime _service { get; set; }
+        private string _description { get; set; }
+        private int _catId { get; set; }
 
 
-
-        public Equipment(string name, string desc, int catId, DateTime service, Dictionary<string, string> value)
+        public Equipment(string name, string value, int size, int catId)
         {
             _name = name;
-            _description = desc;
+            _value = value;
+            _size= size;
             _catId = catId;
-            _values = value;
-            _service = service;
-            
+
         }
-        public Equipment(int id, string name, string desc, int catId, DateTime service, Dictionary<string, string> value)
+        public Equipment(int id,  string name, string value, int size, int catId)
         {
             _id = id;
             _name = name;
-            _description = desc;
+            _value = value;
+            _size = size;
             _catId = catId;
-            _values = value;
-            _service = service;
-
-        }
-
-        public Equipment(int id, string name, string desc, int catId, DateTime service)
-        {
-            _id = id;
-            _name = name;
-            _description = desc;
-            _catId = catId;
-            _service = service;
 
         }
 

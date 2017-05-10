@@ -12,33 +12,24 @@ namespace Logic
     {
         public int _id { get; set; }
         public string _name { get; set; }
-        public List<Property> _values { get; set; }
-        public string _thumbnail { get; set; }
-        public bool _service { get; set; }
 
-        public Category (int id, string name, List<Property> prop, string thumb, bool service)
+        public Dictionary<string, string[]> _values { get; set; }
+        // Dictionary<ValuesName, Values value Array
+
+        public int WarningCount { get; set; }
+
+
+        public Category(int id, string Name, Dictionary<string, string[]> dic)
         {
             _id = id;
-            _name = name;
-            _values = prop;
-            _thumbnail = thumb;
-            _service = service;
+            _name = Name;
+            _values = dic;
         }
 
-        public Category (int id, string name, string thumb, bool service)
+        public Category(string Name, Dictionary<string, string[]> dic)
         {
-            _id = id;
-            _name = name;
-            _thumbnail = thumb;
-            _service = service;
-        }
-
-        public Category(string name, string thumb, List<Property> prop, bool service)
-        {
-            _name = name;
-            _values = prop;
-            _thumbnail = thumb;
-            _service = service;
+            _name = Name;
+            _values = dic;
         }
 
     }
