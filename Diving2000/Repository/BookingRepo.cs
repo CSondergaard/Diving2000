@@ -16,9 +16,8 @@ namespace Logic.Repository
             BookingList.Add(obj);
         }
 
-        public void AddEquipmentTooBooking(Equipment eq, Booking book)
+        public void AddEquipmentTooBooking(Equipment eq, Booking bk)
         {
-            Booking bk = GetById(book._id);
             bk._equipment.Add(eq);
             Edit(bk);
         }
@@ -30,10 +29,13 @@ namespace Logic.Repository
             BookingList.Remove(book);
         }
 
-        public void DeleteEquipmentFromBooking(Equipment eq, Booking book)
+        public void DeleteEquipmentFromBooking(Equipment eq, Booking bk)
         {
-            Booking bk = GetById(book._id);
-            bk._equipment.Remove(eq);
+            Equipment equip = bk._equipment.SingleOrDefault(x => x._id == eq._id);
+            if(equip != null)
+            {
+                bk._equipment.Remove(equip);
+            }
             Edit(bk);
         }
 

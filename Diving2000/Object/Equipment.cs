@@ -14,7 +14,7 @@ namespace Logic
         public string _description { get; set; }
         public int _catId { get; set; }
         public Dictionary<string, string> _values { get; set; }
-        public DateTime _service { get; set; }
+        public DateTime? _service { get; set; }
 
 
 
@@ -46,6 +46,14 @@ namespace Logic
             _catId = catId;
             _service = service;
 
+        }
+
+        public Equipment(int id, string name, string desc, int catId)
+        {
+            _id = id;
+            _name = name;
+            _description = desc;
+            _catId = catId;
         }
 
     }

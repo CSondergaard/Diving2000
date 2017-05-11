@@ -82,10 +82,37 @@ namespace UnitTest
         [TestMethod]
         public void AddTooBooking()
         {
-            EquipList.Add(new Equipment(1, "Dragt", "Hej", 2, DateTime.Now));
-            Book.Add(new Booking(1, EquipList, DateTime.Now, DateTime.Today, 41412622, true));
             Booking bk = Book.GetById(1);
             
+        }
+
+        [TestMethod]
+        public void AddEquipmentToCurrentBooking()
+        {
+            Booking bk = Book.GetById(1);
+            Equipment eq = new Equipment(2, "Handske", "Er en handske", 1);
+
+            int nr = bk._equipment.Count;
+
+            Book.AddEquipmentTooBooking(eq, bk);
+            bk = Book.GetById(1);
+            int newnr = bk._equipment.Count;
+            Assert.AreEqual(nr + 1, newnr);
+        }
+
+        [TestMethod]
+        public void DeleteEquipmentFromCurrentBooking()
+        {
+       
+            Booking bk = Book.GetById(1);
+            Equipment eq = new Equipment(2, "Handske", "Er en handske", 1);
+
+            int nr = bk._equipment.Count;
+
+            Book.DeleteEquipmentFromBooking(eq, bk);
+            bk = Book.GetById(1);
+            int newnr = bk._equipment.Count;
+            Assert.AreEqual(nr - 1, newnr);
         }
 
 
