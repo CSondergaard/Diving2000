@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Repository
 {
-    class PropertyRepo : IRepo<Property>
+    public class PropertyRepo : IRepo<Property>
     {
 
         private List<Property> PropertyList = new List<Property>();

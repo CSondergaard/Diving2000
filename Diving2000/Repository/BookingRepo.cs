@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Repository
 {
-    class BookingRepo : IRepo<Booking>
+    public class BookingRepo : IRepo<Booking>
     {
 
         private List<Booking> BookingList = new List<Booking>();

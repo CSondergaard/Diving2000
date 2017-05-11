@@ -49,7 +49,7 @@ namespace Logic.Data
 
         public void Edit(Category obj)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE Category Name = @name, Thumbnail = @thumb, Service = @serv WHERE Id = @id");
+            MySqlCommand cmd = new MySqlCommand("UPDATE Category SET Name = @name, Thumbnail = @thumb, Service = @serv WHERE Id = @id");
             cmd.Parameters.AddWithValue("@name", obj._name);
             cmd.Parameters.AddWithValue("@id", obj._id);
             cmd.Parameters.AddWithValue("@thumb", obj._thumbnail);
