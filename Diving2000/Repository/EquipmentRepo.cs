@@ -10,7 +10,7 @@ namespace Logic.Repository
     public class EquipmentRepo : IRepo<Equipment>
     {
 
-        private List<Equipment> EquipmentList = new List<Equipment>();
+        private static List<Equipment> EquipmentList = new List<Equipment>();
 
         dbConn db = new dbConn();
 

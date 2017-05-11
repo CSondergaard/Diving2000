@@ -9,7 +9,7 @@ namespace Logic
 {
     public class CategoryRepo : ICategory
     {
-        private List<Category> CategoryList = new List<Category>();
+        private static List<Category> CategoryList = new List<Category>();
 
         public void Add(Category obj)
         {

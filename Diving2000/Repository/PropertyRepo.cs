@@ -9,7 +9,7 @@ namespace Logic.Repository
     public class PropertyRepo : IRepo<Property>
     {
 
-        private List<Property> PropertyList = new List<Property>();
+        private static List<Property> PropertyList = new List<Property>();
 
         public void Add(Property obj)
         {
