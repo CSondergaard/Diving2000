@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Logic.Repository
 {
-    class EquipmentRepo : IRepo<Equipment>
+    public class EquipmentRepo : IRepo<Equipment>
     {
 
-        private List<Equipment> EquipmentList = new List<Equipment>();
+        private static List<Equipment> EquipmentList = new List<Equipment>();
 
         dbConn db = new dbConn();
 

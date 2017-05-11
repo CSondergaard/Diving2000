@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace Logic.Repository
 {
-    class BookingRepo : IRepo<Booking>
+    public class BookingRepo : IRepo<Booking>
     {
 
-        private List<Booking> BookingList = new List<Booking>();
+        private static List<Booking> BookingList = new List<Booking>();
 
         public void Add(Booking obj)
         {
             BookingList.Add(obj);
+        }
+
+        public void AddEquipmentTooBooking(Equipment eq, Booking book)
+        {
+            Booking bk = GetById(book._id);
+            bk._equipment.Add(eq);
+            Edit(bk);
         }
 
         public void DeleteById(int id)
@@ -21,6 +28,13 @@ namespace Logic.Repository
             Booking book = GetById(id);
 
             BookingList.Remove(book);
+        }
+
+        public void DeleteEquipmentFromBooking(Equipment eq, Booking book)
+        {
+            Booking bk = GetById(book._id);
+            bk._equipment.Remove(eq);
+            Edit(bk);
         }
 
         public void Edit(Booking obj)

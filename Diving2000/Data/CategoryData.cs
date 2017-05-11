@@ -20,20 +20,23 @@ namespace Logic.Data
             cmd.Parameters.AddWithValue("@serv", obj._service);
             cmd.Parameters.AddWithValue("@alarm", obj._alarm);
 
-
-
             int id = db.InsertDataGetNewID(cmd);
 
-            foreach (Property item in obj._values)
+            if (obj._values != null)
             {
-                MySqlCommand cmdtwo = new MySqlCommand("INSERT INTO CategoryValues (CategoryId, ValueId) VALUES (@catid, @valid)");
-                cmdtwo.Parameters.AddWithValue("@catid", id);
-                cmdtwo.Parameters.AddWithValue("@valid", item._id);
-                db.ModifyData(cmd);
+                foreach (Property item in obj._values)
+                {
+                    MySqlCommand cmdtwo = new MySqlCommand("INSERT INTO CategoryValues (CategoryId, ValueId) VALUES (@catid, @valid)");
+                    cmdtwo.Parameters.AddWithValue("@catid", id);
+                    cmdtwo.Parameters.AddWithValue("@valid", item._id);
+                    db.ModifyData(cmd);
+                }
             }
 
+            obj._id = 1;
+
             rep.Add(obj);
-            
+
 
 
         }
@@ -45,16 +48,18 @@ namespace Logic.Data
 
             db.ModifyData(cmd);
 
+            rep.DeleteById(id);
+
         }
 
         public void Edit(Category obj)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE Category Name = @name, Thumbnail = @thumb, Service = @serv WHERE Id = @id");
+            MySqlCommand cmd = new MySqlCommand("UPDATE Category SET Name = @name, Thumbnail = @thumb, Service = @serv WHERE Id = @id");
             cmd.Parameters.AddWithValue("@name", obj._name);
             cmd.Parameters.AddWithValue("@id", obj._id);
             cmd.Parameters.AddWithValue("@thumb", obj._thumbnail);
             cmd.Parameters.AddWithValue("@serv", obj._service);
-           
+
             db.ModifyData(cmd);
 
             foreach (var item in obj._values)
@@ -63,7 +68,7 @@ namespace Logic.Data
             }
 
             rep.Edit(obj);
-         
+
 
         }
 
@@ -81,7 +86,7 @@ namespace Logic.Data
                 Category cat = new Category(Convert.ToInt32(rw["Id"]), rw["Name"].ToString(), rw["Thumbnail"].ToString(), Convert.ToBoolean(rw["Service"]), Convert.ToInt32(rw["Alarm"]));
                 rep.Add(cat);
             }
-             
+
         }
     }
 }
