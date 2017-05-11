@@ -36,5 +36,12 @@ namespace Logic.Repository
         {
             return PropertyList.Find(x => x._id == id);
         }
+
+        public Property GetByName(string name)
+        {
+            return PropertyList.Find(x => x._name == name);
+
+        }
+
     }
 }

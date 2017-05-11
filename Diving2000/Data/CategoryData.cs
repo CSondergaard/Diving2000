@@ -27,8 +27,8 @@ namespace Logic.Data
             foreach (Property item in obj._values)
             {
                 MySqlCommand cmdtwo = new MySqlCommand("INSERT INTO CategoryValues (CategoryId, ValueId) VALUES (@catid, @valid)");
-                cmd.Parameters.AddWithValue("@catid", id);
-                cmd.Parameters.AddWithValue("@valid", item._id);
+                cmdtwo.Parameters.AddWithValue("@catid", id);
+                cmdtwo.Parameters.AddWithValue("@valid", item._id);
                 db.ModifyData(cmd);
             }
 
