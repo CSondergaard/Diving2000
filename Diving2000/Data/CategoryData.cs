@@ -70,7 +70,7 @@ namespace Logic.Data
         public void GetAll()
         {
             MySqlCommand cmd = new MySqlCommand(@"
-            SELECT Id, Name, Thumbnail, Service 
+            SELECT Id, Name, Thumbnail, Service, Alarm
             FROM Category
             JOIN CategoryValues ON Category.Id = CategoryValues.CategoryId                    
             ");
@@ -78,7 +78,7 @@ namespace Logic.Data
 
             foreach (DataRow rw in dt.Rows)
             {
-                Category cat = new Category(Convert.ToInt32(rw["Id"]), rw["Name"].ToString(), rw["Thumbnail"].ToString(), Convert.ToBoolean(rw["Service"]));
+                Category cat = new Category(Convert.ToInt32(rw["Id"]), rw["Name"].ToString(), rw["Thumbnail"].ToString(), Convert.ToBoolean(rw["Service"]), Convert.ToInt32(rw["Alarm"]));
                 rep.Add(cat);
             }
              
