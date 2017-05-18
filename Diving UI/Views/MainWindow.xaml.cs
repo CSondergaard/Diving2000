@@ -1,5 +1,4 @@
-﻿using Diving_UI.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,13 +23,6 @@ namespace Diving_UI
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void btnHomeClick(object sender, RoutedEventArgs e)
-        {
-            (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
-            (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
-            (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
         }
     }
 }

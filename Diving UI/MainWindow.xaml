@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diving_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024" MinWidth="1024" MinHeight="768" MaxHeight="768" MaxWidth="1024" ResizeMode="CanMinimize">
-    <Grid>
+        Title="DIVING2K IZI" Height="768" Width="1024" MinWidth="1024" MinHeight="768" MaxHeight="768" MaxWidth="1024" ResizeMode="CanMinimize">
+    <Grid Name="Template">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" >
-            </ColumnDefinition>
-            <ColumnDefinition Width="*">
-            </ColumnDefinition>
+            <ColumnDefinition Width="310" />
+            <ColumnDefinition Width="714" />
         </Grid.ColumnDefinitions>
+
+
+
         <Rectangle Width="auto" Height="auto">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -21,39 +22,64 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle Width="auto" Height="auto" Grid.Column="2">
+
+        <Grid Grid.Column="0" x:Name="LeftPanel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="230" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="75" />
+            </Grid.RowDefinitions>
+            <Button Background="Transparent" BorderThickness="0" Width="200" Height="200" Click="btnHomeClick">
+                <Image x:Name="image" Grid.Column="0" Source="Resources/18217764_1871114903128407_1044267123_n.png"/>
+            </Button>
+            <Button x:Name="btnsearch" Content="Søg" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Width="46" BorderBrush="#0a1f3c" Background="#0a1f3c" Foreground="White" Margin="240,25,0,25"/>
+            <TextBox  Width="225" Height="25" VerticalAlignment="Top" Padding="4" HorizontalAlignment="Left" x:Name="SearchTermTextBox" Margin="15,25,0,0" BorderBrush="#0a1f3c" Grid.Column="0" Grid.Row="2"/>
+            <TextBlock IsHitTestVisible="False" Text="Indtast tlf nr." VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="DarkGray" Margin="20,32,0,32" Grid.Column="0" Grid.Row="2">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <ScrollViewer HorizontalAlignment="Left" Height="414" Margin="10,10,0,0" VerticalAlignment="Top" Width="290" Grid.Column="0" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+                <Frame x:Name="FrameFilter" NavigationUIVisibility="Hidden">
+
+                </Frame>
+            </ScrollViewer>
+        </Grid>
+
+
+        <Rectangle Width="auto" Height="auto" Grid.Column="1">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#cacaca" Offset="0.20" />
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle Width="auto" Grid.Column="1" Margin="18,10,18,676" Stroke="#363636" StrokeDashArray="4 2">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="White" />
-            </Rectangle.Fill>
-        </Rectangle>
-        <Rectangle Width="auto" Grid.Column="1" Margin="18,70,18,19" Stroke="#363636" StrokeDashArray="4 2">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="White" />
-            </Rectangle.Fill>
 
-        </Rectangle>
-        <Image x:Name="image" Height="165" Width="165" VerticalAlignment="Top" Source="Resources/18217764_1871114903128407_1044267123_n.png" RenderTransformOrigin="0.903,0.605" Margin="43,5,42,0" />
-        <TextBox  Width="180"  VerticalAlignment="Center" Padding="4" HorizontalAlignment="Left" x:Name="SearchTermTextBox" Margin="14,675,0,18" Height="25" BorderBrush="#0a1f3c"/>
-        <TextBlock IsHitTestVisible="False" Text="Indtast tlf nr." VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="DarkGray" Margin="20,680,0,23">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <Label x:Name="lblsearch" Content="Find Sag:" HorizontalAlignment="Left" Margin="10,658,0,0" VerticalAlignment="Top" Foreground="White" />
-        <Button x:Name="btnsearch" Content="Søg" HorizontalAlignment="Left" Margin="194,681,0,0" VerticalAlignment="Top" Width="46" Height="25" BorderBrush="#0a1f3c" Background="#0a1f3c" Foreground="White"/>
+        <Grid Grid.Column="1" Name="RightPanel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+
+            </Grid.ColumnDefinitions>
+            <Rectangle Width="660" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="0" Margin="25,6,29,5" />
+            <Rectangle x:Name="MainView" Width="660" Height="660" VerticalAlignment="Top" HorizontalAlignment="Center" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="1" Margin="25,8,29,0" />
+            <Frame x:Name="FrameChart" Width="330" Height="25" Grid.Row="0" HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Margin="35,0,0,0" />
+            <Frame Source="\Views\FrontPage.xaml" Grid.Row="1" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="0,40,0,0" Width="600" Height="600" VerticalAlignment="Top">
+
+            </Frame>
+        </Grid>
+
+
+        
     </Grid>
 </Window>
