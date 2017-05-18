@@ -56,6 +56,16 @@ namespace Logic.Repository
             return BookingList.Find(x => x._id == id);
         }
 
+        public Booking GetByPhone(int phone)
+        {
+            return BookingList.Find(x => x._phone == phone);
+        }
+
+        public List<Booking> GetAllBookings()
+        {
+            return BookingList;
+        }
+
         public List<Equipment> GetEquipmentsBookedAtTime(DateTime date, List<Equipment> equiplist)
         {
             Booking[] bookings = GetRentedEquipmentFromDate(date);
