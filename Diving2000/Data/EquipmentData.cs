@@ -32,7 +32,7 @@ namespace Logic.Data
             {
                 Property prop = proprep.GetByName(item.Key);
 
-                MySqlCommand cmdTwo = new MySqlCommand("INSERT INTO EquipmentValues (Property, Equipment, Values) VALUES(@prop, @eq, @val)");
+                MySqlCommand cmdTwo = new MySqlCommand("INSERT INTO EquipmentValues (Property, Equipment, Value) VALUES(@prop, @eq, @val)");
                 cmdTwo.Parameters.AddWithValue("@prop", prop._id);
                 cmdTwo.Parameters.AddWithValue("@eq", id);
                 cmdTwo.Parameters.AddWithValue("val", item.Value);
@@ -60,7 +60,7 @@ namespace Logic.Data
 
         public void DeleteEquipmentValue(string ValueName, int id, int prop)
         {
-            MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM EquipmentValues WHERE Equipment = @id AND Values = @val AND Property = @prop");
+            MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM EquipmentValues WHERE Equipment = @id AND Value = @val AND Property = @prop");
             cmdTwo.Parameters.AddWithValue("@id", id);
             cmdTwo.Parameters.AddWithValue("@val", ValueName);
             cmdTwo.Parameters.AddWithValue("@prop", prop);
@@ -81,7 +81,7 @@ namespace Logic.Data
             {
                 Property prop = proprep.GetByName(item.Key);
 
-                MySqlCommand cmdTwo = new MySqlCommand("UPDATE EquipmentValues SET Values = @val WHERE Property = @prop AND Equipment = @eq");
+                MySqlCommand cmdTwo = new MySqlCommand("UPDATE EquipmentValues SET Value = @val WHERE Property = @prop AND Equipment = @eq");
                 cmdTwo.Parameters.AddWithValue("@val", item.Value);
                 cmdTwo.Parameters.AddWithValue("@prop",prop._id);
                 cmdTwo.Parameters.AddWithValue("@eq", obj._id);
@@ -119,7 +119,7 @@ namespace Logic.Data
         public Dictionary<string, string> GetValuesForEquipment(int id)
         {
             MySqlCommand cmdTwo = new MySqlCommand(@"
-            SELECT Property, Equipment, Values, Name
+            SELECT Property, Equipment, Value, Name
             FROM EquipmentValues
             JOIN Property ON EquipmentValues.Property = Property.Id
             WHERE EquipmentValues.Equipment = @id
@@ -133,7 +133,7 @@ namespace Logic.Data
 
             foreach (DataRow item in prop.Rows)
             {
-                dic.Add(item["Name"].ToString(), item["Values"].ToString());
+                dic.Add(item["Name"].ToString(), item["Value"].ToString());
             }
 
             return dic;

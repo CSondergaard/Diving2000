@@ -32,7 +32,7 @@ namespace Logic.Repository
         public void DeleteEquipmentFromBooking(Equipment eq, Booking bk)
         {
             Equipment equip = bk._equipment.SingleOrDefault(x => x._id == eq._id);
-            if(equip != null)
+            if (equip != null)
             {
                 bk._equipment.Remove(equip);
             }
@@ -54,6 +54,34 @@ namespace Logic.Repository
         public Booking GetById(int id)
         {
             return BookingList.Find(x => x._id == id);
+        }
+
+        public List<Equipment> GetEquipmentsBookedAtTime(DateTime date, List<Equipment> equiplist)
+        {
+            Booking[] bookings = GetRentedEquipmentFromDate(date);
+            List<Equipment> eq = equiplist;
+
+            foreach (Booking item in bookings)
+            {
+                foreach (Equipment equip in item._equipment)
+                {
+                    bool exist = eq.Any(x => x._id == equip._id);
+                    if (exist)
+                        eq.Remove(equip);
+                }
+
+            }
+
+            return eq;
+
+
+        }
+
+        public Booking[] GetRentedEquipmentFromDate(DateTime date)
+        {
+            return BookingList.Where(x => x._startDate.Ticks < date.Ticks && x._endDate.Ticks > date.Ticks).ToArray();
+
+
         }
     }
 }

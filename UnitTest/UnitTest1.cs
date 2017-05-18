@@ -68,6 +68,46 @@ namespace UnitTest
             Assert.IsTrue(Equip.GetById(1) == null);
         }
 
+        [TestMethod]
+        public void SearchEquipment()
+        {
+
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("Str", "32");
+            dic.Add("Tykkelse", "5mm");
+            dic.Add("Tykkelse2", "4mm");
+            dic.Add("Tykkelse3", "3mm");
+            dic.Add("Tykkelse4", "2mm");
+            dic.Add("Tykkelse5", "1mm");
+            dic.Add("Tykkelse6", "6mm");
+            dic.Add("Tykkelse7", "8mm");
+            Dictionary<string, string> dic2 = new Dictionary<string, string>();
+            dic2.Add("Str", "34");
+            dic2.Add("Tykkelse", "4mm");
+            dic2.Add("Tykkelse2", "4mm");
+            dic2.Add("Tykkelse3", "3mm");
+            dic2.Add("Tykkelse4", "2mm");
+            dic2.Add("Tykkelse5", "1mm");
+            dic2.Add("Tykkelse6", "6mm");
+            dic2.Add("Tykkelse7", "8mm");
+
+
+            Equip.Add(new Equipment(1, "Dragt", "Hej", 2, DateTime.Now, dic));
+            Equip.Add(new Equipment(2, "Dragt", "Hej", 2, DateTime.Now, dic));
+            Equip.Add(new Equipment(3, "Dragt", "Hej", 2, DateTime.Now, dic));
+            for (int i = 4; i < 250000; i++)
+            {
+                Equip.Add(new Equipment(i, "Dragt", "Hej", 2, DateTime.Now, dic2));
+            }
+
+            List<Equipment> eq = Equip.GetAllEquipments();
+            eq = Equip.GetEquipmentsFromCategory(2, eq);
+            eq = Equip.SearchEquipment(dic2, eq);
+            Assert.AreEqual(249996, eq.Count);
+
+
+        }
+
         //Booking
 
         [TestMethod]
@@ -83,7 +123,7 @@ namespace UnitTest
         public void AddTooBooking()
         {
             Booking bk = Book.GetById(1);
-            
+
         }
 
         [TestMethod]
@@ -103,7 +143,7 @@ namespace UnitTest
         [TestMethod]
         public void DeleteEquipmentFromCurrentBooking()
         {
-       
+
             Booking bk = Book.GetById(1);
             Equipment eq = new Equipment(2, "Handske", "Er en handske", 1);
 

@@ -36,5 +36,13 @@ namespace Logic
 
         }
 
+        public Booking(DateTime start, DateTime end, int phone)
+        {
+            _startDate = start;
+            _endDate = end;
+            _phone = phone;
+            _status = false;
+        }
+
     }
 }
