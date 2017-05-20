@@ -40,8 +40,6 @@ namespace Logic.Data
                 db.ModifyData(cmdTwo);
 
             }
-
-            rep.Add(obj);
         }
 
         public void DeleteById(int id)
@@ -89,8 +87,6 @@ namespace Logic.Data
                 db.ModifyData(cmdTwo);
             }
 
-            rep.Edit(obj);
-
         }
 
         public void GetAll()
@@ -113,8 +109,6 @@ namespace Logic.Data
 
             }
         }
-
-
 
         public Dictionary<string, string> GetValuesForEquipment(int id)
         {
