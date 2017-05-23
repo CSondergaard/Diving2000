@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Data\BookingData.cs" />
     <Compile Include="Data\CategoryData.cs" />
+    <Compile Include="Data\DataFacade.cs" />
     <Compile Include="Data\EquipmentData.cs" />
     <Compile Include="Data\PropertyData.cs" />
     <Compile Include="Interface\ICategory.cs" />

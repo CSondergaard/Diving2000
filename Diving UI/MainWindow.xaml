@@ -5,15 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diving_UI"
         mc:Ignorable="d"
-        Title="DIVING2K IZI" Height="768" Width="1024" MinWidth="1024" MinHeight="768" MaxHeight="768" MaxWidth="1024" ResizeMode="CanMinimize">
+        Title="Booking Manager V2.1.204" Height="768" Width="1024" MinWidth="1024" MinHeight="768" MaxHeight="768" MaxWidth="1024" ResizeMode="CanMinimize">
     <Grid Name="Template">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="310" />
             <ColumnDefinition Width="714" />
         </Grid.ColumnDefinitions>
-
-
-
         <Rectangle Width="auto" Height="auto">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -29,9 +26,23 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="75" />
             </Grid.RowDefinitions>
-            <Button Background="Transparent" BorderThickness="0" Width="200" Height="200" Click="btnHomeClick">
-                <Image x:Name="image" Grid.Column="0" Source="Resources/18217764_1871114903128407_1044267123_n.png"/>
+            <Button x:Name="btnLogo" Background="Transparent" BorderThickness="0" Width="200" Height="200" Click="btnHomeClick">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image x:Name="image" Grid.Column="0" Source="Resources/18217764_1871114903128407_1044267123_n.png" />
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="image" Property="Source" Value="Resources/18217764_1871114903128407_1044267123_n.png" />
+                                <Setter TargetName="image" Property="Cursor" Value="Hand" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
+
+
             <Button x:Name="btnsearch" Content="Søg" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Width="46" BorderBrush="#0a1f3c" Background="#0a1f3c" Foreground="White" Margin="240,25,0,25"/>
             <TextBox  Width="225" Height="25" VerticalAlignment="Top" Padding="4" HorizontalAlignment="Left" x:Name="SearchTermTextBox" Margin="15,25,0,0" BorderBrush="#0a1f3c" Grid.Column="0" Grid.Row="2"/>
             <TextBlock IsHitTestVisible="False" Text="Indtast tlf nr." VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="DarkGray" Margin="20,32,0,32" Grid.Column="0" Grid.Row="2">
@@ -80,6 +91,6 @@
         </Grid>
 
 
-        
+
     </Grid>
 </Window>

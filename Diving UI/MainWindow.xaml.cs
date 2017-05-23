@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Logic.Data;
 
 namespace Diving_UI
 {
@@ -21,9 +22,12 @@ namespace Diving_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        DataFacade fac = new DataFacade();
+
         public MainWindow()
         {
             InitializeComponent();
+            fac.GetAll();
         }
 
         private void btnHomeClick(object sender, RoutedEventArgs e)
@@ -32,5 +36,11 @@ namespace Diving_UI
             (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
             (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
         }
+
+        private void GetAllDate()
+        {
+            fac.GetAll();
+        }
     }
+
 }

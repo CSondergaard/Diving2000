@@ -19,9 +19,8 @@ namespace Logic.Data
 
         public void Add(Equipment obj)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO Equipment (Name, Description, catId, service) VALUES (@name, @desc, @catid, @service)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO Equipment (Name, catId, service) VALUES (@name, @catid, @service)");
             cmd.Parameters.AddWithValue("@name", obj._name);
-            cmd.Parameters.AddWithValue("@desc", obj._description);
             cmd.Parameters.AddWithValue("@catid", obj._catId);
             cmd.Parameters.AddWithValue("@service", obj._service);
 
@@ -67,10 +66,9 @@ namespace Logic.Data
 
         public void Edit(Equipment obj)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE Equipment SET Service = @ser, Name = @name, Description = @desc, catId = @cat WHERE Id = @id");
+            MySqlCommand cmd = new MySqlCommand("UPDATE Equipment SET Service = @ser, Name = @name, catId = @cat WHERE Id = @id");
             cmd.Parameters.AddWithValue("@ser", obj._service);
             cmd.Parameters.AddWithValue("@name", obj._name);
-            cmd.Parameters.AddWithValue("@desc", obj._description);
             cmd.Parameters.AddWithValue("@cat", obj._catId);
             cmd.Parameters.AddWithValue("@id", obj._id);
             db.ModifyData(cmd);
@@ -91,7 +89,7 @@ namespace Logic.Data
 
         public void GetAll()
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, service, Name, Description, catId FROM Equipment");
+            MySqlCommand cmd = new MySqlCommand("SELECT id, service, Name, CatId FROM Equipment");
             DataTable dt = db.GetData(cmd);
             foreach (DataRow rw in dt.Rows)
             {
@@ -101,7 +99,6 @@ namespace Logic.Data
                 rep.Add(new Equipment(
                 Convert.ToInt32(rw["id"]),
                 rw["name"].ToString(),
-                rw["Description"].ToString(),
                 Convert.ToInt32(rw["catId"]),
                 Convert.ToDateTime(rw["service"]),
                 dic

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Data
 {
-    class PropertyData
+    public class PropertyData
     {
 
         PropertyRepo proprep = new PropertyRepo();
@@ -48,6 +48,16 @@ namespace Logic.Data
             }
         }
 
+        public void AddValue(string value, int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO Value (PropertyId, Name) VALUES (@id, @name)");
+
+            cmd.Parameters.AddWithValue("@name", value);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            db.ModifyData(cmd);
+
+        }
 
         public void DeleteById(int id)
         {
@@ -82,8 +92,8 @@ namespace Logic.Data
         public List<string> GetAllValuesForProperty(int Id)
         {
             List<string> ValueList = new List<string>();
-            MySqlCommand cmdVal = new MySqlCommand("SELET Name From Value WHERE PropertyId = @id");
-            cmdVal.Parameters.AddWithValue("@id", id);
+            MySqlCommand cmdVal = new MySqlCommand("SELECT Name From Value WHERE PropertyId = @id");
+            cmdVal.Parameters.AddWithValue("@id", Id);
             DataTable dtVal = db.GetData(cmdVal);
 
             foreach (DataRow val in dtVal.Rows)

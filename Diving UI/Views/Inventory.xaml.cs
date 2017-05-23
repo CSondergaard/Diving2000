@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Logic;
+using Logic.Repository;
 
 namespace Diving_UI.Views
 {
@@ -20,9 +22,26 @@ namespace Diving_UI.Views
     /// </summary>
     public partial class Inventory : UserControl
     {
+        EquipmentRepo eqRep = new EquipmentRepo();
+
         public Inventory()
         {
             InitializeComponent();
+
+           
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            List<Equipment> eqlist = eqRep.GetAllEquipments();
+            foreach (Equipment item in eqlist)
+            {
+                StackPanel sp = new StackPanel();
+                Label lb = new Label();
+                lb.Content = item._name;
+                sp.Children.Add(lb);
+                SpInv.Children.Add(sp);
+            }
         }
     }
 }

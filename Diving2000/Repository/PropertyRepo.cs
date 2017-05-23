@@ -16,6 +16,13 @@ namespace Logic.Repository
             PropertyList.Add(obj);
         }
 
+        public void AddValue(string property, string value)
+        {
+            Property prop = GetByName(property);
+            prop._values.Add(value);
+            Edit(prop);
+        }
+
         public void DeleteById(int id)
         {
             Property prop = GetById(id);

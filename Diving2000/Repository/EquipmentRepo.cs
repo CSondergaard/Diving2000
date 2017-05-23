@@ -38,7 +38,6 @@ namespace Logic.Repository
             Equipment OldObj = GetById(obj._id);
 
             OldObj._name = obj._name;
-            OldObj._description = obj._description;
             OldObj._catId = obj._catId;
             OldObj._values = obj._values;
             OldObj._service = obj._service;
@@ -90,8 +89,7 @@ namespace Logic.Repository
                     eqlist.Add(items);
                 }
             }
-
-         
+        
             return eqlist;
         }
     }

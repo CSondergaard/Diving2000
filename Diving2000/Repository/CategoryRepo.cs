@@ -42,5 +42,16 @@ namespace Logic
             Category cat = CategoryList.Find(x => x._id == id);
             return cat;
         }
+
+        public Category GetByName(string name)
+        {
+            Category cat = CategoryList.Find(x => x._name == name);
+            return cat;
+        }
+
+        public List<Category> GetAll()
+        {
+            return CategoryList;
+        }
     }
 }

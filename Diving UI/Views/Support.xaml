@@ -6,46 +6,97 @@
              xmlns:local="clr-namespace:Diving_UI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024">
-	<Grid>
-		<StackPanel>
-			<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,0,0,0" VerticalAlignment="Top" Width="400">
-				<Image Source="/Diving UI;component/Resources/Support/Jacob.jpg" HorizontalAlignment="Left"/>
-			</Border>
-			<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,20,0,0" VerticalAlignment="Top" Width="400">
-				<Image Source="/Diving UI;component/Resources/Support/Casper.jpg" HorizontalAlignment="Left"/>
-			</Border>
-			<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,20,0,0" VerticalAlignment="Top" Width="400">
-				<Image Source="/Diving UI;component/Resources/Support/JonasL.jpg" HorizontalAlignment="Left"/>
-			</Border>
-			<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,20,0,0" VerticalAlignment="Top" Width="400">
-				<Image Source="/Diving UI;component/Resources/Support/JonasK.jpg" HorizontalAlignment="Left"/>
-			</Border>
-		</StackPanel>
-		<TextBlock HorizontalAlignment="Left" Margin="150,20,0,0" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,51,0,0" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,82,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,20,0,0" TextWrapping="Wrap" Text="Jakob Boisen" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,51,0,0" TextWrapping="Wrap" Text="51418279" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,82,10,0" TextWrapping="Wrap" Text="Jakob@fumi.dk" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,151,0,0" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,182,0,0" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,213,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,151,0,0" TextWrapping="Wrap" Text="Casper Søndergaard" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,182,0,0" TextWrapping="Wrap" Text="28776026" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,213,10,0" TextWrapping="Wrap" Text="Casp4807@hotmail.com" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,288,0,0" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,319,0,0" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,350,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,289,0,0" TextWrapping="Wrap" Text="Jonas Larsen" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,320,0,0" TextWrapping="Wrap" Text="41412622" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,351,10,0" TextWrapping="Wrap" Text="therealadrianscythe@gmail.com" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,422,0,0" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,453,0,0" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
-		<TextBlock HorizontalAlignment="Left" Margin="150,484,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,423,0,0" TextWrapping="Wrap" Text="Jonas Kaan" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,454,0,0" TextWrapping="Wrap" Text="29218581" VerticalAlignment="Top"/>
-		<TextBlock Margin="190,485,10,0" TextWrapping="Wrap" Text="Kaanmob@gmail.com" VerticalAlignment="Top"/>
+    <Grid Background="White">
+        <StackPanel HorizontalAlignment="Center">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,0,0,0" VerticalAlignment="Top" Width="400">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Diving UI;component/Resources/Support/Jacob.jpg" HorizontalAlignment="Left" Margin="0, 0,20, 0" />
+                    <StackPanel Width="auto">
+                        <Separator Width="20" Height="15" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="Jakob Boisen" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="51 41 82 79" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="Jakob@fumi.dk" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,20,0,0" VerticalAlignment="Top" Width="400">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Diving UI;component/Resources/Support/Casper.jpg" HorizontalAlignment="Left" Margin="0, 0, 20, 0"/>
+                    <StackPanel Width="auto">
+                        <Separator Width="20" Height="15" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="Casper Klærke Søndergaard" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="28 77 60 26" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="Kontakt@csondergaard.dk" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,20,0,0" VerticalAlignment="Top" Width="400">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Diving UI;component/Resources/Support/JonasL.jpg" HorizontalAlignment="Left" Margin="0,0,20,0"/>
+                    <StackPanel Width="auto">
+                        <Separator Width="20" Height="15" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="Jonas Larsen" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="41 41 26 22" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="therealadrianschyte@gmail.com" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="115" Margin="10,20,0,0" VerticalAlignment="Top" Width="400">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Diving UI;component/Resources/Support/JonasK.jpg" HorizontalAlignment="Left" Margin="0,0,20,0"/>
+                    <StackPanel Width="auto">
+                        <Separator Width="20" Height="15" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Navn:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="Jonas Kaan" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Tlf. nr:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="29 21 85 81" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        <Separator Width="20" Height="10" Background="Transparent"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="50" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Text="Kaanmob@gmail.com" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
 
-
-	</Grid>
+    </Grid>
 </UserControl>

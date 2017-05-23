@@ -5,12 +5,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logic.Repository;
 
 namespace Logic.Data
 {
     public class CategoryData
     {
         CategoryRepo rep = new CategoryRepo();
+        PropertyRepo PropRep = new PropertyRepo();
+
         dbConn db = new dbConn();
         public void Add(Category obj)
         {
@@ -76,14 +79,27 @@ namespace Logic.Data
         {
             MySqlCommand cmd = new MySqlCommand(@"
             SELECT Id, Name, Thumbnail, Service, Alarm
-            FROM Category
-            JOIN CategoryValues ON Category.Id = CategoryValues.CategoryId                    
+            FROM Category                  
             ");
             DataTable dt = db.GetData(cmd);
 
             foreach (DataRow rw in dt.Rows)
             {
-                Category cat = new Category(Convert.ToInt32(rw["Id"]), rw["Name"].ToString(), rw["Thumbnail"].ToString(), Convert.ToBoolean(rw["Service"]), Convert.ToInt32(rw["Alarm"]));
+                MySqlCommand cmdProp = new MySqlCommand(@"
+                SELECT CategoryId, ValueId
+                FROM CategoryValues
+                WHERE CategoryId = @id
+                ");
+                cmdProp.Parameters.AddWithValue("@id", Convert.ToInt32(rw["id"]));
+                DataTable dtProp = db.GetData(cmdProp);
+
+                List<Property> ListProp = new List<Property>();
+                foreach (DataRow row in dtProp.Rows)
+                {
+                    Property prop = PropRep.GetById(Convert.ToInt32(row["ValueId"]));
+                    ListProp.Add(prop);
+                }
+                Category cat = new Category(Convert.ToInt32(rw["Id"]), rw["Name"].ToString(), ListProp, rw["Thumbnail"].ToString(), Convert.ToBoolean(rw["Service"]), Convert.ToInt32(rw["Alarm"]));
                 rep.Add(cat);
             }
 
