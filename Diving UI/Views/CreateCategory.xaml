@@ -7,6 +7,46 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+
+        <Label Content="Opret Kategori:" FontSize="24"/>
+
+        <StackPanel Margin="50">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Kategorinavn: " />
+                <TextBox Width="150" Height="25"  x:Name="txtName"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Service: " />
+                <StackPanel Orientation="Horizontal">
+                    <ItemsControl x:Name="RBService" HorizontalAlignment="Left" KeyboardNavigation.IsTabStop="False" KeyboardNavigation.TabNavigation="Once" KeyboardNavigation.DirectionalNavigation="Contained">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="RBYes" Content="Ja" KeyboardNavigation.TabIndex="1" />
+                            <Separator Width="15" Background="Transparent"/>
+                            <RadioButton x:Name="RBNo"  Content="Nej" KeyboardNavigation.TabIndex="2" />
+                        </StackPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Alarm:" />
+                <TextBox Width="150" Height="25"  x:Name="txtAlarm"></TextBox>
+            </StackPanel>
+            <StackPanel>
+
+                <Button x:Name="btnUpload" Content="Upload Thumbnail" Click="btnUpload_Click" Width="150" Height="25"></Button>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Defination: " />
+                <ComboBox x:Name="CBDefinition" Width="150" Height="25" ></ComboBox>
+            </StackPanel>
+            <Button x:Name="btnDefinition" Click="btnDefinition_Click"  Content="Tilføj Defination" Height="25" Width="100" ></Button>
+            <Label x:Name="labelSelectedProperty"></Label>
+            <Button x:Name="btnCreateCategory" Content="Opret ny" Click="btnCreateCategory_Click" Width="150" Height="25"></Button>
+        </StackPanel>
+
+
+
+
     </Grid>
 </UserControl>

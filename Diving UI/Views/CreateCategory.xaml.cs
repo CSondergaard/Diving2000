@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Logic.Repository;
+using Logic.Data;
+using Logic;
+using Microsoft.Win32;
 
 namespace Diving_UI.Views
 {
@@ -20,9 +15,86 @@ namespace Diving_UI.Views
     /// </summary>
     public partial class CreateCategory : UserControl
     {
+        PropertyRepo PropRep = new PropertyRepo();
+        CategoryData CatData = new CategoryData();
+
+        List<Property> PropForCatList = new List<Property>();
+
+
+
         public CreateCategory()
         {
             InitializeComponent();
+            FillOutProperty();
         }
+
+
+
+        private void FillOutProperty()
+        {
+            ObservableCollection<string> cblist = new ObservableCollection<string>();
+
+            List<Property> Proplist = PropRep.GetAllProperty();
+            Proplist.Add(new Property(1, "Hejsa"));
+
+            foreach (Property item in Proplist)
+            {
+                CBDefinition.Items.Add(item._name);
+            }
+
+        }
+
+        private void btnDefinition_Click(object sender, RoutedEventArgs e)
+        {
+            Property prop = PropRep.GetByName(CBDefinition.Text);
+
+            PropForCatList.Add(prop);
+            labelSelectedProperty.Content = "";
+
+            foreach (Property item in PropForCatList)
+            {
+                labelSelectedProperty.Content += item._name;
+            }
+
+        }
+
+        private void btnCreateCategory_Click(object sender, RoutedEventArgs e)
+        {
+            bool Service = false;
+
+            if (RBYes.IsChecked == true)
+            {
+
+                Service = true;
+            }
+
+            CatData.Add(new Category(
+                txtName.Text,
+                "",
+                PropForCatList,
+                Service,
+                Convert.ToInt32(txtAlarm.Text)
+                ));
+        }
+
+        private void btnUpload_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.DefaultExt = ".jpg"; // Required file extension 
+            fileDialog.Filter = "Billeder (.jpg)|*.jpg"; // Optional file extensions
+
+            bool? res = fileDialog.ShowDialog();
+
+            if (res.HasValue && res.Value)
+            {
+                System.IO.StreamReader sr = new
+                System.IO.StreamReader(fileDialog.FileName);
+                MessageBox.Show(sr.ReadToEnd());
+                sr.Close();
+            }
+        }
+
     }
 }
+
+
