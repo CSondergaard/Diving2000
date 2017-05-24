@@ -32,11 +32,11 @@ namespace Logic.Data
                     MySqlCommand cmdtwo = new MySqlCommand("INSERT INTO CategoryValues (CategoryId, ValueId) VALUES (@catid, @valid)");
                     cmdtwo.Parameters.AddWithValue("@catid", id);
                     cmdtwo.Parameters.AddWithValue("@valid", item._id);
-                    db.ModifyData(cmd);
+                    db.ModifyData(cmdtwo);
                 }
             }
 
-            obj._id = 1;
+            obj._id = id;
 
             return obj;
 

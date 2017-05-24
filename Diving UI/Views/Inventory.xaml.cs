@@ -119,7 +119,7 @@ namespace Diving_UI.Views
         private void btnDel(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32((sender as Button).Tag);
-            DataFac.DeteEquipmentById(id);
+            DataFac.DeleteEquipmentById(id);
             OnInventoryLoad();
         }
     }
