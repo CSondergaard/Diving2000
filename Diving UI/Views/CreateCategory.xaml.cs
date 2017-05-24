@@ -58,6 +58,8 @@ namespace Diving_UI.Views
                 labelSelectedProperty.Content = "";
             }
 
+            labelSelectedProperty.Content = "";
+
             foreach (Property item in PropForCatList)
             {
                 labelSelectedProperty.Content += item._name + " ";
