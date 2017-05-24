@@ -51,8 +51,6 @@ namespace Logic.Data
             cmd.Parameters.AddWithValue("@id", id);
             db.ModifyData(cmd);
 
-            rep.DeleteById(id);
-
             MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM EquipmentValues WHERE Equipment = @id");
             cmdTwo.Parameters.AddWithValue("@id", id);
 

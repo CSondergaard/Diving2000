@@ -51,7 +51,7 @@ namespace Logic.Data
             eqRep.Add(newEq);
         }
 
-        public void DeteEquipmentById(int id)
+        public void DeleteEquipmentById(int id)
         {
             eqData.DeleteById(id);
             eqRep.DeleteById(id);

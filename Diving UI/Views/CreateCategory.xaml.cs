@@ -17,7 +17,7 @@ namespace Diving_UI.Views
     public partial class CreateCategory : UserControl
     {
         PropertyRepo PropRep = new PropertyRepo();
-        CategoryData CatData = new CategoryData();
+        DataFacade DataFac = new DataFacade();
 
         List<Property> PropForCatList = new List<Property>();
 
@@ -75,7 +75,7 @@ namespace Diving_UI.Views
                 Service = true;
             }
 
-            CatData.Add(new Category(
+            DataFac.AddCategory(new Category(
                 txtName.Text,
                 "",
                 PropForCatList,
