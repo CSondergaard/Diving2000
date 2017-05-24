@@ -10,14 +10,14 @@ using System.Data;
 
 namespace Logic.Data
 {
-    class EquipmentData
+    public class EquipmentData
     {
 
         EquipmentRepo rep = new EquipmentRepo();
         PropertyRepo proprep = new PropertyRepo();
         dbConn db = new dbConn();
 
-        public void Add(Equipment obj)
+        public Equipment Add(Equipment obj)
         {
             MySqlCommand cmd = new MySqlCommand("INSERT INTO Equipment (Name, catId, service) VALUES (@name, @catid, @service)");
             cmd.Parameters.AddWithValue("@name", obj._name);
@@ -39,6 +39,10 @@ namespace Logic.Data
                 db.ModifyData(cmdTwo);
 
             }
+
+            obj._id = id;
+
+            return obj;
         }
 
         public void DeleteById(int id)

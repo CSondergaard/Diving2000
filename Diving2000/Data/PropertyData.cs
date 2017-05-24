@@ -15,7 +15,7 @@ namespace Logic.Data
         PropertyRepo proprep = new PropertyRepo();
         dbConn db = new dbConn();
 
-        public void Add(Property prop)
+        public Property Add(Property prop)
         {
             MySqlCommand cmd = new MySqlCommand("INSERT INTO Property (Name) VALUES (@name)");
             cmd.Parameters.AddWithValue("@name", prop._name);
@@ -26,16 +26,15 @@ namespace Logic.Data
 
             foreach (string item in prop._values)
             {
-                // Kig på
 
-                MySqlCommand check = new MySqlCommand("SELECT VALUE COUNT(*) WHERE PropertyId = @id, Name = @name");
+                MySqlCommand check = new MySqlCommand("SELECT COUNT(*) FROM Value AS nr WHERE PropertyId = @id AND Name = @name");
 
                 check.Parameters.AddWithValue("@id", id);
                 check.Parameters.AddWithValue("@name", item);
 
                 DataTable count = db.GetData(check);
 
-                if (Convert.ToInt32(count.Rows[0]["Count"]) == 0)
+                if (Convert.ToInt32(count.Rows[0]["nr"]) == 0)
                 {
 
                     MySqlCommand cmdTwo = new MySqlCommand(@"INSERT INTO 
@@ -46,6 +45,8 @@ namespace Logic.Data
 
                 }
             }
+
+            return prop;
         }
 
         public void AddValue(string value, int id)
@@ -104,13 +105,6 @@ namespace Logic.Data
             return ValueList;
 
         }
-
-        public void EditSingleValue(string val)
-        {
-
-        }
-
-
 
     }
 }

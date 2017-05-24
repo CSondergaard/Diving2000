@@ -15,7 +15,7 @@ namespace Logic.Data
         PropertyRepo PropRep = new PropertyRepo();
 
         dbConn db = new dbConn();
-        public void Add(Category obj)
+        public Category Add(Category obj)
         {
             MySqlCommand cmd = new MySqlCommand("INSERT INTO Category (Name, Thumbnail, Service, Alarm) VALUES (@name, @thumb, @serv, @alarm)");
             cmd.Parameters.AddWithValue("@name", obj._name);
@@ -38,7 +38,7 @@ namespace Logic.Data
 
             obj._id = 1;
 
-            rep.Add(obj);
+            return obj;
 
 
 
@@ -50,8 +50,6 @@ namespace Logic.Data
             cmd.Parameters.AddWithValue("@id", id);
 
             db.ModifyData(cmd);
-
-            rep.DeleteById(id);
 
         }
 
@@ -65,13 +63,22 @@ namespace Logic.Data
 
             db.ModifyData(cmd);
 
-            foreach (var item in obj._values)
+            foreach (Property val in obj._values)
             {
+                MySqlCommand check = new MySqlCommand("SELECT COUNT(*) FROM CategoryValues AS nr WHERE CategoryId = @catid AND ValueId = @valid");
+                check.Parameters.AddWithValue("@catid", obj._id);
+                check.Parameters.AddWithValue("@valid", val._id);
 
+                DataTable count = db.GetData(check);
+
+                if (Convert.ToInt32(count.Rows[0]["nr"]) == 0)
+                {
+                    MySqlCommand cmdtwo = new MySqlCommand("INSERT INTO CategoryValues (CategoryId, ValueId) VALUES (@catid, @valid)");
+                    cmdtwo.Parameters.AddWithValue("@catid", obj._id);
+                    cmdtwo.Parameters.AddWithValue("@valid", val._id);
+                    db.ModifyData(cmd);
+                }
             }
-
-            rep.Edit(obj);
-
 
         }
 

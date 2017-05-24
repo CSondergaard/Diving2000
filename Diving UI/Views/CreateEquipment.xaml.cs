@@ -28,7 +28,8 @@ namespace Diving_UI.Views
         PropertyRepo PropRep = new PropertyRepo();
         EquipmentRepo EqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
-        PropertyData PropData = new PropertyData();
+
+        DataFacade DataFac = new DataFacade();
 
 
         public CreateEquipment()
@@ -121,7 +122,7 @@ namespace Diving_UI.Views
                     PropRep.AddValue(content, dialog.ResponseText);
 
                     Property prop = PropRep.GetByName(content);
-                    PropData.AddValue(dialog.ResponseText, prop._id);
+                    DataFac.AddValueToProp(dialog.ResponseText, prop._id);
                 }
                 else
                 {
@@ -155,7 +156,9 @@ namespace Diving_UI.Views
                 propList
                 );
 
-            EqRep.Add(eq);
+            DataFac.AddEquipment(eq);
+
+       
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
