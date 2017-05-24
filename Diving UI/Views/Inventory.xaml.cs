@@ -23,31 +23,24 @@ namespace Diving_UI.Views
     public partial class Inventory : UserControl
     {
         EquipmentRepo eqRep = new EquipmentRepo();
-        CategoryRepo CatRep = new CategoryRepo();
 
         public Inventory()
         {
             InitializeComponent();
-            OnInventoryLoad();
+
            
         }
-        private void OnInventoryLoad()
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             List<Equipment> eqlist = eqRep.GetAllEquipments();
             foreach (Equipment item in eqlist)
             {
-                Category Cat = CatRep.GetById(item._catId);
-                string url = @"\Diving2000\Diving UI\Resources\CategoryPictures\" + Cat._thumbnail;
-                //string url2 = @""
-
-                WrapPanel wp = new WrapPanel();
-                Image img = new Image();
-                img.Source = new BitmapImage(new Uri(url, UriKind.Relative));
+                StackPanel sp = new StackPanel();
                 Label lb = new Label();
                 lb.Content = item._name;
-                wp.Children.Add(img);
-                wp.Children.Add(lb);
-                SpInv.Children.Add(wp);
+                sp.Children.Add(lb);
+                SpInv.Children.Add(sp);
             }
         }
     }
