@@ -43,8 +43,18 @@ namespace Diving_UI.Views
                 WrapPanel wp = new WrapPanel();
                 Image img = new Image();
                 img.Source = new BitmapImage(new Uri(url, UriKind.Relative));
+                img.Height = 50;
+                img.Width = 50;
                 Label lb = new Label();
+                Label lb3 = new Label();
+                lb.VerticalAlignment = VerticalAlignment.Center;
                 lb.Content = item._name;
+                foreach (KeyValuePair<string, string> val in item._values)
+                {
+                    Label lb2 = new Label();
+                    lb2.VerticalAlignment = VerticalAlignment.Center;
+                    lb2.Content = val.Key + ": " + val.Value;
+                }
                 wp.Children.Add(img);
                 wp.Children.Add(lb);
                 SpInv.Children.Add(wp);
