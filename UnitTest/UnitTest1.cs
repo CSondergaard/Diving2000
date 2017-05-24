@@ -46,7 +46,7 @@ namespace UnitTest
 
         public void CreateEquipment()
         {
-            Equip.Add(new Equipment(1, "Dragt", "Hej", 2, DateTime.Now));
+            Equip.Add(new Equipment(1, "Dragt", 2, DateTime.Now));
             Equipment equips = Equip.GetById(1);
             Assert.AreEqual(equips._name, "Dragt");
         }
@@ -55,7 +55,7 @@ namespace UnitTest
 
         public void EditEquipment()
         {
-            Equip.Edit(new Equipment(1, "Hansker", "Dav", 2, DateTime.Today));
+            Equip.Edit(new Equipment(1, "Hansker", 2, DateTime.Today));
             Equipment equips = Equip.GetById(1);
             Assert.AreEqual(equips._name, "Hansker");
         }
@@ -92,12 +92,12 @@ namespace UnitTest
             dic2.Add("Tykkelse7", "8mm");
 
 
-            Equip.Add(new Equipment(1, "Dragt", "Hej", 2, DateTime.Now, dic));
-            Equip.Add(new Equipment(2, "Dragt", "Hej", 2, DateTime.Now, dic));
-            Equip.Add(new Equipment(3, "Dragt", "Hej", 2, DateTime.Now, dic));
+            Equip.Add(new Equipment(1, "Dragt",  2, DateTime.Now, dic));
+            Equip.Add(new Equipment(2, "Dragt",  2, DateTime.Now, dic));
+            Equip.Add(new Equipment(3, "Dragt",  2, DateTime.Now, dic));
             for (int i = 4; i < 250000; i++)
             {
-                Equip.Add(new Equipment(i, "Dragt", "Hej", 2, DateTime.Now, dic2));
+                Equip.Add(new Equipment(i, "Dragt", 2, DateTime.Now, dic2));
             }
 
             List<Equipment> eq = Equip.GetAllEquipments();
@@ -113,7 +113,7 @@ namespace UnitTest
         [TestMethod]
         public void CreateBooking()
         {
-            EquipList.Add(new Equipment(1, "Dragt", "Hej", 2, DateTime.Now));
+            EquipList.Add(new Equipment(1, "Dragt", 2, DateTime.Now));
             Book.Add(new Booking(1, EquipList, DateTime.Now, DateTime.Today, 41412622, true));
             Booking bk = Book.GetById(1);
             Assert.AreEqual(bk._phone, 41412622);
@@ -130,7 +130,7 @@ namespace UnitTest
         public void AddEquipmentToCurrentBooking()
         {
             Booking bk = Book.GetById(1);
-            Equipment eq = new Equipment(2, "Handske", "Er en handske", 1);
+            Equipment eq = new Equipment(2, "Handske", 1);
 
             int nr = bk._equipment.Count;
 
@@ -145,7 +145,7 @@ namespace UnitTest
         {
 
             Booking bk = Book.GetById(1);
-            Equipment eq = new Equipment(2, "Handske", "Er en handske", 1);
+            Equipment eq = new Equipment(2, "Handske",  1);
 
             int nr = bk._equipment.Count;
 

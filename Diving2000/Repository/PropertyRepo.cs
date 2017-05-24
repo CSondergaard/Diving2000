@@ -50,5 +50,10 @@ namespace Logic.Repository
 
         }
 
+        public List<Property> GetAllProperty()
+        {
+            return PropertyList;
+        }
+
     }
 }
