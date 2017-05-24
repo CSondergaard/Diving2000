@@ -29,7 +29,7 @@ namespace Diving_UI.Views
         {
             InitializeComponent();
             OnInventoryLoad();
-           
+
         }
         private void OnInventoryLoad()
         {
@@ -49,14 +49,17 @@ namespace Diving_UI.Views
                 Label lb3 = new Label();
                 lb.VerticalAlignment = VerticalAlignment.Center;
                 lb.Content = item._name;
+                wp.Children.Add(img);
+                wp.Children.Add(lb);
+
                 foreach (KeyValuePair<string, string> val in item._values)
                 {
                     Label lb2 = new Label();
                     lb2.VerticalAlignment = VerticalAlignment.Center;
                     lb2.Content = val.Key + ": " + val.Value;
+                    wp.Children.Add(lb2);
                 }
-                wp.Children.Add(img);
-                wp.Children.Add(lb);
+
                 SpInv.Children.Add(wp);
             }
         }
