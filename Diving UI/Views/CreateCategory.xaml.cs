@@ -84,6 +84,10 @@ namespace Diving_UI.Views
                 Service,
                 Convert.ToInt32(txtAlarm.Text)
                 ));
+
+            (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
         }
 
         private void btnUpload_Click(object sender, RoutedEventArgs e)

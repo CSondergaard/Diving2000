@@ -34,6 +34,7 @@ namespace Logic.Data
         {
             prop.GetAll();
             cat.GetAll();
+            eq.GetAll();
             
 
         }
