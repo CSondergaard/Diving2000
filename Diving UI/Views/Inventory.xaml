@@ -8,10 +8,9 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel x:Name="SpInv">
-            
-            
-            
+
+
+
         </StackPanel>
-        <Button Click="Button_Click" Width="20" Height="10"></Button>
     </Grid>
 </UserControl>

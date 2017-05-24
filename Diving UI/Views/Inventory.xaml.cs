@@ -37,7 +37,7 @@ namespace Diving_UI.Views
             foreach (Equipment item in eqlist)
             {
                 Category Cat = CatRep.GetById(item._catId);
-                string url = @"\Diving2000\Diving UI\Resources\CategoryPictures\" + Cat._thumbnail;
+                string url = @"\Resources\CategoryPic\" + Cat._thumbnail;
                 //string url2 = @""
 
                 WrapPanel wp = new WrapPanel();

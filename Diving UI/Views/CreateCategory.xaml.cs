@@ -21,8 +21,6 @@ namespace Diving_UI.Views
 
         List<Property> PropForCatList = new List<Property>();
 
-
-
         public CreateCategory()
         {
             InitializeComponent();
