@@ -85,9 +85,9 @@
             <Rectangle Width="660" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="0" Margin="25,6,29,5" />
             <Rectangle x:Name="MainView" Width="660" Height="660" VerticalAlignment="Top" HorizontalAlignment="Center" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="1" Margin="25,8,29,0" />
             <Frame x:Name="FrameChart" Width="330" Height="25" Grid.Row="0" HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Margin="35,0,0,0" />
-            <Frame Source="\Views\FrontPage.xaml" Grid.Row="1" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="0,40,0,0" Width="600" Height="600" VerticalAlignment="Top">
-
-            </Frame>
+            <ScrollViewer Grid.Row="1">
+                <Frame Source="\Views\FrontPage.xaml" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="0,40,0,0" Width="600" Height="600" VerticalAlignment="Top"/>
+            </ScrollViewer>
         </Grid>
 
 
