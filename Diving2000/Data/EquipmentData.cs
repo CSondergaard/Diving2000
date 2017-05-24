@@ -89,7 +89,7 @@ namespace Logic.Data
 
         public void GetAll()
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, service, Name, CatId FROM Equipment");
+            MySqlCommand cmd = new MySqlCommand("SELECT Id, Service, Name, CatId FROM Equipment");
             DataTable dt = db.GetData(cmd);
             foreach (DataRow rw in dt.Rows)
             {
