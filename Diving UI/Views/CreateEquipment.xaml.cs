@@ -59,7 +59,7 @@ namespace Diving_UI.Views
 
             foreach (Property item in cat._values)
             {
-                if (item._values.Count == 0)
+                if (item._values.Count == 0 ||item._values == null)
                 {
 
                 }

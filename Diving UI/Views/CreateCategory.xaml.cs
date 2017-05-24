@@ -7,6 +7,7 @@ using Logic.Repository;
 using Logic.Data;
 using Logic;
 using Microsoft.Win32;
+using System.Linq;
 
 namespace Diving_UI.Views
 {
@@ -35,7 +36,6 @@ namespace Diving_UI.Views
             ObservableCollection<string> cblist = new ObservableCollection<string>();
 
             List<Property> Proplist = PropRep.GetAllProperty();
-            Proplist.Add(new Property(1, "Hejsa"));
 
             foreach (Property item in Proplist)
             {
@@ -48,13 +48,21 @@ namespace Diving_UI.Views
         {
             Property prop = PropRep.GetByName(CBDefinition.Text);
 
-            PropForCatList.Add(prop);
-            labelSelectedProperty.Content = "";
+            if(PropForCatList.Any(x => x._name == prop._name))
+            {
+
+            }
+            else
+            {
+                PropForCatList.Add(prop);
+                labelSelectedProperty.Content = "";
+            }
 
             foreach (Property item in PropForCatList)
             {
-                labelSelectedProperty.Content += item._name;
+                labelSelectedProperty.Content += item._name + " ";
             }
+
 
         }
 
@@ -64,7 +72,6 @@ namespace Diving_UI.Views
 
             if (RBYes.IsChecked == true)
             {
-
                 Service = true;
             }
 
