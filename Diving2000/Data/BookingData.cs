@@ -64,7 +64,7 @@ namespace Logic.Data
                        eqList,
                        Convert.ToDateTime(rw["StartDate"]),
                        Convert.ToDateTime(rw["EndDate"]),
-                       Convert.ToInt32(rw["Phone"]),
+                       rw["Phone"].ToString(),
                        Convert.ToBoolean(rw["Status"])
                        ));
 

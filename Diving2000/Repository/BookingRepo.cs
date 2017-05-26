@@ -56,7 +56,7 @@ namespace Logic.Repository
             return BookingList.Find(x => x._id == id);
         }
 
-        public Booking GetByPhone(int phone)
+        public Booking GetByPhone(string phone)
         {
             return BookingList.Find(x => x._phone == phone);
         }
@@ -91,6 +91,23 @@ namespace Logic.Repository
         {
             return BookingList.Where(x => x._startDate.Ticks < date.Ticks && x._endDate.Ticks > date.Ticks).ToArray();
 
+        }
+
+        public DateTime? GetRentDateForEquipment(Equipment eq)
+        {
+            foreach (Booking item in BookingList)
+            {
+                foreach (Equipment equip in item._equipment)
+                {
+                    if (equip._id == eq._id)
+                    {
+                        return item._endDate;
+                    }
+                }
+            }
+
+            return null;
+          
 
         }
     }
