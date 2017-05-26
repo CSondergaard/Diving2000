@@ -46,7 +46,8 @@ public class dbConn
 
             objConn.Open();
 
-            newid = Convert.ToInt32(cmd.ExecuteScalar());
+            cmd.ExecuteNonQuery();
+            newid = (Int32) cmd.LastInsertedId;
 
         }
 
