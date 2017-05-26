@@ -42,7 +42,7 @@ namespace Logic.Data
             propData.GetAll();
             catData.GetAll();
             eqData.GetAll();
-
+            bookData.GetAll();
         }
 
         public void AddEquipment(Equipment obj)

@@ -6,8 +6,9 @@ using System.Windows.Controls;
 using Logic.Repository;
 using Logic.Data;
 using Logic;
-using Microsoft.Win32;
 using System.Linq;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace Diving_UI.Views
 {
@@ -46,7 +47,7 @@ namespace Diving_UI.Views
         {
             Property prop = PropRep.GetByName(CBDefinition.Text);
 
-            if(PropForCatList.Any(x => x._name == prop._name))
+            if (PropForCatList.Any(x => x._name == prop._name))
             {
 
             }
@@ -77,7 +78,7 @@ namespace Diving_UI.Views
 
             DataFac.AddCategory(new Category(
                 txtName.Text,
-                "",
+                lbUploadName.Content.ToString(),
                 PropForCatList,
                 Service,
                 Convert.ToInt32(txtAlarm.Text)
@@ -90,19 +91,17 @@ namespace Diving_UI.Views
 
         private void btnUpload_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            System.Windows.Forms.OpenFileDialog fileDialog = new System.Windows.Forms.OpenFileDialog();
             fileDialog.DefaultExt = ".jpg"; // Required file extension 
-            fileDialog.Filter = "Billeder (.jpg)|*.jpg"; // Optional file extensions
+            fileDialog.Filter = "Billeder (.jpg)|*.jpg|.png|*.png"; // Optional file extensions
+            fileDialog.Multiselect = false;
 
-            bool? res = fileDialog.ShowDialog();
-
-            if (res.HasValue && res.Value)
+            if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                System.IO.StreamReader sr = new
-                System.IO.StreamReader(fileDialog.FileName);
-                MessageBox.Show(sr.ReadToEnd());
-                sr.Close();
+                lbUploadName.Content = fileDialog.FileName;
             }
+
+
         }
 
     }

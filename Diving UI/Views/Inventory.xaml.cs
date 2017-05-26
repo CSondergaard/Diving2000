@@ -86,7 +86,7 @@ namespace Diving_UI.Views
                 DG.Children.Add(brimg);
 
                 Image img = new Image();
-                img.Source = new BitmapImage(new Uri(url, UriKind.Relative));
+                img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
                 img.Height = 50;
                 img.Width = 50;
                 brimg.Child = img;

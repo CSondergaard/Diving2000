@@ -33,7 +33,8 @@
             </StackPanel>
             <StackPanel>
 
-                <Button x:Name="btnUpload" Content="Upload Thumbnail" Click="btnUpload_Click" Width="150" Height="25"></Button>
+                <Button x:Name="btnUpload" Content="Find Thumbnail" Click="btnUpload_Click" Width="150" Height="25"></Button>
+                <Label x:Name="lbUploadName" />
 
             </StackPanel>
             <StackPanel Orientation="Horizontal">
