@@ -7,6 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <StackPanel x:Name="spSearch">
+            <ComboBox x:Name="cbCategory" SelectionChanged="cbCategory_SelectionChanged"></ComboBox>
+            <StackPanel x:Name="spProp">
+                
+            </StackPanel>
+            <Button x:Name="btnSearch" Click="btnSearch_Click"  Content="Søg" Height="25" Width="100" ></Button>
+        </StackPanel>
     </Grid>
 </UserControl>

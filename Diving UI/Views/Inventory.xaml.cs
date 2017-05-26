@@ -30,18 +30,15 @@ namespace Diving_UI.Views
         public Inventory()
         {
             InitializeComponent();
-            OnInventoryLoad();
-
+            ShowEquipments(eqRep.GetAllEquipments());
         }
-        private void OnInventoryLoad()
+
+        private void ShowEquipments(List<Equipment> eqlist)
         {
             SpInv.Children.Clear();
-            List<Equipment> eqlist = eqRep.GetAllEquipments();
+            
             foreach (Equipment item in eqlist)
             {
-                Category Cat = CatRep.GetById(item._catId);
-                string url = @"\Resources\CategoryPic\" + Cat._thumbnail;
-
                 Border br = new Border();
                 br.BorderThickness = new Thickness(1);
                 br.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -86,9 +83,14 @@ namespace Diving_UI.Views
                 DG.Children.Add(brimg);
 
                 Image img = new Image();
+
+                Category Cat = CatRep.GetById(item._catId);
+                string url = @"\Resources\CategoryPic\" + Cat._thumbnail;
+
                 img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
                 img.Height = 50;
                 img.Width = 50;
+                
                 brimg.Child = img;
 
                 StackPanel spcol1 = new StackPanel();
@@ -120,7 +122,7 @@ namespace Diving_UI.Views
         {
             int id = Convert.ToInt32((sender as Button).Tag);
             DataFac.DeleteEquipmentById(id);
-            OnInventoryLoad();
+            ShowEquipments(eqRep.GetAllEquipments());
         }
     }
 }

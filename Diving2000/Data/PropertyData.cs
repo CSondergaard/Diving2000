@@ -24,25 +24,29 @@ namespace Logic.Data
 
             prop._id = id;
 
-            foreach (string item in prop._values)
+
+            if (prop._values != null)
             {
-
-                MySqlCommand check = new MySqlCommand("SELECT COUNT(*) FROM Value AS nr WHERE PropertyId = @id AND Name = @name");
-
-                check.Parameters.AddWithValue("@id", id);
-                check.Parameters.AddWithValue("@name", item);
-
-                DataTable count = db.GetData(check);
-
-                if (Convert.ToInt32(count.Rows[0]["nr"]) == 0)
+                foreach (string item in prop._values)
                 {
 
-                    MySqlCommand cmdTwo = new MySqlCommand(@"INSERT INTO 
+                    MySqlCommand check = new MySqlCommand("SELECT COUNT(*) FROM Value AS nr WHERE PropertyId = @id AND Name = @name");
+
+                    check.Parameters.AddWithValue("@id", id);
+                    check.Parameters.AddWithValue("@name", item);
+
+                    DataTable count = db.GetData(check);
+
+                    if (Convert.ToInt32(count.Rows[0]["nr"]) == 0)
+                    {
+
+                        MySqlCommand cmdTwo = new MySqlCommand(@"INSERT INTO 
                                                          Value (PropertyId, Name) 
                                                          VALUES (@id, @name)");
-                    cmdTwo.Parameters.AddWithValue("@id", id);
-                    cmdTwo.Parameters.AddWithValue("@name", item);
+                        cmdTwo.Parameters.AddWithValue("@id", id);
+                        cmdTwo.Parameters.AddWithValue("@name", item);
 
+                    }
                 }
             }
 

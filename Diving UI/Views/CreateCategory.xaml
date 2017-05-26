@@ -40,6 +40,7 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="Defination: " />
                 <ComboBox x:Name="CBDefinition" Width="150" Height="25" ></ComboBox>
+                <Button x:Name="btnCreateNewDefinition" Click="btnCreateNewDefinition_Click"  Content="Opret Defination" Height="25" Width="100" ></Button>
             </StackPanel>
             <Button x:Name="btnDefinition" Click="btnDefinition_Click"  Content="Tilføj Defination" Height="25" Width="100" ></Button>
             <Label x:Name="labelSelectedProperty"></Label>

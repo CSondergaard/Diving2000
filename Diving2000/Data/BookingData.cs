@@ -16,7 +16,7 @@ namespace Logic.Data
         EquipmentRepo EqRep = new EquipmentRepo();
         dbConn db = new dbConn();
 
-        public void Add(Booking obj)
+        public Booking Add(Booking obj)
         {
             MySqlCommand cmd = new MySqlCommand("INSERT INTO Booking (StartDate, EndDate, Phone, Status VALUES (@startdate, @enddate, @phone, @status)");
             cmd.Parameters.AddWithValue("@startdate", obj._startDate);
@@ -35,6 +35,9 @@ namespace Logic.Data
                 db.ModifyData(cmdEq);
             }
 
+            obj._id = id;
+
+            return obj;
         }
 
         public void DeleteById(int id)
@@ -84,7 +87,7 @@ namespace Logic.Data
 
             foreach (DataRow eq in dtEqId.Rows)
             {
-                eqList.Add(EqRep.GetById(Convert.ToInt32(eq["Id"])));
+                eqList.Add(EqRep.GetById(Convert.ToInt32(eq["EquipmentId"])));
             }
 
             return eqList;

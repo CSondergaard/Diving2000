@@ -25,6 +25,11 @@ namespace Logic
             _values = value;
         }
 
+        public Property(string name)
+        {
+            _name = name;
+        }
+
 
     }
 }

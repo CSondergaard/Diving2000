@@ -10,7 +10,6 @@ namespace Logic
     {
         public int _id { get; set; }
         public string _name { get; set; }
-
         public int _catId { get; set; }
         public Dictionary<string, string> _values { get; set; }
         public DateTime? _service { get; set; }

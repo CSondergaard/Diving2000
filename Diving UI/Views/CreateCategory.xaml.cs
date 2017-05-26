@@ -33,6 +33,7 @@ namespace Diving_UI.Views
         private void FillOutProperty()
         {
             ObservableCollection<string> cblist = new ObservableCollection<string>();
+            cblist.Clear();
 
             List<Property> Proplist = PropRep.GetAllProperty();
 
@@ -70,15 +71,24 @@ namespace Diving_UI.Views
         private void btnCreateCategory_Click(object sender, RoutedEventArgs e)
         {
             bool Service = false;
+            string thumb;
 
             if (RBYes.IsChecked == true)
             {
                 Service = true;
             }
+            if (string.IsNullOrWhiteSpace(lbUploadName.Content.ToString()))
+            {
+                thumb = "";
+            }
+            else
+            {
+                thumb = lbUploadName.Content.ToString();
+            }
 
             DataFac.AddCategory(new Category(
                 txtName.Text,
-                lbUploadName.Content.ToString(),
+                thumb,
                 PropForCatList,
                 Service,
                 Convert.ToInt32(txtAlarm.Text)
@@ -101,9 +111,29 @@ namespace Diving_UI.Views
                 lbUploadName.Content = fileDialog.FileName;
             }
 
-
         }
 
+        private void btnCreateNewDefinition_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CreateValue();
+            if (dialog.ShowDialog() == true)
+            {
+                if (!string.IsNullOrWhiteSpace(dialog.ResponseText))
+                {
+
+                    DataFac.AddProperty(new Property(dialog.ResponseText));
+                }
+                else
+                {
+                    MessageBox.Show("Du mangler at udfylde feltet");
+                }
+
+            }
+
+            FillOutProperty();
+
+
+        }
     }
 }
 

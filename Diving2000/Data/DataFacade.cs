@@ -109,6 +109,22 @@ namespace Logic.Data
         }
 
 
+        // Booking
+
+        public void AddBooking(Booking obj)
+        {
+            Booking book = bookData.Add(obj);
+            BookRep.Add(book);
+               
+        }
+
+        public void DeleteBookingById(int id)
+        {
+            bookData.DeleteById(id);
+            BookRep.DeleteById(id);
+        }
+
+
 
     }
 }

@@ -31,7 +31,6 @@ namespace Diving_UI.Views
 
         DataFacade DataFac = new DataFacade();
 
-
         public CreateEquipment()
         {
             InitializeComponent();
@@ -62,7 +61,17 @@ namespace Diving_UI.Views
             {
                 if (item._values.Count == 0 ||item._values == null)
                 {
+                    TextBox tbox = CreateTextbox(item._name.ToString());
+                    Label lb = new Label();
+                    lb.Content = item._name;
 
+                    Button btn = CreateButton(item._name.ToString());
+                    StackPanel sp = new StackPanel();
+                    sp.Children.Add(lb);
+                    sp.Children.Add(tbox);
+                    sp.Children.Add(btn);
+
+                    SpProp.Children.Add(sp);
                 }
                 else
                 {
@@ -104,6 +113,15 @@ namespace Diving_UI.Views
             cbox.Height = 25;
             cbox.Name = name;
             return cbox;
+        }
+
+        private TextBox CreateTextbox(string name)
+        {
+            TextBox tbox = new TextBox();
+            tbox.Width = 200;
+            tbox.Height = 25;
+            tbox.Name = name;
+            return tbox;
         }
 
         private void CBCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -148,6 +166,14 @@ namespace Diving_UI.Views
                 }
             }
 
+            foreach (TextBox tb in FindVisualChildren<TextBox>(window))
+            {
+                if (tb.Name != "PART_TextBox")
+                {
+                    propList.Add(tb.Name, tb.Text);
+                }
+            }
+
 
             Equipment eq = new Equipment(
                 cat._name,
@@ -158,7 +184,10 @@ namespace Diving_UI.Views
 
             DataFac.AddEquipment(eq);
 
-       
+            (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
+
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
