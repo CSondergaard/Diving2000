@@ -74,6 +74,15 @@ namespace Logic.Repository
 
         }
 
+        public List<Equipment> GetAllAviableEquipments(DateTime date)
+        {
+            BookingRepo bookrep = new BookingRepo();
+
+            List<Equipment> booklist = bookrep.GetEquipmentsBookedAtTime(date, EquipmentList);
+
+            return booklist;
+        }
+
 
         public List<Equipment> SearchEquipment(Dictionary<string, string> dic, List<Equipment> eq)
         {
