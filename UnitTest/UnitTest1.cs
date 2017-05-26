@@ -114,7 +114,7 @@ namespace UnitTest
         public void CreateBooking()
         {
             EquipList.Add(new Equipment(1, "Dragt", 2, DateTime.Now));
-            Book.Add(new Booking(1, EquipList, DateTime.Now, DateTime.Today, 41412622, true));
+            Book.Add(new Booking(1, EquipList, DateTime.Now, DateTime.Today, "41412622", true));
             Booking bk = Book.GetById(1);
             Assert.AreEqual(bk._phone, 41412622);
         }
