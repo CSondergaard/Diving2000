@@ -51,6 +51,11 @@ namespace Logic.Data
 
         }
 
+        public void DeleteEquipmentFromBooking(Equipment eq, Booking book)
+        {
+
+        }
+
 
         public void GetAll()
         {
