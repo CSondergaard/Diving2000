@@ -53,7 +53,9 @@ namespace Logic.Data
 
         public void DeleteEquipmentFromBooking(Equipment eq, Booking book)
         {
-
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM BookingList WHERE BookingId = @bookid AND EquipmentId = @eqid");
+            cmd.Parameters.AddWithValue("@bookid", book._id);
+            cmd.Parameters.AddWithValue("@eqid", eq._id);
         }
 
 

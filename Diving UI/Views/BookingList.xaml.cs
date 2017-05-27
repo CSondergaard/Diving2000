@@ -170,7 +170,7 @@ namespace Diving_UI.Views
             Equipment eq = eqRep.GetById(id);
 
 
-            BookRep.DeleteEquipmentFromBooking(eq, book);
+            DataFac.DeleteEquipmentFromBooking(eq, book);
             OnBookingListLoad();
         }
     }

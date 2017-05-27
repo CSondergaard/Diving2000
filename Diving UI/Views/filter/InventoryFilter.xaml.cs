@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using Diving_UI.Model;
+using Logic;
 using Logic.Repository;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Diving_UI.Model;
+
 
 namespace Diving_UI.Views.filter
 {
@@ -29,9 +30,9 @@ namespace Diving_UI.Views.filter
         EquipmentRepo EqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
 
-        SearchEquipment search = new SearchEquipment();
+        SearchEquipment searchequip = SearchEquipment.Instance;
 
-        new List<Equipment> eqlist = new List<Equipment>();
+        List<Equipment> eqlist = new List<Equipment>();
 
         public BookingListChart()
         {
@@ -88,7 +89,8 @@ namespace Diving_UI.Views.filter
                     spProp.Children.Add(sp);
                 }
             }
-
+            FilterListWithCategory();
+            FireSearchEvent();
 
         }
 
@@ -122,8 +124,9 @@ namespace Diving_UI.Views.filter
 
             foreach (ComboBox cb in FindVisualChildren<ComboBox>(spProp))
             {
-                if(!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
-                    propList.Add(cb.Name, cb.SelectedValue.ToString());
+                if(cb.SelectedValue != null)
+                    if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
+                        propList.Add(cb.Name, cb.SelectedValue.ToString());
             }
 
             foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
@@ -132,10 +135,24 @@ namespace Diving_UI.Views.filter
                     propList.Add(tb.Name, tb.Text);
             }
 
+            FilterListWithCategory();
             eqlist = EqRep.SearchEquipment(propList, eqlist);
 
-           
+            FireSearchEvent();
         }
+
+        private void FilterListWithCategory()
+        {
+            eqlist = EqRep.GetAllEquipments();
+            Category cat = CatRep.GetByName(cbCategory.SelectedValue.ToString());
+            eqlist = EqRep.GetEquipmentsFromCategory(cat._id, eqlist);
+        }
+
+        private void FireSearchEvent()
+        {
+            searchequip.Search(eqlist);
+        }
+
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {

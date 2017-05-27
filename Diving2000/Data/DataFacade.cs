@@ -124,6 +124,12 @@ namespace Logic.Data
             BookRep.DeleteById(id);
         }
 
+        public void DeleteEquipmentFromBooking(Equipment eq, Booking bk)
+        {
+            bookData.DeleteEquipmentFromBooking(eq, bk);
+            BookRep.DeleteEquipmentFromBooking(eq, bk);
+        }
+
 
 
     }

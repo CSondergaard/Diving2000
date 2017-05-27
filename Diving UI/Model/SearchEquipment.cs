@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,48 +7,50 @@ using System.Threading.Tasks;
 
 namespace Diving_UI.Model
 {
-    using System.Collections;
     public class SearchEquipment
     {
-        public delegate void ChangedSearch();
-    }
 
-    public class ListWithChangedEvent : ArrayList
-    {
-        // An event that clients can use to be notified whenever the
-        // elements of the list change.
-        public event ChangedEventHandler Changed;
+        private List<Equipment> eqlist = new List<Equipment>();
 
-        // Invoke the Changed event; called whenever list changes
-        protected virtual void OnChanged(EventArgs e)
+        public delegate void ChangedSearchEventHandler(List<Equipment> list);
+
+        public event ChangedSearchEventHandler SearchChanged;
+
+        #region Singleton Region
+        private static volatile SearchEquipment instance;
+
+        public static SearchEquipment Instance
         {
-            if (Changed != null)
-                Changed(this, e);
-        }
-
-        // Override some of the methods that can change the list;
-        // invoke event after each
-        public override int Add(object value)
-        {
-            int i = base.Add(value);
-            OnChanged(EventArgs.Empty);
-            return i;
-        }
-
-        public override void Clear()
-        {
-            base.Clear();
-            OnChanged(EventArgs.Empty);
-        }
-
-        public override object this[int index]
-        {
-            set
+            get
             {
-                base[index] = value;
-                OnChanged(EventArgs.Empty);
+                if(instance == null)
+                {
+                    instance = new SearchEquipment();
+                }
+                return instance;
             }
         }
-    }
+        #endregion
 
+        public void Search(List<Equipment> list)
+        {
+            OnSearchChanged(list);
+        }
+
+        public List<Equipment> GetList()
+        {
+            return eqlist;
+        }
+
+        protected virtual void OnSearchChanged(List<Equipment> list)
+        {
+            if (SearchChanged != null)
+            {
+                SearchChanged(list);
+            }
+        }
+
+
+
+    }
 }

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Logic;
 using Logic.Repository;
 using Logic.Data;
+using Diving_UI.Model;
 
 namespace Diving_UI.Views
 {
@@ -27,10 +28,21 @@ namespace Diving_UI.Views
         CategoryRepo CatRep = new CategoryRepo();
         DataFacade DataFac = new DataFacade();
 
+        SearchEquipment searcheq = SearchEquipment.Instance;
+        
+
         public Inventory()
         {
             InitializeComponent();
             ShowEquipments(eqRep.GetAllEquipments());
+
+            searcheq.SearchChanged += new SearchEquipment.ChangedSearchEventHandler(Searcheq_SearchChanged);
+        }
+
+        private void Searcheq_SearchChanged(List<Equipment> eqlist)
+        {
+            List<Equipment> newlist = eqlist;
+            ShowEquipments(newlist);
         }
 
         private void ShowEquipments(List<Equipment> eqlist)
@@ -85,7 +97,7 @@ namespace Diving_UI.Views
                 Image img = new Image();
 
                 Category Cat = CatRep.GetById(item._catId);
-                string url = @"\Resources\CategoryPic\" + Cat._thumbnail;
+                string url = Cat._thumbnail;
 
                 img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
                 img.Height = 50;
