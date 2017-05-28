@@ -34,6 +34,7 @@ namespace Diving_UI.Views
         {
             ObservableCollection<string> cblist = new ObservableCollection<string>();
             cblist.Clear();
+            CBDefinition.Items.Clear();
 
             List<Property> Proplist = PropRep.GetAllProperty();
 

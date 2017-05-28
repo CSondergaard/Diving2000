@@ -137,8 +137,6 @@ namespace Diving_UI.Views
             {
                 if (!string.IsNullOrWhiteSpace(dialog.ResponseText))
                 {
-                    PropRep.AddValue(content, dialog.ResponseText);
-
                     Property prop = PropRep.GetByName(content);
                     DataFac.AddValueToProp(dialog.ResponseText, prop._id);
                 }
@@ -149,31 +147,35 @@ namespace Diving_UI.Views
 
             }
 
+            KeepSelectedValues();
+
+           
+        }
+
+        private void KeepSelectedValues()
+        {
+           
+            Dictionary<string, string> propList = FillOutProperty();
+
             CreateProperty(CBCategory.SelectedValue.ToString());
+
+            foreach (KeyValuePair<string, string> item in propList)
+            {
+                foreach (ComboBox cb in FindVisualChildren<ComboBox>(window))
+                {
+                    if (cb.Name != "CBCategory" && cb.Name == item.Key)
+                    {
+                        cb.SelectedValue = item.Value.ToString();
+                    }
+                }
+            }
         }
 
         private void btnCreateEq_Click(object sender, RoutedEventArgs e)
         {
             Category cat = CatRep.GetByName(CBCategory.SelectedValue.ToString());
 
-            Dictionary<string, string> propList = new Dictionary<string, string>();
-
-            foreach (ComboBox cb in FindVisualChildren<ComboBox>(window))
-            {
-                if(cb.Name != "CBCategory")
-                {
-                    propList.Add(cb.Name, cb.SelectedValue.ToString());
-                }
-            }
-
-            foreach (TextBox tb in FindVisualChildren<TextBox>(window))
-            {
-                if (tb.Name != "PART_TextBox")
-                {
-                    propList.Add(tb.Name, tb.Text);
-                }
-            }
-
+            Dictionary<string, string> propList = FillOutProperty();
 
             Equipment eq = new Equipment(
                 cat._name,
@@ -188,6 +190,29 @@ namespace Diving_UI.Views
             (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
             (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
 
+        }
+
+        private Dictionary<string, string> FillOutProperty()
+        {
+            Dictionary<string, string> propList = new Dictionary<string, string>();
+
+            foreach (ComboBox cb in FindVisualChildren<ComboBox>(window))
+            {
+                if (cb.Name != "CBCategory")
+                {
+                    propList.Add(cb.Name, cb.SelectedValue.ToString());
+                }
+            }
+
+            foreach (TextBox tb in FindVisualChildren<TextBox>(window))
+            {
+                if (tb.Name != "PART_TextBox")
+                {
+                    propList.Add(tb.Name, tb.Text);
+                }
+            }
+
+            return propList;
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
