@@ -29,6 +29,8 @@ namespace Diving_UI.Views.filter
         PropertyRepo PropRep = new PropertyRepo();
         EquipmentRepo EqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
+        EquipmentSearch EqSearch = new EquipmentSearch();
+        BookingSearch bookingSearch = new BookingSearch();
 
         SearchEquipment searchequip = SearchEquipment.Instance;
 
@@ -136,7 +138,7 @@ namespace Diving_UI.Views.filter
             }
 
             FilterListWithCategory();
-            eqlist = EqRep.SearchEquipment(propList, eqlist);
+            eqlist = EqSearch.SearchEquipment(propList, eqlist);
 
             FireSearchEvent();
         }
@@ -145,7 +147,7 @@ namespace Diving_UI.Views.filter
         {
             eqlist = EqRep.GetAllEquipments();
             Category cat = CatRep.GetByName(cbCategory.SelectedValue.ToString());
-            eqlist = EqRep.GetEquipmentsFromCategory(cat._id, eqlist);
+            eqlist = EqSearch.GetEquipmentsFromCategory(cat._id, eqlist);
         }
 
         private void FireSearchEvent()
