@@ -51,6 +51,11 @@ namespace Logic.Repository
 
         }
 
+        public List<Booking> GetAllBookings()
+        {
+            return BookingList;
+        }
+
         public Booking GetById(int id)
         {
             return BookingList.Find(x => x._id == id);
@@ -61,11 +66,5 @@ namespace Logic.Repository
             return BookingList.Find(x => x._phone == phone);
         }
 
-        public List<Booking> GetAllBookings()
-        {
-            return BookingList;
-        }
-
-      
     }
 }

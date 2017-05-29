@@ -46,5 +46,17 @@ namespace Logic.Repository
         {
             return EquipmentList;
         }
+
+        public List<Equipment> GetEquipmentsFromCategory(int CatId, List<Equipment> eq)
+        {
+            List<Equipment> eqlist = new List<Equipment>();
+            foreach (Equipment item in eq)
+            {
+                if (item._catId == CatId)
+                    eqlist.Add(item);
+            }
+
+            return eqlist;
+        }
     }
 }

@@ -147,7 +147,7 @@ namespace Diving_UI.Views.filter
         {
             eqlist = EqRep.GetAllEquipments();
             Category cat = CatRep.GetByName(cbCategory.SelectedValue.ToString());
-            eqlist = EqSearch.GetEquipmentsFromCategory(cat._id, eqlist);
+            eqlist = EqRep.GetEquipmentsFromCategory(cat._id, eqlist);
         }
 
         private void FireSearchEvent()

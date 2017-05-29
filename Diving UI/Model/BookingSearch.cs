@@ -13,6 +13,7 @@ namespace Diving_UI.Model
 
         BookingRepo bookrep = new BookingRepo();
 
+
         public List<Equipment> GetEquipmentsBookedAtTime(DateTime date, List<Equipment> equiplist)
         {
             Booking[] bookings = GetRentedEquipmentFromDate(date);

@@ -13,24 +13,12 @@ namespace Diving_UI.Model
 
         EquipmentRepo eqRepo = new EquipmentRepo();
 
-        public List<Equipment> GetEquipmentsFromCategory(int CatId, List<Equipment> eq)
-        {
-            List<Equipment> eqlist = new List<Equipment>();
-            foreach (Equipment item in eq)
-            {
-                if (item._catId == CatId)
-                    eqlist.Add(item);
-            }
-
-            return eqlist;
-        }
-
         public List<Equipment> GetAllAviableEquipmentsFromCategory(int CatId, DateTime date, List<Equipment> eq)
         {
 
             BookingSearch bookSearch = new BookingSearch();
 
-            List<Equipment> booklist = GetEquipmentsFromCategory(CatId, eq);
+            List<Equipment> booklist = eqRepo.GetEquipmentsFromCategory(CatId, eq);
 
             List<Equipment> EquipmentList = eqRepo.GetAllEquipments();
 

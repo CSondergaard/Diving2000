@@ -47,7 +47,5 @@ namespace Diving_UI.Model
             SearchChanged?.Invoke(list);
         }
 
-
-
     }
 }

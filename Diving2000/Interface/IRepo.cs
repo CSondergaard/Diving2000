@@ -12,6 +12,7 @@ namespace Logic
         void Add(T obj);
         void Edit(T obj);
         void DeleteById(int id);
+
         T GetById(int id);
 
     }
