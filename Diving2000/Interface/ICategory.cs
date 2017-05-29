@@ -9,5 +9,7 @@ namespace Logic
     public interface ICategory : IRepo<Category>
     {
         void AddValue(int id, Property property);
+
+
     }
 }

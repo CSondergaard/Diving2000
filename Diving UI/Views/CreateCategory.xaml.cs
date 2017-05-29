@@ -18,7 +18,7 @@ namespace Diving_UI.Views
     public partial class CreateCategory : UserControl
     {
         PropertyRepo PropRep = new PropertyRepo();
-        DataFacade DataFac = new DataFacade();
+        DataFacade DataFac = DataFacade.Instance;
 
         List<Property> PropForCatList = new List<Property>();
 

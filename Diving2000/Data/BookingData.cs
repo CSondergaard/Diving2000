@@ -49,6 +49,8 @@ namespace Logic.Data
             MySqlCommand cmdEq = new MySqlCommand("DELETE FROM BookingList WHERE BookingId = @bookingid");
             cmdEq.Parameters.AddWithValue("@bookingid", id);
 
+            db.ModifyData(cmdEq);
+
         }
 
         public void DeleteEquipmentFromBooking(Equipment eq, Booking book)
@@ -56,6 +58,17 @@ namespace Logic.Data
             MySqlCommand cmd = new MySqlCommand("DELETE FROM BookingList WHERE BookingId = @bookid AND EquipmentId = @eqid");
             cmd.Parameters.AddWithValue("@bookid", book._id);
             cmd.Parameters.AddWithValue("@eqid", eq._id);
+
+            db.ModifyData(cmd);
+        }
+
+        public void AddEquipmentToBooking(Equipment eq, Booking bk)
+        {
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO BookingList (EquipmentId, BookingId) VALUES (@bookid, @eqid)");
+            cmd.Parameters.AddWithValue("@bookid", bk._id);
+            cmd.Parameters.AddWithValue("@eqid", eq._id);
+
+            db.ModifyData(cmd);
         }
 
 

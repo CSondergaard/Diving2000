@@ -130,6 +130,12 @@ namespace Logic.Data
             BookRep.DeleteEquipmentFromBooking(eq, bk);
         }
 
+        public void AddEquipmentToBooking(Equipment eq, Booking bk)
+        {
+            bookData.AddEquipmentToBooking(eq, bk);
+            BookRep.AddEquipmentToBooking(eq, bk);
+        }
+
 
 
     }

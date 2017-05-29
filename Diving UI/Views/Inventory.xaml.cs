@@ -26,7 +26,7 @@ namespace Diving_UI.Views
     {
         EquipmentRepo eqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
-        DataFacade DataFac = new DataFacade();
+        DataFacade DataFac = DataFacade.Instance;
 
         SearchEquipment searcheq = SearchEquipment.Instance;
         

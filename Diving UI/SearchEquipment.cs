@@ -44,7 +44,10 @@ namespace Diving_UI.Model
 
         protected virtual void OnSearchChanged(List<Equipment> list)
         {
-            SearchChanged?.Invoke(list);
+            if (SearchChanged != null)
+            {
+                SearchChanged(list);
+            }
         }
 
 

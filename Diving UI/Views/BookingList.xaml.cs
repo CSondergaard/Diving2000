@@ -25,7 +25,7 @@ namespace Diving_UI.Views
     {
         EquipmentRepo eqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
-        DataFacade DataFac = new DataFacade();
+        DataFacade DataFac = DataFacade.Instance;
         BookingRepo BookRep = new BookingRepo();
         public BookingList()
         {
@@ -77,6 +77,8 @@ namespace Diving_UI.Views
                     RentBtn.Margin = new Thickness(0, 0, 20, 0);
                     RentBtn.Background = new SolidColorBrush(Colors.Green);
                     RentBtn.Content = "Udlej";
+                    RentBtn.Click += btnRent;
+                    RentBtn.Tag = item2._id;
                     bigDG.Children.Add(RentBtn);
                 }
                 else
@@ -172,6 +174,14 @@ namespace Diving_UI.Views
 
             DataFac.DeleteEquipmentFromBooking(eq, book);
             OnBookingListLoad();
+        }
+
+        private void btnRent(object sender, RoutedEventArgs e)
+        {
+            int id = Convert.ToInt32((sender as Button).Tag);
+
+            
+
         }
     }
 }

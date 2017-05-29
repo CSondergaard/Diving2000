@@ -16,7 +16,7 @@ namespace Logic.Repository
             BookingList.Add(obj);
         }
 
-        public void AddEquipmentTooBooking(Equipment eq, Booking bk)
+        public void AddEquipmentToBooking(Equipment eq, Booking bk)
         {
             bk._equipment.Add(eq);
             Edit(bk);
@@ -93,6 +93,31 @@ namespace Logic.Repository
 
         }
 
+        public List<Equipment> GetEquipmentsNotRentedBetweenDates(DateTime startdate, DateTime endDate, List<Equipment> eqlist)
+        {
+            Booking[] bookings = GetRentedEquipmentsBetweenDates(startdate, endDate);
+            List<Equipment> eq = eqlist;
+
+            foreach (Booking item in bookings)
+            {
+                foreach (Equipment equip in item._equipment)
+                {
+                    bool exist = eq.Any(x => x._id == equip._id);
+                    if (exist)
+                        eq.Remove(equip);
+                }
+
+            }
+
+            return eq;
+        }
+
+        private Booking[] GetRentedEquipmentsBetweenDates(DateTime startDate, DateTime endDate)
+        {
+            return BookingList.Where(x => x._startDate.Ticks <= endDate.Ticks && x._endDate.Ticks >= startDate.Ticks).ToArray();
+
+        }
+
         public DateTime? GetRentDateForEquipment(Equipment eq)
         {
             foreach (Booking item in BookingList)
@@ -105,10 +130,7 @@ namespace Logic.Repository
                     }
                 }
             }
-
-            return null;
-          
-
+            return null;         
         }
     }
 }

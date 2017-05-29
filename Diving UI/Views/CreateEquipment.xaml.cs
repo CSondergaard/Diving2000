@@ -29,7 +29,7 @@ namespace Diving_UI.Views
         EquipmentRepo EqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
 
-        DataFacade DataFac = new DataFacade();
+        DataFacade DataFac = DataFacade.Instance;
 
         public CreateEquipment()
         {
@@ -148,7 +148,6 @@ namespace Diving_UI.Views
             }
 
             KeepSelectedValues();
-
            
         }
 
