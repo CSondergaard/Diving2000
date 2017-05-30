@@ -77,8 +77,10 @@
     </ApplicationDefinition>
     <Compile Include="Model\CurrentBookingList.cs" />
     <Compile Include="Model\BookingSearch.cs" />
+    <Compile Include="Model\Edit.cs" />
     <Compile Include="Model\EquipmentSearch.cs" />
     <Compile Include="Model\SearchBooking.cs" />
+    <Compile Include="Model\SearchBookingList.cs" />
     <Compile Include="Views\chart\CreateValue.xaml.cs">
       <DependentUpon>CreateValue.xaml</DependentUpon>
     </Compile>
@@ -101,6 +103,12 @@
     </Compile>
     <Compile Include="Views\CreateEquipment.xaml.cs">
       <DependentUpon>CreateEquipment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditCategory.xaml.cs">
+      <DependentUpon>EditCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditEquipment.xaml.cs">
+      <DependentUpon>EditEquipment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\filter\BookingFilter.xaml.cs">
       <DependentUpon>BookingFilter.xaml</DependentUpon>
@@ -154,6 +162,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditEquipment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,32 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using Logic.Repository;
 using Logic.Data;
 using Logic;
-using System.Linq;
-using System.IO;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
+using Diving_UI.Model;
 
 namespace Diving_UI.Views
 {
     /// <summary>
-    /// Interaction logic for CreateCategory.xaml
+    /// Interaction logic for EditCategory.xaml
     /// </summary>
-    public partial class CreateCategory : UserControl
+    public partial class EditCategory : UserControl
     {
         PropertyRepo PropRep = new PropertyRepo();
         DataFacade DataFac = DataFacade.Instance;
+        CategoryRepo CatRep = new CategoryRepo();
+        Edit ed = Edit.Instance;
 
         List<Property> PropForCatList = new List<Property>();
+        Category cat;
 
-        public CreateCategory()
+        public EditCategory()
         {
             InitializeComponent();
+
+
+            cat = CatRep.GetById(ed.GetCatId());
+
             FillOutProperty();
+            PropForCatList = cat._values;
+            WriteValueOut();
+            txtName.Text = cat._name;
+            txtAlarm.Text = cat._alarm.ToString();
+            lbUploadName.Content = cat._thumbnail;
+            if (cat._service)
+                RBYes.IsChecked = true;
+            else
+                RBNo.IsChecked = true;
+
         }
 
 
@@ -60,10 +84,12 @@ namespace Diving_UI.Views
             }
 
             WriteValueOut();
+
         }
 
         private void WriteValueOut()
         {
+
             spProp.Children.Clear();
             foreach (Property item in PropForCatList)
             {
@@ -113,7 +139,7 @@ namespace Diving_UI.Views
 
         }
 
-        private void btnCreateCategory_Click(object sender, RoutedEventArgs e)
+        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             bool Service = false;
             string thumb;
@@ -145,15 +171,16 @@ namespace Diving_UI.Views
             }
             else
             {
-                DataFac.AddCategory(new Category(
+                DataFac.EditCategory(new Category(
+                    cat._id,
                     txtName.Text,
-                    thumb,
                     PropForCatList,
+                    thumb,
                     Service,
                     Convert.ToInt32(txtAlarm.Text)
                     ));
 
-                MessageBox.Show("kategorien " + txtName.Text + " er nu oprettet");
+                MessageBox.Show("kategorien " + txtName.Text + " er nu gemt");
 
                 (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
                 (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
@@ -162,6 +189,19 @@ namespace Diving_UI.Views
             }
         }
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if ((System.Windows.Forms.MessageBox.Show("Er du sikker på du vil slette denne Kategori? Dette vil også slette alle items under denne kategori.", "Bekræftelse",
+                System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question,
+                System.Windows.Forms.MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
+            {
+                DataFac.DeleteCategory(cat._id);
+
+                (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
+            }
+        }
         private void btnUpload_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog fileDialog = new System.Windows.Forms.OpenFileDialog();

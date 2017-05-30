@@ -1,5 +1,5 @@
-﻿<UserControl x:Class="Diving_UI.Views.CreateEquipment"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl x:Class="Diving_UI.Views.EditEquipment"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="window">
-        <Label Content="Opret Item: " FontSize="24" FontWeight="Bold"></Label>
+        <Label Content="Rediger item: " FontSize="24" FontWeight="Bold"></Label>
         <StackPanel Width="450" Margin="0,50,0,0">
             <Label x:Name="lbError" Foreground="Red"></Label>
             <Grid>
@@ -22,8 +22,8 @@
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
 
-                <Label Content="Vælg kategori:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
-                <ComboBox x:Name="CBCategory" SelectionChanged="CBCategory_SelectionChanged" Grid.Row="0" Grid.Column="1" Width="250" Height="25" />
+                <Label Content="Kategori" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                <Label x:Name="lbCategory" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 
                 <Label Content="Service:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
                 <xctk:DateTimePicker x:Name="dtpService" Grid.Row="1" Grid.Column="1" Width="250" Height="25">
@@ -33,7 +33,10 @@
 
             </StackPanel>
             <Separator Width="100" Height="10" Background="Transparent" />
-            <Button Content="Opret Equipment" Width="100" Height="25" x:Name="btnCreateEq" Click="btnCreateEq_Click" />
+            <StackPanel Orientation="Horizontal" Width="250">
+                <Button Content="Slet" Width="100" Height="25" x:Name="btnDeleteEq" Click="btnDeleteEq_Click" Background="#C9302C" BorderThickness="0" Margin="25,0,25,0"/>
+                <Button Content="Gem" Width="100" Height="25" x:Name="btnCreateEq" Click="btnCreateEq_Click" Background="#5FD080"  BorderThickness="0" />
+            </StackPanel>
         </StackPanel>
 
     </Grid>

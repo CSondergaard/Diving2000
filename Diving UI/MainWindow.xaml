@@ -43,8 +43,8 @@
             </Button>
 
 
-            <Button x:Name="btnsearch" Content="Søg" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Width="46" BorderBrush="#0a1f3c" Background="#0a1f3c" Foreground="White" Margin="240,25,0,25"/>
-            <TextBox  Width="225" Height="25" VerticalAlignment="Top" Padding="4" HorizontalAlignment="Left" x:Name="SearchTermTextBox" Margin="15,25,0,0" BorderBrush="#0a1f3c" Grid.Column="0" Grid.Row="2"/>
+            <Button x:Name="btnsearch" Content="Søg" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Width="46" BorderBrush="#0a1f3c" Background="#0a1f3c" Foreground="White" Margin="240,25,0,25" Click="btnsearch_Click"/>
+            <TextBox  PreviewTextInput="SearchTermTextBox_PreviewTextInput" Width="225" Height="25" VerticalAlignment="Top" Padding="4" HorizontalAlignment="Left" x:Name="SearchTermTextBox" Margin="15,25,0,0" BorderBrush="#0a1f3c" Grid.Column="0" Grid.Row="2" />
             <TextBlock IsHitTestVisible="False" Text="Indtast tlf nr." VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="DarkGray" Margin="20,32,0,32" Grid.Column="0" Grid.Row="2">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -85,8 +85,8 @@
             <Rectangle Width="660" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="0" Margin="25,6,29,5" />
             <Rectangle x:Name="MainView" Width="660" Height="660" VerticalAlignment="Top" HorizontalAlignment="Center" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="1" Margin="25,8,29,0" />
             <Frame x:Name="FrameChart" Width="330" Height="25" Grid.Row="0" HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Margin="35,0,0,0" />
-            <ScrollViewer Grid.Row="1" ScrollViewer.CanContentScroll="True">
-                <Frame Source="\Views\FrontPage.xaml" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="0,40,0,0" Width="600" Height="600" VerticalAlignment="Top"/>
+            <ScrollViewer Grid.Row="1" ScrollViewer.CanContentScroll="True" Margin="15,9,0,0" Width="675" Height="658" VerticalAlignment="Top" >
+                <Frame Source="\Views\FrontPage.xaml" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="10,25,10,10" />
             </ScrollViewer>
         </Grid>
 

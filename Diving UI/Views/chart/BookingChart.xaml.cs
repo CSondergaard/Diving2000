@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Diving_UI.Model;
+using System.Windows.Controls.Primitives;
 
 namespace Diving_UI.Views.chart
 {
@@ -27,21 +28,44 @@ namespace Diving_UI.Views.chart
         public BookingChart()
         {
             InitializeComponent();
+            UpdateCount();
 
             bklist.ItemAdded += new CurrentBookingList.ItemAddedToListEventHandler(UpdateCount);
+
 
         }
 
         private void UpdateCount()
         {
-            lbCount.Content = bklist.CountBookingList();
+            int count = bklist.CountBookingList();
+            if ( count == 1)
+            {
+                btnAddBooking.Content = bklist.CountBookingList() + " Vare tilføjet";
+            }
+            else if (count == 0)
+            {
+                btnAddBooking.Content = "Ingen vare er tilføjet";
+            }
+            else
+            {
+                btnAddBooking.Content = bklist.CountBookingList() + " Varer tilføjet";
+            }
+            
         }
 
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
-            (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
-            (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\CreateBooking.xaml", UriKind.RelativeOrAbsolute);
+            if (bklist.GetEnddate() == null || bklist.GetStartdate() == null)
+            {
+                MessageBox.Show("Du mangler at udfylde dato");
+            }
+            else
+            {
+                (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\CreateBooking.xaml", UriKind.RelativeOrAbsolute);
+
+            }
         }
     }
 }

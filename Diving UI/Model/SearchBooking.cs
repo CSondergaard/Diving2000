@@ -9,7 +9,6 @@ namespace Diving_UI.Model
 {
     class SearchBooking
     {
-        private List<Equipment> eqlist = new List<Equipment>();
 
         public delegate void ChangedSearchEventHandler(List<Equipment> list);
 
@@ -34,11 +33,6 @@ namespace Diving_UI.Model
         public void Search(List<Equipment> list)
         {
             OnSearchChanged(list);
-        }
-
-        public List<Equipment> GetList()
-        {
-            return eqlist;
         }
 
         protected virtual void OnSearchChanged(List<Equipment> list)

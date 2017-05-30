@@ -12,17 +12,17 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <Label Content="Kunde Tlf nr: "></Label>
-                    <TextBox x:Name="txtPhone" Width="175" Height="25" ></TextBox>
+                    <TextBox x:Name="txtPhone" Width="175" Height="20" ></TextBox>
                     <Label x:Name="txtPhoneError" Foreground="Red"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Periode fra: "></Label>
-                        <TextBox x:Name="txtStartDate" IsReadOnly="True" Width="75" Height="25"></TextBox>
+                        <TextBox x:Name="txtStartDate" IsReadOnly="True" Width="75" Height="20"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Til: "></Label>
-                        <TextBox x:Name="txtEndDate" IsReadOnly="True" Width="75" Height="25"></TextBox>
+                        <TextBox x:Name="txtEndDate" IsReadOnly="True" Width="75" Height="20"></TextBox>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -33,7 +33,7 @@
 
                 </StackPanel>
             </StackPanel>
-            <Button x:Name="btnAddBooking" Content="Tilføj" Height="50" Width="150" Background="#22A30B" Foreground="White"  Click="btnAddBooking_Click" HorizontalAlignment="Right" Margin="0,10,10,0"></Button>
+            <Button x:Name="btnAddBooking" Content="Tilføj" Height="50" Width="150" Background="#22A30B" Foreground="White"  Click="btnAddBooking_Click" HorizontalAlignment="Right" Margin="0,10,10,10"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

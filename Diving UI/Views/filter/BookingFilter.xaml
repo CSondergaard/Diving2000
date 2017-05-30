@@ -6,26 +6,43 @@
              xmlns:local="clr-namespace:Diving_UI.Views.filter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
-    <Grid Background="black" Width="250">
+
+    <Grid Width="250">
         <StackPanel x:Name="spSearch">
             <Label Foreground="White" Content="Periode: " />
-            <StackPanel Orientation="Horizontal">
+            <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Foreground="White" Content="Fra: "></Label>
-                    <DatePicker x:Name="dpStartDate" BorderThickness="0" Text="Vælg dato" Width="100"></DatePicker>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Foreground="White" Content="Til: "></Label>
-                    <DatePicker x:Name="dpEndDate" BorderThickness="0" Text="Vælg dato" Width="100" ></DatePicker>
-                </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Foreground="White" Content="Fra: "></Label>
+                        <DatePicker x:Name="dpStartDate" BorderThickness="0" Text="Vælg dato" Width="100">
+                            <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                    </StackPanel>
 
+                    <StackPanel Orientation="Horizontal">
+                        <Label Foreground="White" Content="Til: "></Label>
+                        <DatePicker x:Name="dpEndDate" BorderThickness="0" Text="Vælg dato" Width="100"  >
+                            <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                    </StackPanel>
+                    
+                </StackPanel>
+                <Label x:Name="lbDateError" Foreground="Red"></Label>
             </StackPanel>
             <Label Content="Kategori: " Foreground="White"></Label>
-            <ComboBox x:Name="cbCategory" SelectionChanged="cbCategory_SelectionChanged"></ComboBox>
-            <StackPanel x:Name="spProp">
+            <ComboBox x:Name="cbCategory" Width="240" SelectionChanged="cbCategory_SelectionChanged"></ComboBox>
+            <StackPanel x:Name="spProp" Margin="0,0,0,10">
 
             </StackPanel>
+            
             <Button x:Name="btnSearch" Click="btnSearch_Click"  Content="Søg" Height="25" Width="100" ></Button>
         </StackPanel>
     </Grid>

@@ -78,6 +78,14 @@ namespace Logic.Data
 
         public void DeleteCategory(int id)
         {
+            List<Equipment> eqlist = eqRep.GetEquipmentsFromCategory(id, eqRep.GetAllEquipments());
+
+            foreach (Equipment item in eqlist)
+            {
+                eqData.DeleteById(item._id);
+                eqRep.DeleteById(item._id);
+            }
+
             catData.DeleteById(id);
             CatRep.DeleteById(id);
         }

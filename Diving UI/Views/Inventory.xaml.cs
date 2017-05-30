@@ -27,6 +27,7 @@ namespace Diving_UI.Views
         EquipmentRepo eqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
         DataFacade DataFac = DataFacade.Instance;
+        Edit ed = Edit.Instance;
 
         SearchEquipment searcheq = SearchEquipment.Instance;
         
@@ -40,9 +41,8 @@ namespace Diving_UI.Views
         }
 
         private void Searcheq_SearchChanged(List<Equipment> eqlist)
-        {
-            List<Equipment> newlist = eqlist;
-            ShowEquipments(newlist);
+        {          
+            ShowEquipments(eqlist);
         }
 
         private void ShowEquipments(List<Equipment> eqlist)
@@ -72,20 +72,20 @@ namespace Diving_UI.Views
                 DG.ColumnDefinitions.Add(col3);
                 br.Child = DG;
 
-                Button Delbtn = new Button();
-                Grid.SetRow(Delbtn, 0);
-                Grid.SetColumn(Delbtn, 2);
-                Delbtn.Width = 60;
-                Delbtn.Height = 20;
-                Delbtn.Click += btnDel;
-                Delbtn.Tag = item._id.ToString();
-                Delbtn.Margin = new Thickness(0, 0, 0, 10);
-                Delbtn.Foreground = Brushes.White;
-                Delbtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#C9302C"));
-                Delbtn.Content = "Slet";
-                Delbtn.HorizontalAlignment = HorizontalAlignment.Center;
-                Delbtn.VerticalAlignment = VerticalAlignment.Bottom;
-                DG.Children.Add(Delbtn);
+                Button Editbtn = new Button();
+                Grid.SetRow(Editbtn, 0);
+                Grid.SetColumn(Editbtn, 2);
+                Editbtn.Width = 60;
+                Editbtn.Height = 20;
+                Editbtn.Click += btnEdit;
+                Editbtn.Tag = item._id.ToString();
+                Editbtn.Margin = new Thickness(0, 0, 0, 10);
+                Editbtn.Foreground = Brushes.White;
+                Editbtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5FD080"));
+                Editbtn.Content = "Rediger";
+                Editbtn.HorizontalAlignment = HorizontalAlignment.Center;
+                Editbtn.VerticalAlignment = VerticalAlignment.Bottom;
+                DG.Children.Add(Editbtn);
 
                 Border brimg = new Border();
                 brimg.BorderThickness = new Thickness(1);
@@ -97,7 +97,10 @@ namespace Diving_UI.Views
                 Image img = new Image();
 
                 Category Cat = CatRep.GetById(item._catId);
-                string url = Cat._thumbnail;
+                string url = "../Resources/18217764_1871114903128407_1044267123_n.png";
+                if (Cat._thumbnail != null)
+                    if (!string.IsNullOrWhiteSpace(Cat._thumbnail))
+                        url = Cat._thumbnail;
 
                 img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
                 img.Height = 50;
@@ -130,11 +133,15 @@ namespace Diving_UI.Views
                 }
             }
         }
-        private void btnDel(object sender, RoutedEventArgs e)
+
+        private void btnEdit(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32((sender as Button).Tag);
-            DataFac.DeleteEquipmentById(id);
-            ShowEquipments(eqRep.GetAllEquipments());
+            ed.SetEqId(id);
+
+            (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\EditEquipment.xaml", UriKind.RelativeOrAbsolute);
         }
     }
 }

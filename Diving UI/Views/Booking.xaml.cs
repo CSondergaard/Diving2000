@@ -24,8 +24,6 @@ namespace Diving_UI.Views
     /// </summary>
     public partial class Booking : UserControl
     {
-
-
         EquipmentRepo eqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
         DataFacade DataFac = DataFacade.Instance;
@@ -43,8 +41,7 @@ namespace Diving_UI.Views
 
         private void Searcheq_SearchChanged(List<Equipment> eqlist)
         {
-            List<Equipment> newlist = eqlist;
-            ShowEquipments(newlist);
+            ShowEquipments(eqlist);
         }
 
         private void ShowEquipments(List<Equipment> eqlist)
@@ -99,7 +96,10 @@ namespace Diving_UI.Views
                 Image img = new Image();
 
                 Category Cat = CatRep.GetById(item._catId);
-                string url = Cat._thumbnail;
+                string url = "../Resources/18217764_1871114903128407_1044267123_n.png";
+                if(Cat._thumbnail != null)
+                    if (!string.IsNullOrWhiteSpace(Cat._thumbnail))
+                         url = Cat._thumbnail;
 
                 img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
                 img.Height = 50;
@@ -134,9 +134,16 @@ namespace Diving_UI.Views
         }
         private void btnAddToList(object sender, RoutedEventArgs e)
         {
-            int id = Convert.ToInt32((sender as Button).Tag);
-            Equipment eq = eqRep.GetById(id);
-            bklist.AddItemToBookingList(eq);
+            if (bklist.GetEnddate() == null || bklist.GetStartdate() == null)
+            {
+                MessageBox.Show("Du mangler at udfylde dato eller trykke søg");
+            }
+            else
+            {
+                int id = Convert.ToInt32((sender as Button).Tag);
+                Equipment eq = eqRep.GetById(id);
+                bklist.AddItemToBookingList(eq);
+            }
         }
     }
 }

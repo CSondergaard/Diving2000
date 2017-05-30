@@ -48,8 +48,13 @@ namespace Logic.Data
         {
             MySqlCommand cmd = new MySqlCommand("DELETE FROM Category WHERE Id = @id");
             cmd.Parameters.AddWithValue("@id", id);
-
+       
             db.ModifyData(cmd);
+
+            MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM CategoryValues WHERE CategoryId = @id");
+            cmdTwo.Parameters.AddWithValue("@id", id);
+
+            db.ModifyData(cmdTwo);
 
         }
 

@@ -68,12 +68,11 @@ namespace Diving_UI.Views.filter
                 {
                     TextBox tbox = CreateTextbox(item._name);
                     Label lb = new Label();
+                    lb.Foreground = new SolidColorBrush(Colors.White);
                     lb.Content = item._name;
 
-                    StackPanel sp = new StackPanel();
-                    sp.Children.Add(tbox);
-                    sp.Children.Add(lb);
-                    spProp.Children.Add(sp);
+                    spProp.Children.Add(lb);
+                    spProp.Children.Add(tbox);
                 }
                 else
                 {
@@ -83,12 +82,11 @@ namespace Diving_UI.Views.filter
                         cb.Items.Add(val);
                     }
                     Label lb = new Label();
+                    lb.Foreground = new SolidColorBrush(Colors.White);
                     lb.Content = item._name;
 
-                    StackPanel sp = new StackPanel();
-                    sp.Children.Add(cb);
-                    sp.Children.Add(lb);
-                    spProp.Children.Add(sp);
+                    spProp.Children.Add(lb);
+                    spProp.Children.Add(cb);
                 }
             }
             FilterListWithCategory();
@@ -100,7 +98,7 @@ namespace Diving_UI.Views.filter
         private ComboBox CreateCombobox(string name)
         {
             ComboBox cbox = new ComboBox();
-            cbox.Width = 200;
+            cbox.Width = 240;
             cbox.Height = 25;
             cbox.Name = name;
             return cbox;
@@ -109,7 +107,7 @@ namespace Diving_UI.Views.filter
         private TextBox CreateTextbox(string name)
         {
             TextBox tbox = new TextBox();
-            tbox.Width = 200;
+            tbox.Width = 240;
             tbox.Height = 25;
             tbox.Name = name;
             return tbox;
@@ -122,25 +120,34 @@ namespace Diving_UI.Views.filter
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            Dictionary<string, string> propList = new Dictionary<string, string>();
-
-            foreach (ComboBox cb in FindVisualChildren<ComboBox>(spProp))
+            if (cbCategory.SelectedValue == null)
             {
-                if(cb.SelectedValue != null)
-                    if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
-                        propList.Add(cb.Name, cb.SelectedValue.ToString());
+                lbError.Content = "Vælg kategori";
             }
-
-            foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
+            else
             {
-                if (!string.IsNullOrWhiteSpace(tb.Text))
-                    propList.Add(tb.Name, tb.Text);
+                lbError.Content = "";
+
+                Dictionary<string, string> propList = new Dictionary<string, string>();
+
+                foreach (ComboBox cb in FindVisualChildren<ComboBox>(spProp))
+                {
+                    if (cb.SelectedValue != null)
+                        if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
+                            propList.Add(cb.Name, cb.SelectedValue.ToString());
+                }
+
+                foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
+                {
+                    if (!string.IsNullOrWhiteSpace(tb.Text))
+                        propList.Add(tb.Name, tb.Text);
+                }
+
+                FilterListWithCategory();
+                eqlist = EqSearch.SearchEquipment(propList, eqlist);
+
+                FireSearchEvent();
             }
-
-            FilterListWithCategory();
-            eqlist = EqSearch.SearchEquipment(propList, eqlist);
-
-            FireSearchEvent();
         }
 
         private void FilterListWithCategory()

@@ -6,10 +6,9 @@
              xmlns:local="clr-namespace:Diving_UI.Views.chart"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Width="100" Height="50">
+    <Grid Height="25">
         <StackPanel Orientation="Horizontal">
-        <Label x:Name="lbCount"></Label>
-            <Button x:Name="btnAddBooking" Click="btnAddBooking_Click" Content="Opret" />
+            <Button x:Name="btnAddBooking" Click="btnAddBooking_Click" Content="Opret" BorderThickness="0" Background="Transparent" Foreground="Black" />
         </StackPanel>
     </Grid>
 </UserControl>

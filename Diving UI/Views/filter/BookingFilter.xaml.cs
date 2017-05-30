@@ -76,7 +76,6 @@ namespace Diving_UI.Views.filter
                 else
                 {
                     ComboBox cb = CreateCombobox(item._name);
-                    cb.Width = 200;
                     foreach (string val in item._values)
                     {
                         cb.Items.Add(val);
@@ -90,7 +89,6 @@ namespace Diving_UI.Views.filter
                 }
             }
             FilterListWithCategory();
-            FireSearchEvent();
 
         }
 
@@ -98,7 +96,7 @@ namespace Diving_UI.Views.filter
         private ComboBox CreateCombobox(string name)
         {
             ComboBox cbox = new ComboBox();
-            cbox.Width = 200;
+            cbox.Width = 240;
             cbox.Height = 25;
             cbox.Name = name;
             return cbox;
@@ -107,7 +105,7 @@ namespace Diving_UI.Views.filter
         private TextBox CreateTextbox(string name)
         {
             TextBox tbox = new TextBox();
-            tbox.Width = 200;
+            tbox.Width = 240;
             tbox.Height = 25;
             tbox.Name = name;
             return tbox;
@@ -115,34 +113,55 @@ namespace Diving_UI.Views.filter
 
         private void cbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoadPropertyForCategory(cbCategory.SelectedValue.ToString());
+            if (dpStartDate.SelectedDate == null || dpEndDate.SelectedDate == null)
+            {
+                lbDateError.Content = "Vælg start og slut dato!";
+            }
+            else
+            {
+                lbDateError.Content = "";
+                LoadPropertyForCategory(cbCategory.SelectedValue.ToString());
+            }
+
         }
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            Dictionary<string, string> propList = new Dictionary<string, string>();
-
-            foreach (ComboBox cb in FindVisualChildren<ComboBox>(spProp))
+            if (dpStartDate.SelectedDate == null || dpEndDate.SelectedDate == null)
             {
-                if (cb.SelectedValue != null)
-                    if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
-                        propList.Add(cb.Name, cb.SelectedValue.ToString());
+                lbDateError.Content = "Vælg start og slut dato!";
             }
-
-            foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
+            else if(cbCategory.SelectedValue == null)
             {
-                if (!string.IsNullOrWhiteSpace(tb.Text))
-                    propList.Add(tb.Name, tb.Text);
+                lbDateError.Content = "Vælg en kategori";
             }
+            else
+            {
+                lbDateError.Content = "";
+                Dictionary<string, string> propList = new Dictionary<string, string>();
 
-            FilterListWithCategory();
-            if(dpStartDate != null && dpEndDate != null && dpStartDate.Text != "Select a date")
-             eqlist = bookingSearch.GetEquipmentsNotRentedBetweenDates(Convert.ToDateTime(dpStartDate.Text), Convert.ToDateTime(dpEndDate.Text), eqlist);
+                foreach (ComboBox cb in FindVisualChildren<ComboBox>(spProp))
+                {
+                    if (cb.SelectedValue != null)
+                        if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
+                            propList.Add(cb.Name, cb.SelectedValue.ToString());
+                }
 
-            eqlist = EqSearch.SearchEquipment(propList, eqlist);
+                foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
+                {
+                    if (!string.IsNullOrWhiteSpace(tb.Text))
+                        propList.Add(tb.Name, tb.Text);
+                }
 
-            FireSearchEvent();
+                FilterListWithCategory();
+                if (dpStartDate != null && dpEndDate != null && dpStartDate.Text != "Select a date")
+                    eqlist = bookingSearch.GetEquipmentsNotRentedBetweenDates(Convert.ToDateTime(dpStartDate.Text), Convert.ToDateTime(dpEndDate.Text), eqlist);
 
-            crbooklist.SetDates(Convert.ToDateTime(dpStartDate.Text), Convert.ToDateTime(dpEndDate.Text));
+                eqlist = EqSearch.SearchEquipment(propList, eqlist);
+
+                FireSearchEvent();
+
+                crbooklist.SetDates(Convert.ToDateTime(dpStartDate.Text), Convert.ToDateTime(dpEndDate.Text));
+            }
         }
 
         private void FilterListWithCategory()

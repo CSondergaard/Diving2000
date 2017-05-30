@@ -16,53 +16,38 @@ using Logic;
 using Logic.Repository;
 using Logic.Data;
 using System.Collections.ObjectModel;
+using Diving_UI.Model;
 
 namespace Diving_UI.Views
 {
     /// <summary>
-    /// Interaction logic for CreateEquipment.xaml
+    /// Interaction logic for EditEquipment.xaml
     /// </summary>
-    public partial class CreateEquipment : UserControl
+    public partial class EditEquipment : UserControl
     {
 
         PropertyRepo PropRep = new PropertyRepo();
         EquipmentRepo EqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
+        Edit ed = Edit.Instance;
 
         DataFacade DataFac = DataFacade.Instance;
 
-        public CreateEquipment()
+        private Category cat;
+        private Equipment eq;
+
+        public EditEquipment()
         {
             InitializeComponent();
-            FillCategory();
-
-
+            eq = EqRep.GetById(ed.GetEqId());
+            cat = CatRep.GetById(eq._catId);
+            CreateProperty(cat);
+            SetValues();
         }
 
-        public void FillCategory()
-        {
-            ObservableCollection<string> list = new ObservableCollection<string>();
-
-            List<Category> catlist = CatRep.GetAll();
-
-            foreach (Category item in catlist)
-            {
-                list.Add(item._name);
-            }
-
-            CBCategory.ItemsSource = list;
-
-        }
-
-        public void CreateProperty(string catName)
+        public void CreateProperty(Category cat)
         {
             SpProp.Children.Clear();
-            Category cat = CatRep.GetByName(catName);
-
-            if(cat._service == false)
-            {
-                dtpService.IsReadOnly = true;
-            }
 
             foreach (Property item in cat._values)
             {
@@ -148,12 +133,6 @@ namespace Diving_UI.Views
             return tbox;
         }
 
-        private void CBCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            lbError.Content = "";
-            CreateProperty(CBCategory.SelectedValue.ToString());
-        }
-
         private void btnCreateValue(object sender, RoutedEventArgs e)
         {
             string content = (sender as Button).Name.ToString();
@@ -173,8 +152,6 @@ namespace Diving_UI.Views
 
             }
 
-
-
         }
 
         private void KeepSelectedValues()
@@ -182,7 +159,7 @@ namespace Diving_UI.Views
 
             Dictionary<string, string> propList = FillOutProperty();
 
-            CreateProperty(CBCategory.SelectedValue.ToString());
+            CreateProperty(cat);
 
             foreach (KeyValuePair<string, string> item in propList)
             {
@@ -204,6 +181,33 @@ namespace Diving_UI.Views
             }
         }
 
+        private void SetValues()
+        {
+            Dictionary<string, string> propList = eq._values;
+
+            foreach (KeyValuePair<string, string> item in propList)
+            {
+                foreach (ComboBox cb in FindVisualChildren<ComboBox>(window))
+                {
+                    if (cb.Name != "CBCategory" && cb.Name == item.Key)
+                    {
+                        cb.SelectedValue = item.Value.ToString();
+                    }
+                }
+
+                foreach (TextBox tb in FindVisualChildren<TextBox>(window))
+                {
+                    if (tb.Name != "PART_TextBox" && tb.Name == item.Key)
+                    {
+                        tb.Text = item.Value.ToString();
+                    }
+                }
+            }
+
+            dtpService.Text = eq._service.ToString();
+            lbCategory.Content = eq._name;
+        }
+
         private void btnCreateEq_Click(object sender, RoutedEventArgs e)
         {
             DateTime date;
@@ -223,31 +227,26 @@ namespace Diving_UI.Views
                 }
             }
 
-            if (CBCategory.SelectedValue == null)
+            if (!DateTime.TryParse(dtpService.Text, out date))
             {
-                lbError.Content = "Du skal vælge en kategori";
+                lbError.Content = "Du skal udfylde en dato for service";
             }
-            else if (dtpService.IsReadOnly == false)
-            { 
-                if(!DateTime.TryParse(dtpService.Text, out date))
-                    lbError.Content = "Du skal udfylde en dato for service";
-            }
-            else if(missing)
+            else if (missing)
             {
                 lbError.Content = "Du mangler at udfylde en værdi";
             }
             else
             {
-                Category cat = CatRep.GetByName(CBCategory.SelectedValue.ToString());
 
-                Equipment eq = new Equipment(
+                Equipment equip = new Equipment(
+                    eq._id,
                     cat._name,
                     cat._id,
                     Convert.ToDateTime(dtpService.Text),
                     propList
                     );
 
-                DataFac.AddEquipment(eq);
+                DataFac.EditEquipment(equip);
 
                 MessageBox.Show("Udstyret" + cat._name + " er nu oprettet");
 
@@ -260,6 +259,24 @@ namespace Diving_UI.Views
 
         }
 
+        private void btnDeleteEq_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if ((System.Windows.Forms.MessageBox.Show("Er du sikker på du vil slette dette item?", "Bekræftelse",
+                System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question,
+                System.Windows.Forms.MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
+            {
+                DataFac.DeleteEquipmentById(eq._id);
+
+                (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
+            }
+
+
+        }
+
         private Dictionary<string, string> FillOutProperty()
         {
             Dictionary<string, string> propList = new Dictionary<string, string>();
@@ -268,7 +285,7 @@ namespace Diving_UI.Views
             {
                 if (cb.Name != "CBCategory")
                 {
-                    if(cb.SelectedValue != null)
+                    if (cb.SelectedValue != null)
                         propList.Add(cb.Name, cb.SelectedValue.ToString());
                     else
                         propList.Add(cb.Name, "");
@@ -279,7 +296,7 @@ namespace Diving_UI.Views
             {
                 if (tb.Name != "PART_TextBox")
                 {
-                        propList.Add(tb.Name, tb.Text);
+                    propList.Add(tb.Name, tb.Text);
                 }
             }
 

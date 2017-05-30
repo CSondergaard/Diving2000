@@ -61,9 +61,9 @@ namespace Logic.Repository
             return BookingList.Find(x => x._id == id);
         }
 
-        public Booking GetByPhone(string phone)
+        public List<Booking> GetByPhone(string phone)
         {
-            return BookingList.Find(x => x._phone == phone);
+            return BookingList.Where(x => x._phone.Contains(phone)).ToList();
         }
 
     }

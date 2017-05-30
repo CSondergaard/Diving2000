@@ -38,8 +38,8 @@ namespace Diving_UI.Views
 
         private void SetDate()
         {
-           txtStartDate.Text = crbkList.GetStartdate().ToString("MM-dd-yyyy");
-           txtEndDate.Text = crbkList.GetEnddate().ToString("MM-dd-yyyy");
+           txtStartDate.Text = Convert.ToDateTime(crbkList.GetStartdate()).ToString("MM-dd-yyyy");
+           txtEndDate.Text = Convert.ToDateTime(crbkList.GetEnddate()).ToString("MM-dd-yyyy");
         }
 
         private void CreateEquipmentList()
@@ -148,13 +148,22 @@ namespace Diving_UI.Views
                     txtPhone.Text,
                     false
                     ));
+
+
+                MessageBox.Show("Booking er nu oprettet");
+
+                (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+                (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
             }
             else
             {
                 txtPhoneError.Content = "Du mangler at udfylde et nr";
             }
 
-           
+
+                
+
         }
     }
 }

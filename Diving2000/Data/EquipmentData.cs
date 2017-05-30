@@ -57,15 +57,6 @@ namespace Logic.Data
             db.ModifyData(cmdTwo);
         }
 
-        public void DeleteEquipmentValue(string ValueName, int id, int prop)
-        {
-            MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM EquipmentValues WHERE Equipment = @id AND Value = @val AND Property = @prop");
-            cmdTwo.Parameters.AddWithValue("@id", id);
-            cmdTwo.Parameters.AddWithValue("@val", ValueName);
-            cmdTwo.Parameters.AddWithValue("@prop", prop);
-
-        }
-
         public void Edit(Equipment obj)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE Equipment SET Service = @ser, Name = @name, catId = @cat WHERE Id = @id");
@@ -79,13 +70,26 @@ namespace Logic.Data
             {
                 Property prop = proprep.GetByName(item.Key);
 
-                MySqlCommand cmdTwo = new MySqlCommand("UPDATE EquipmentValues SET Value = @val WHERE Property = @prop AND Equipment = @eq");
+                DeleteEquipmentValue(item.Value, obj._id, prop._id);
+
+                MySqlCommand cmdTwo = new MySqlCommand("INSERT INTO EquipmentValues (Value, Property, Equipment) VALUES(@val, @prop, @eq)");
                 cmdTwo.Parameters.AddWithValue("@val", item.Value);
                 cmdTwo.Parameters.AddWithValue("@prop",prop._id);
                 cmdTwo.Parameters.AddWithValue("@eq", obj._id);
 
                 db.ModifyData(cmdTwo);
             }
+
+        }
+
+        public void DeleteEquipmentValue(string ValueName, int id, int prop)
+        {
+            MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM EquipmentValues WHERE Equipment = @id AND Value = @val AND Property = @prop");
+            cmdTwo.Parameters.AddWithValue("@id", id);
+            cmdTwo.Parameters.AddWithValue("@val", ValueName);
+            cmdTwo.Parameters.AddWithValue("@prop", prop);
+
+            db.ModifyData(cmdTwo);
 
         }
 

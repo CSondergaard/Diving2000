@@ -11,8 +11,8 @@ namespace Diving_UI.Model
     {
         private static List<Equipment> eqlist = new List<Equipment>();
 
-        private DateTime StartDate;
-        private DateTime EndDate;
+        private DateTime? StartDate;
+        private DateTime? EndDate;
 
         public delegate void ItemAddedToListEventHandler();
 
@@ -45,12 +45,12 @@ namespace Diving_UI.Model
             OnItemAdded();
         }
 
-        public DateTime GetStartdate()
+        public DateTime? GetStartdate()
         {
             return StartDate;
         }
 
-        public DateTime GetEnddate()
+        public DateTime? GetEnddate()
         {
             return EndDate;
         }

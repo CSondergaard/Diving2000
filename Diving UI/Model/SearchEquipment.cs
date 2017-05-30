@@ -9,9 +9,6 @@ namespace Diving_UI.Model
 {
     public class SearchEquipment
     {
-
-        private List<Equipment> eqlist = new List<Equipment>();
-
         public delegate void ChangedSearchEventHandler(List<Equipment> list);
 
         public event ChangedSearchEventHandler SearchChanged;
@@ -35,11 +32,6 @@ namespace Diving_UI.Model
         public void Search(List<Equipment> list)
         {
             OnSearchChanged(list);
-        }
-
-        public List<Equipment> GetList()
-        {
-            return eqlist;
         }
 
         protected virtual void OnSearchChanged(List<Equipment> list)
