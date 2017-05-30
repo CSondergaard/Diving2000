@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Diving_UI.Views.CreateBooking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diving_UI.Views"
+        mc:Ignorable="d"
+        d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Background="White">
+        <StackPanel>
+            <Label Content="Udlejningssag:" FontSize="24" FontWeight="Bold" Margin="0, 10, 0, 10"></Label>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Kunde Tlf nr: "></Label>
+                    <TextBox x:Name="txtPhone" Width="175" Height="25" ></TextBox>
+                    <Label x:Name="txtPhoneError" Foreground="Red"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Periode fra: "></Label>
+                        <TextBox x:Name="txtStartDate" IsReadOnly="True" Width="75" Height="25"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Til: "></Label>
+                        <TextBox x:Name="txtEndDate" IsReadOnly="True" Width="75" Height="25"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Udstyr: "></Label>
+                <StackPanel x:Name="spEquip">
+                
+
+                </StackPanel>
+            </StackPanel>
+            <Button x:Name="btnAddBooking" Content="Tilføj" Height="50" Width="150" Background="#22A30B" Foreground="White"  Click="btnAddBooking_Click" HorizontalAlignment="Right" Margin="0,10,10,0"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

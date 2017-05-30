@@ -6,7 +6,27 @@
              xmlns:local="clr-namespace:Diving_UI.Views.filter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+    
+    <Grid Background="black" Width="250">
+        <StackPanel x:Name="spSearch">
+            <Label Foreground="White" Content="Periode: " />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <Label Foreground="White" Content="Fra: "></Label>
+                    <DatePicker x:Name="dpStartDate" BorderThickness="0" Text="Vælg dato" Width="100"></DatePicker>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Foreground="White" Content="Til: "></Label>
+                    <DatePicker x:Name="dpEndDate" BorderThickness="0" Text="Vælg dato" Width="100" ></DatePicker>
+                </StackPanel>
+
+            </StackPanel>
+            <Label Content="Kategori: " Foreground="White"></Label>
+            <ComboBox x:Name="cbCategory" SelectionChanged="cbCategory_SelectionChanged"></ComboBox>
+            <StackPanel x:Name="spProp">
+
+            </StackPanel>
+            <Button x:Name="btnSearch" Click="btnSearch_Click"  Content="Søg" Height="25" Width="100" ></Button>
+        </StackPanel>
     </Grid>
 </UserControl>

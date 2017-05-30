@@ -18,7 +18,7 @@ namespace Logic.Data
 
         public Booking Add(Booking obj)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO Booking (StartDate, EndDate, Phone, Status VALUES (@startdate, @enddate, @phone, @status)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO Booking (StartDate, EndDate, Phone, Status) VALUES (@startdate, @enddate, @phone, @status)");
             cmd.Parameters.AddWithValue("@startdate", obj._startDate);
             cmd.Parameters.AddWithValue("@enddate", obj._endDate);
             cmd.Parameters.AddWithValue("@phone", obj._phone);

@@ -27,6 +27,7 @@ namespace Diving_UI.Views
         CategoryRepo CatRep = new CategoryRepo();
         DataFacade DataFac = DataFacade.Instance;
         BookingRepo BookRep = new BookingRepo();
+
         public BookingList()
         {
             InitializeComponent();
@@ -100,15 +101,6 @@ namespace Diving_UI.Views
                 foreach (Equipment item in item2._equipment)
                 {
                     Category Cat = CatRep.GetById(item._catId);
-                    string url;
-                    if (!string.IsNullOrWhiteSpace(Cat._thumbnail))
-                    {
-                        url = @"\Resources\CategoryPic\" + Cat._thumbnail;
-                    }
-                    else
-                    {
-                        url = @"\Resources\CategoryPic\dykk.png";
-                    }
 
                     Border DGbr = new Border();
                     DGbr.BorderThickness = new Thickness(0, 1, 0, 0);

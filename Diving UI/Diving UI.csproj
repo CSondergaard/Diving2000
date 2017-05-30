@@ -75,8 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\CurrentBookingList.cs" />
     <Compile Include="Model\BookingSearch.cs" />
     <Compile Include="Model\EquipmentSearch.cs" />
+    <Compile Include="Model\SearchBooking.cs" />
     <Compile Include="Views\chart\CreateValue.xaml.cs">
       <DependentUpon>CreateValue.xaml</DependentUpon>
     </Compile>
@@ -90,6 +92,9 @@
     </Compile>
     <Compile Include="Views\chart\BookingChart.xaml.cs">
       <DependentUpon>BookingChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateBooking.xaml.cs">
+      <DependentUpon>CreateBooking.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateCategory.xaml.cs">
       <DependentUpon>CreateCategory.xaml</DependentUpon>
@@ -137,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\chart\BookingChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
