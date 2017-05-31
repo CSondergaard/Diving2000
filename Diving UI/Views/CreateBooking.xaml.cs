@@ -108,7 +108,7 @@ namespace Diving_UI.Views
 
                 Label lb = new Label();
                 lb.VerticalAlignment = VerticalAlignment.Center;
-                lb.Content = item._name;
+                lb.Content = Cat._name;
                 Grid.SetColumn(lb, 0);
                 DG.Children.Add(lb);
 

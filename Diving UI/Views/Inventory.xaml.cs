@@ -26,29 +26,35 @@ namespace Diving_UI.Views
     {
         EquipmentRepo eqRep = new EquipmentRepo();
         CategoryRepo CatRep = new CategoryRepo();
+        BookingSearch bookSearch = new BookingSearch();
         DataFacade DataFac = DataFacade.Instance;
         Edit ed = Edit.Instance;
 
         SearchEquipment searcheq = SearchEquipment.Instance;
-        
+
+        List<Equipment> booklist = new List<Equipment>();
+
 
         public Inventory()
         {
             InitializeComponent();
+            booklist = bookSearch.GetEquipmentsBookedAtTime(DateTime.Now);
+
             ShowEquipments(eqRep.GetAllEquipments());
+
 
             searcheq.SearchChanged += new SearchEquipment.ChangedSearchEventHandler(Searcheq_SearchChanged);
         }
 
         private void Searcheq_SearchChanged(List<Equipment> eqlist)
-        {          
+        {
             ShowEquipments(eqlist);
         }
 
         private void ShowEquipments(List<Equipment> eqlist)
         {
             SpInv.Children.Clear();
-            
+
             foreach (Equipment item in eqlist)
             {
                 Border br = new Border();
@@ -60,7 +66,6 @@ namespace Diving_UI.Views
                 Grid DG = new Grid();
                 DG.Width = 600;
                 DG.MinHeight = 75;
-                DG.Background = new SolidColorBrush(Colors.Transparent);
                 ColumnDefinition col1 = new ColumnDefinition();
                 col1.Width = new GridLength(75);
                 ColumnDefinition col2 = new ColumnDefinition();
@@ -71,6 +76,35 @@ namespace Diving_UI.Views
                 DG.ColumnDefinitions.Add(col2);
                 DG.ColumnDefinitions.Add(col3);
                 br.Child = DG;
+
+                Canvas cv = new Canvas();
+                cv.Width = 618;
+                cv.ClipToBounds = true;
+
+                Label lbRentDates = new Label();
+                lbRentDates.Width = 100;
+                lbRentDates.Height = 25;
+                lbRentDates.FontSize = 10;
+                lbRentDates.FontFamily = new FontFamily("Arial");
+                lbRentDates.HorizontalContentAlignment = HorizontalAlignment.Center;
+                lbRentDates.VerticalContentAlignment = VerticalAlignment.Center;
+                lbRentDates.Foreground = new SolidColorBrush(Colors.White);
+                lbRentDates.LayoutTransform = new RotateTransform(45);
+                Canvas.SetTop(lbRentDates, -25);
+                Canvas.SetRight(lbRentDates, -25);
+                DG.Children.Add(cv);
+
+                Label lbRentDate = new Label();
+
+
+                if (booklist.Any(x => x._id == item._id))
+                {
+                    lbRentDates.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#C9302C"));
+                    lbRentDates.Content = "UDLEJET";
+                    lbRentDate.Content = "Udlejet indtil: " + bookSearch.GetRentDateForEquipment(item).ToString("dd-MM-yyyy");
+                }
+
+                cv.Children.Add(lbRentDates);
 
                 Button Editbtn = new Button();
                 Grid.SetRow(Editbtn, 0);
@@ -90,7 +124,7 @@ namespace Diving_UI.Views
                 Border brimg = new Border();
                 brimg.BorderThickness = new Thickness(1);
                 brimg.BorderBrush = new SolidColorBrush(Colors.Black);
-                brimg.Margin = new Thickness(10,10,10,10);
+                brimg.Margin = new Thickness(10, 10, 10, 10);
                 Grid.SetColumn(brimg, 0);
                 DG.Children.Add(brimg);
 
@@ -105,16 +139,16 @@ namespace Diving_UI.Views
                 img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
                 img.Height = 50;
                 img.Width = 50;
-                
+
                 brimg.Child = img;
 
                 StackPanel spcol1 = new StackPanel();
                 Grid.SetColumn(spcol1, 1);
                 DG.Children.Add(spcol1);
-                
+
                 Label lb = new Label();
                 lb.VerticalAlignment = VerticalAlignment.Center;
-                lb.Content = item._name;
+                lb.Content = Cat._name;
                 lb.FontSize = 20;
                 Grid.SetColumn(lb, 1);
                 spcol1.Children.Add(lb);
@@ -131,6 +165,9 @@ namespace Diving_UI.Views
                     wp.Children.Add(lb2);
 
                 }
+
+                wp.Children.Add(lbRentDate);
+              
             }
         }
 

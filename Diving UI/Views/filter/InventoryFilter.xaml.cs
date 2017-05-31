@@ -100,7 +100,8 @@ namespace Diving_UI.Views.filter
             ComboBox cbox = new ComboBox();
             cbox.Width = 240;
             cbox.Height = 25;
-            cbox.Name = name;
+            cbox.Tag = name;
+            cbox.SelectionChanged += btnSearch_Click;
             return cbox;
         }
 
@@ -109,7 +110,8 @@ namespace Diving_UI.Views.filter
             TextBox tbox = new TextBox();
             tbox.Width = 240;
             tbox.Height = 25;
-            tbox.Name = name;
+            tbox.Tag = name;
+            tbox.SelectionChanged += btnSearch_Click;
             return tbox;
         }
 
@@ -134,13 +136,13 @@ namespace Diving_UI.Views.filter
                 {
                     if (cb.SelectedValue != null)
                         if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
-                            propList.Add(cb.Name, cb.SelectedValue.ToString());
+                            propList.Add(cb.Tag.ToString(), cb.SelectedValue.ToString());
                 }
 
                 foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
                 {
                     if (!string.IsNullOrWhiteSpace(tb.Text))
-                        propList.Add(tb.Name, tb.Text);
+                        propList.Add(tb.Tag.ToString(), tb.Text);
                 }
 
                 FilterListWithCategory();

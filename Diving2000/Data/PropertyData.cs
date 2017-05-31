@@ -24,13 +24,12 @@ namespace Logic.Data
 
             prop._id = id;
 
-
             if (prop._values != null)
             {
                 foreach (string item in prop._values)
                 {
 
-                    MySqlCommand check = new MySqlCommand("SELECT COUNT(*) FROM Value AS nr WHERE PropertyId = @id AND Name = @name");
+                    MySqlCommand check = new MySqlCommand("SELECT COUNT(*) AS nr FROM Value WHERE PropertyId = @id AND Name = @name");
 
                     check.Parameters.AddWithValue("@id", id);
                     check.Parameters.AddWithValue("@name", item);
@@ -80,16 +79,19 @@ namespace Logic.Data
             MySqlCommand cmd = new MySqlCommand("SELECT Id, Name FROM Property");
             DataTable dtProp = db.GetData(cmd);
 
-            foreach (DataRow rw in dtProp.Rows)
+            if (dtProp != null)
             {
-                List<string> ValueList = GetAllValuesForProperty(Convert.ToInt32(rw["id"]));
+                foreach (DataRow rw in dtProp.Rows)
+                {
+                    List<string> ValueList = GetAllValuesForProperty(Convert.ToInt32(rw["id"]));
 
-                proprep.Add(
-                    new Property(
-                        Convert.ToInt32(rw["Id"]),
-                        rw["name"].ToString(),
-                        ValueList
-                        ));
+                    proprep.Add(
+                        new Property(
+                            Convert.ToInt32(rw["Id"]),
+                            rw["name"].ToString(),
+                            ValueList
+                            ));
+                }
             }
 
         }

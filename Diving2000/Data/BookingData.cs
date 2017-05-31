@@ -71,29 +71,40 @@ namespace Logic.Data
             db.ModifyData(cmd);
         }
 
+        public void RentBooking(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE Booking SET STATUS = 1 WHERE Id = @id");
+            cmd.Parameters.AddWithValue("@id", id);
+
+            db.ModifyData(cmd);
+        }
 
         public void GetAll()
         {
             MySqlCommand cmd = new MySqlCommand("SELECT Id, StartDate, EndDate, Phone, Status FROM Booking");
             DataTable dtbook = db.GetData(cmd);
 
-            foreach (DataRow rw in dtbook.Rows)
+            if (dtbook != null)
             {
 
-                List<Equipment> eqList = GetAllEquipmentsForBooking(Convert.ToInt32(rw["Id"]));
+                foreach (DataRow rw in dtbook.Rows)
+                {
 
-                bookingRep.Add(new Booking(
-                       Convert.ToInt32(rw["Id"]),
-                       eqList,
-                       Convert.ToDateTime(rw["StartDate"]),
-                       Convert.ToDateTime(rw["EndDate"]),
-                       rw["Phone"].ToString(),
-                       Convert.ToBoolean(rw["Status"])
-                       ));
+                    List<Equipment> eqList = GetAllEquipmentsForBooking(Convert.ToInt32(rw["Id"]));
 
+                    bookingRep.Add(new Booking(
+                           Convert.ToInt32(rw["Id"]),
+                           eqList,
+                           Convert.ToDateTime(rw["StartDate"]),
+                           Convert.ToDateTime(rw["EndDate"]),
+                           rw["Phone"].ToString(),
+                           Convert.ToBoolean(rw["Status"])
+                           ));
+
+
+                }
 
             }
-           
         }
 
         public List<Equipment> GetAllEquipmentsForBooking(int id)

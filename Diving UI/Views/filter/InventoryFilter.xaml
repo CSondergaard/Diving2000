@@ -12,9 +12,8 @@
             <Label Content="Kategori: " Foreground="White"></Label>
             <ComboBox x:Name="cbCategory" Width="240" SelectionChanged="cbCategory_SelectionChanged"></ComboBox>
             <StackPanel x:Name="spProp" Margin="0,0,0,10">
-                
+
             </StackPanel>
-            <Button x:Name="btnSearch" Click="btnSearch_Click"  Content="Søg" Height="25" Width="100" ></Button>
         </StackPanel>
     </Grid>
 </UserControl>

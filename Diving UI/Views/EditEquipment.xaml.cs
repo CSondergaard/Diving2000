@@ -107,7 +107,7 @@ namespace Diving_UI.Views
         {
             Button btn = new Button();
             btn.Click += btnCreateValue;
-            btn.Name = name;
+            btn.Tag = name;
             btn.Content = "Ny værdi";
             btn.Width = 75;
             btn.Height = 25;
@@ -120,7 +120,7 @@ namespace Diving_UI.Views
             ComboBox cbox = new ComboBox();
             cbox.Width = 250;
             cbox.Height = 25;
-            cbox.Name = name;
+            cbox.Tag = name;
             return cbox;
         }
 
@@ -129,13 +129,13 @@ namespace Diving_UI.Views
             TextBox tbox = new TextBox();
             tbox.Width = 250;
             tbox.Height = 25;
-            tbox.Name = name;
+            tbox.Tag = name;
             return tbox;
         }
 
         private void btnCreateValue(object sender, RoutedEventArgs e)
         {
-            string content = (sender as Button).Name.ToString();
+            string content = (sender as Button).Tag.ToString();
             var dialog = new CreateValue();
             if (dialog.ShowDialog() == true)
             {
@@ -165,7 +165,7 @@ namespace Diving_UI.Views
             {
                 foreach (ComboBox cb in FindVisualChildren<ComboBox>(window))
                 {
-                    if (cb.Name != "CBCategory" && cb.Name == item.Key)
+                    if (cb.Name != "CBCategory" && cb.Tag.ToString() == item.Key)
                     {
                         cb.SelectedValue = item.Value.ToString();
                     }
@@ -173,7 +173,7 @@ namespace Diving_UI.Views
 
                 foreach (TextBox tb in FindVisualChildren<TextBox>(window))
                 {
-                    if (tb.Name != "PART_TextBox" && tb.Name == item.Key)
+                    if (tb.Name != "PART_TextBox" && tb.Tag.ToString() == item.Key)
                     {
                         tb.Text = item.Value.ToString();
                     }
@@ -189,7 +189,7 @@ namespace Diving_UI.Views
             {
                 foreach (ComboBox cb in FindVisualChildren<ComboBox>(window))
                 {
-                    if (cb.Name != "CBCategory" && cb.Name == item.Key)
+                    if (cb.Name != "CBCategory" && cb.Tag.ToString() == item.Key)
                     {
                         cb.SelectedValue = item.Value.ToString();
                     }
@@ -197,7 +197,7 @@ namespace Diving_UI.Views
 
                 foreach (TextBox tb in FindVisualChildren<TextBox>(window))
                 {
-                    if (tb.Name != "PART_TextBox" && tb.Name == item.Key)
+                    if (tb.Name != "PART_TextBox" && tb.Tag.ToString() == item.Key)
                     {
                         tb.Text = item.Value.ToString();
                     }
@@ -205,7 +205,7 @@ namespace Diving_UI.Views
             }
 
             dtpService.Text = eq._service.ToString();
-            lbCategory.Content = eq._name;
+            lbCategory.Content = cat._name;
         }
 
         private void btnCreateEq_Click(object sender, RoutedEventArgs e)
@@ -237,10 +237,15 @@ namespace Diving_UI.Views
             }
             else
             {
+                foreach (KeyValuePair<string, string> item in eq._values)
+                {
+                    Property pro = PropRep.GetByName(item.Key);
+                    DataFac.DeleteEquipmentValue(item.Value, eq._id, pro._id);
+                }
+                
 
                 Equipment equip = new Equipment(
                     eq._id,
-                    cat._name,
                     cat._id,
                     Convert.ToDateTime(dtpService.Text),
                     propList
@@ -286,7 +291,7 @@ namespace Diving_UI.Views
                 if (cb.Name != "CBCategory")
                 {
                     if (cb.SelectedValue != null)
-                        propList.Add(cb.Name, cb.SelectedValue.ToString());
+                        propList.Add(cb.Tag.ToString(), cb.SelectedValue.ToString());
                     else
                         propList.Add(cb.Name, "");
                 }
@@ -296,7 +301,7 @@ namespace Diving_UI.Views
             {
                 if (tb.Name != "PART_TextBox")
                 {
-                    propList.Add(tb.Name, tb.Text);
+                    propList.Add(tb.Tag.ToString(), tb.Text);
                 }
             }
 

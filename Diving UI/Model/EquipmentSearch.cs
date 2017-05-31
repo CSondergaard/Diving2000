@@ -8,7 +8,7 @@ using Logic.Repository;
 
 namespace Diving_UI.Model
 {
-    class EquipmentSearch
+    public class EquipmentSearch
     {
 
         EquipmentRepo eqRepo = new EquipmentRepo();
@@ -22,7 +22,7 @@ namespace Diving_UI.Model
 
             List<Equipment> EquipmentList = eqRepo.GetAllEquipments();
 
-            booklist = bookSearch.GetEquipmentsBookedAtTime(date, EquipmentList);
+            booklist = bookSearch.GetEquipmentsNotBookedAtTime(date, EquipmentList);
 
             return booklist;
 
@@ -34,7 +34,7 @@ namespace Diving_UI.Model
             BookingSearch bookSearch = new BookingSearch();
             List<Equipment> EquipmentList = eqRepo.GetAllEquipments();
 
-            List<Equipment> booklist = bookSearch.GetEquipmentsBookedAtTime(date, EquipmentList);
+            List<Equipment> booklist = bookSearch.GetEquipmentsNotBookedAtTime(date, EquipmentList);
 
             return booklist;
         }

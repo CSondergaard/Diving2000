@@ -8,7 +8,7 @@ namespace Diving_UI.Model
 {
     public class SearchBookingList
     {
-        private string phone;
+        private string phone = "";
 
         public delegate void SearchEventHandler(string phone);
 

@@ -4,6 +4,7 @@ using Logic;
 using Logic.Data;
 using Logic.Repository;
 using System.Collections.Generic;
+using Diving_UI.Model;
 
 namespace UnitTest
 {
@@ -14,6 +15,7 @@ namespace UnitTest
         CategoryRepo cat = new CategoryRepo();
         BookingRepo Book = new BookingRepo();
         List<Equipment> EquipList = new List<Equipment>();
+        EquipmentSearch eqSearch = new EquipmentSearch();
 
         // Categoryj
         [TestMethod]
@@ -100,9 +102,11 @@ namespace UnitTest
                 Equip.Add(new Equipment(i, "Dragt", 2, DateTime.Now, dic2));
             }
 
+
+
             List<Equipment> eq = Equip.GetAllEquipments();
             eq = Equip.GetEquipmentsFromCategory(2, eq);
-            eq = Equip.SearchEquipment(dic2, eq);
+            eq = eqSearch.SearchEquipment(dic2, eq);
             Assert.AreEqual(249996, eq.Count);
 
 
@@ -116,7 +120,7 @@ namespace UnitTest
             EquipList.Add(new Equipment(1, "Dragt", 2, DateTime.Now));
             Book.Add(new Booking(1, EquipList, DateTime.Now, DateTime.Today, "41412622", true));
             Booking bk = Book.GetById(1);
-            Assert.AreEqual(bk._phone, 41412622);
+            Assert.AreEqual(bk._phone, "41412622");
         }
 
         [TestMethod]
@@ -134,7 +138,7 @@ namespace UnitTest
 
             int nr = bk._equipment.Count;
 
-            Book.AddEquipmentTooBooking(eq, bk);
+            Book.AddEquipmentToBooking(eq, bk);
             bk = Book.GetById(1);
             int newnr = bk._equipment.Count;
             Assert.AreEqual(nr + 1, newnr);

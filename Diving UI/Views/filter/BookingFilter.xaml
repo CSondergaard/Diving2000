@@ -43,7 +43,7 @@
 
             </StackPanel>
             
-            <Button x:Name="btnSearch" Click="btnSearch_Click"  Content="Søg" Height="25" Width="100" ></Button>
+            
         </StackPanel>
     </Grid>
 </UserControl>

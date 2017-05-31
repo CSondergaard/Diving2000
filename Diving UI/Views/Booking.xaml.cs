@@ -97,9 +97,9 @@ namespace Diving_UI.Views
 
                 Category Cat = CatRep.GetById(item._catId);
                 string url = "../Resources/18217764_1871114903128407_1044267123_n.png";
-                if(Cat._thumbnail != null)
+                if (Cat._thumbnail != null)
                     if (!string.IsNullOrWhiteSpace(Cat._thumbnail))
-                         url = Cat._thumbnail;
+                        url = Cat._thumbnail;
 
                 img.Source = new BitmapImage(new Uri(url, UriKind.RelativeOrAbsolute));
                 img.Height = 50;
@@ -113,7 +113,7 @@ namespace Diving_UI.Views
 
                 Label lb = new Label();
                 lb.VerticalAlignment = VerticalAlignment.Center;
-                lb.Content = item._name;
+                lb.Content = Cat._name;
                 lb.FontSize = 20;
                 Grid.SetColumn(lb, 1);
                 spcol1.Children.Add(lb);
@@ -134,6 +134,7 @@ namespace Diving_UI.Views
         }
         private void btnAddToList(object sender, RoutedEventArgs e)
         {
+
             if (bklist.GetEnddate() == null || bklist.GetStartdate() == null)
             {
                 MessageBox.Show("Du mangler at udfylde dato eller trykke søg");
@@ -144,6 +145,7 @@ namespace Diving_UI.Views
                 Equipment eq = eqRep.GetById(id);
                 bklist.AddItemToBookingList(eq);
             }
+
         }
     }
 }

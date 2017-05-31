@@ -59,70 +59,82 @@ namespace Diving_UI.Views
             SpProp.Children.Clear();
             Category cat = CatRep.GetByName(catName);
 
-            if(cat._service == false)
+            if (cat._service == false)
             {
+                dtpService.Text = "";
                 dtpService.IsReadOnly = true;
             }
-
-            foreach (Property item in cat._values)
+            else
             {
-
-                Grid gr = new Grid();
-                ColumnDefinition col1 = new ColumnDefinition();
-                col1.Width = new GridLength(100);
-                ColumnDefinition col2 = new ColumnDefinition();
-                col2.Width = new GridLength(250);
-                ColumnDefinition col3 = new ColumnDefinition();
-                col3.Width = new GridLength(100);
-                RowDefinition row1 = new RowDefinition();
-                gr.ColumnDefinitions.Add(col1);
-                gr.ColumnDefinitions.Add(col2);
-                gr.ColumnDefinitions.Add(col3);
-                gr.Height = 40;
-
-                Label lb = new Label();
-                lb.Content = item._name;
-                lb.VerticalAlignment = VerticalAlignment.Center;
-                Grid.SetColumn(lb, 0);
-                gr.Children.Add(lb);
-
-                if (item._values.Count == 0 || item._values == null)
-                {
-                    TextBox tbox = CreateTextbox(item._name.ToString());
-                    Button btn = CreateButton(item._name.ToString());
-
-                    Grid.SetColumn(tbox, 1);
-                    Grid.SetColumn(btn, 2);
-
-                    gr.Children.Add(tbox);
-                    gr.Children.Add(btn);
-
-                }
-                else
-                {
-                    ComboBox cbox = CreateCombobox(item._name.ToString());
-                    foreach (string val in item._values)
-                    {
-                        cbox.Items.Add(val);
-                    }
-                    Button btn = CreateButton(item._name.ToString());
-
-                    Grid.SetColumn(cbox, 1);
-                    Grid.SetColumn(btn, 2);
-
-                    gr.Children.Add(cbox);
-                    gr.Children.Add(btn);
-                }
-
-                SpProp.Children.Add(gr);
+                dtpService.IsReadOnly = false;
             }
+
+            if (cat._values != null)
+            {
+                foreach (Property item in cat._values)
+                {
+
+                    Grid gr = new Grid();
+                    ColumnDefinition col1 = new ColumnDefinition();
+                    col1.Width = new GridLength(100);
+                    ColumnDefinition col2 = new ColumnDefinition();
+                    col2.Width = new GridLength(250);
+                    ColumnDefinition col3 = new ColumnDefinition();
+                    col3.Width = new GridLength(100);
+                    RowDefinition row1 = new RowDefinition();
+                    gr.ColumnDefinitions.Add(col1);
+                    gr.ColumnDefinitions.Add(col2);
+                    gr.ColumnDefinitions.Add(col3);
+                    gr.Height = 40;
+
+                    Label lb = new Label();
+                    lb.Content = item._name;
+                    lb.VerticalAlignment = VerticalAlignment.Center;
+                    Grid.SetColumn(lb, 0);
+                    gr.Children.Add(lb);
+
+                    if (item._values == null || item._values.Count == 0)
+                    {
+                        TextBox tbox = CreateTextbox(item._name.ToString());
+                        Button btn = CreateButton(item._name.ToString());
+
+                        Grid.SetColumn(tbox, 1);
+                        Grid.SetColumn(btn, 2);
+
+                        gr.Children.Add(tbox);
+                        gr.Children.Add(btn);
+
+                    }
+                    else
+                    {
+                        ComboBox cbox = CreateCombobox(item._name.ToString());
+                        foreach (string val in item._values)
+                        {
+                            cbox.Items.Add(val);
+                        }
+                        Button btn = CreateButton(item._name.ToString());
+
+                        Grid.SetColumn(cbox, 1);
+                        Grid.SetColumn(btn, 2);
+
+                        gr.Children.Add(cbox);
+                        gr.Children.Add(btn);
+                    }
+
+
+                    SpProp.Children.Add(gr);
+                }
+            }
+
+
+
         }
 
         private Button CreateButton(string name)
         {
             Button btn = new Button();
             btn.Click += btnCreateValue;
-            btn.Name = name;
+            btn.Tag = name;
             btn.Content = "Ny værdi";
             btn.Width = 75;
             btn.Height = 25;
@@ -135,7 +147,7 @@ namespace Diving_UI.Views
             ComboBox cbox = new ComboBox();
             cbox.Width = 250;
             cbox.Height = 25;
-            cbox.Name = name;
+            cbox.Tag = name;
             return cbox;
         }
 
@@ -144,7 +156,7 @@ namespace Diving_UI.Views
             TextBox tbox = new TextBox();
             tbox.Width = 250;
             tbox.Height = 25;
-            tbox.Name = name;
+            tbox.Tag = name;
             return tbox;
         }
 
@@ -156,7 +168,7 @@ namespace Diving_UI.Views
 
         private void btnCreateValue(object sender, RoutedEventArgs e)
         {
-            string content = (sender as Button).Name.ToString();
+            string content = (sender as Button).Tag.ToString();
             var dialog = new CreateValue();
             if (dialog.ShowDialog() == true)
             {
@@ -188,7 +200,7 @@ namespace Diving_UI.Views
             {
                 foreach (ComboBox cb in FindVisualChildren<ComboBox>(window))
                 {
-                    if (cb.Name != "CBCategory" && cb.Name == item.Key)
+                    if (cb.Name != "CBCategory" && cb.Tag.ToString() == item.Key)
                     {
                         cb.SelectedValue = item.Value.ToString();
                     }
@@ -196,7 +208,7 @@ namespace Diving_UI.Views
 
                 foreach (TextBox tb in FindVisualChildren<TextBox>(window))
                 {
-                    if (tb.Name != "PART_TextBox" && tb.Name == item.Key)
+                    if (tb.Name != "PART_TextBox" && tb.Tag.ToString() == item.Key)
                     {
                         tb.Text = item.Value.ToString();
                     }
@@ -227,12 +239,15 @@ namespace Diving_UI.Views
             {
                 lbError.Content = "Du skal vælge en kategori";
             }
-            else if (dtpService.IsReadOnly == false)
-            { 
-                if(!DateTime.TryParse(dtpService.Text, out date))
-                    lbError.Content = "Du skal udfylde en dato for service";
+            else if (dtpService.IsReadOnly == false && !DateTime.TryParse(dtpService.Text, out date))
+            {
+                lbError.Content = "Du skal udfylde en dato for service";
             }
-            else if(missing)
+            else if (dtpService.IsReadOnly == false && Convert.ToDateTime(dtpService.Text).Ticks < DateTime.Now.Ticks)
+            {
+                lbError.Content = "Sæt en korrekt service";
+            }
+            else if (missing)
             {
                 lbError.Content = "Du mangler at udfylde en værdi";
             }
@@ -240,16 +255,22 @@ namespace Diving_UI.Views
             {
                 Category cat = CatRep.GetByName(CBCategory.SelectedValue.ToString());
 
+                DateTime? dateend;
+
+                if (string.IsNullOrWhiteSpace(dtpService.Text))
+                    dateend = null;
+                else
+                    dateend = Convert.ToDateTime(dtpService.Text);
+
                 Equipment eq = new Equipment(
-                    cat._name,
                     cat._id,
-                    Convert.ToDateTime(dtpService.Text),
+                    dateend,
                     propList
                     );
 
                 DataFac.AddEquipment(eq);
 
-                MessageBox.Show("Udstyret" + cat._name + " er nu oprettet");
+                MessageBox.Show("Udstyret: " + cat._name + " er nu oprettet");
 
                 (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
                 (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
@@ -268,10 +289,10 @@ namespace Diving_UI.Views
             {
                 if (cb.Name != "CBCategory")
                 {
-                    if(cb.SelectedValue != null)
-                        propList.Add(cb.Name, cb.SelectedValue.ToString());
+                    if (cb.SelectedValue != null)
+                        propList.Add(cb.Tag.ToString(), cb.SelectedValue.ToString());
                     else
-                        propList.Add(cb.Name, "");
+                        propList.Add(cb.Tag.ToString(), "");
                 }
             }
 
@@ -279,7 +300,7 @@ namespace Diving_UI.Views
             {
                 if (tb.Name != "PART_TextBox")
                 {
-                        propList.Add(tb.Name, tb.Text);
+                    propList.Add(tb.Tag.ToString(), tb.Text);
                 }
             }
 

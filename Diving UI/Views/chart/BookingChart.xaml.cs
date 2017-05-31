@@ -59,6 +59,7 @@ namespace Diving_UI.Views.chart
             {
                 MessageBox.Show("Du mangler at udfylde dato");
             }
+           
             else
             {
                 (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;

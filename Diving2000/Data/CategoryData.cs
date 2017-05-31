@@ -48,7 +48,7 @@ namespace Logic.Data
         {
             MySqlCommand cmd = new MySqlCommand("DELETE FROM Category WHERE Id = @id");
             cmd.Parameters.AddWithValue("@id", id);
-       
+
             db.ModifyData(cmd);
 
             MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM CategoryValues WHERE CategoryId = @id");
@@ -70,7 +70,7 @@ namespace Logic.Data
 
             foreach (Property val in obj._values)
             {
-                MySqlCommand check = new MySqlCommand("SELECT COUNT(*) FROM CategoryValues AS nr WHERE CategoryId = @catid AND ValueId = @valid");
+                MySqlCommand check = new MySqlCommand("SELECT COUNT(*) AS nr FROM CategoryValues WHERE CategoryId = @catid AND ValueId = @valid");
                 check.Parameters.AddWithValue("@catid", obj._id);
                 check.Parameters.AddWithValue("@valid", val._id);
 
@@ -95,24 +95,27 @@ namespace Logic.Data
             ");
             DataTable dt = db.GetData(cmd);
 
-            foreach (DataRow rw in dt.Rows)
+            if (dt != null)
             {
-                MySqlCommand cmdProp = new MySqlCommand(@"
+                foreach (DataRow rw in dt.Rows)
+                {
+                    MySqlCommand cmdProp = new MySqlCommand(@"
                 SELECT CategoryId, ValueId
                 FROM CategoryValues
                 WHERE CategoryId = @id
                 ");
-                cmdProp.Parameters.AddWithValue("@id", Convert.ToInt32(rw["id"]));
-                DataTable dtProp = db.GetData(cmdProp);
+                    cmdProp.Parameters.AddWithValue("@id", Convert.ToInt32(rw["id"]));
+                    DataTable dtProp = db.GetData(cmdProp);
 
-                List<Property> ListProp = new List<Property>();
-                foreach (DataRow row in dtProp.Rows)
-                {
-                    Property prop = PropRep.GetById(Convert.ToInt32(row["ValueId"]));
-                    ListProp.Add(prop);
+                    List<Property> ListProp = new List<Property>();
+                    foreach (DataRow row in dtProp.Rows)
+                    {
+                        Property prop = PropRep.GetById(Convert.ToInt32(row["ValueId"]));
+                        ListProp.Add(prop);
+                    }
+                    Category cat = new Category(Convert.ToInt32(rw["Id"]), rw["Name"].ToString(), ListProp, rw["Thumbnail"].ToString(), Convert.ToBoolean(rw["Service"]), Convert.ToInt32(rw["Alarm"]));
+                    rep.Add(cat);
                 }
-                Category cat = new Category(Convert.ToInt32(rw["Id"]), rw["Name"].ToString(), ListProp, rw["Thumbnail"].ToString(), Convert.ToBoolean(rw["Service"]), Convert.ToInt32(rw["Alarm"]));
-                rep.Add(cat);
             }
 
         }

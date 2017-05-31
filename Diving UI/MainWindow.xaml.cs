@@ -26,6 +26,7 @@ namespace Diving_UI
     {
         DataFacade fac = new DataFacade();
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +35,8 @@ namespace Diving_UI
 
         private void btnHomeClick(object sender, RoutedEventArgs e)
         {
+            SearchTermTextBox.Text = "";
+
             (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
             (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
             (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
@@ -58,7 +61,7 @@ namespace Diving_UI
 
         private static bool IsTextAllowed(string text)
         {
-            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
+            Regex regex = new Regex("[^0-9]+"); //regex that matches disallowed text
             return !regex.IsMatch(text);
         }
 

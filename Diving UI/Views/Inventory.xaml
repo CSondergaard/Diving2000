@@ -10,7 +10,6 @@
         <StackPanel x:Name="SpInv">
 
 
-
         </StackPanel>
     </Grid>
 </UserControl>

@@ -60,7 +60,7 @@ namespace Logic.Data
         public void DeleteEquipmentValue(string ValueName, int id, int prop)
         {
             eqData.DeleteEquipmentValue(ValueName, id, prop);
-
+            PropRep.DeleteValue(ValueName, prop);
         }
 
         public void EditEquipment(Equipment obj)
@@ -96,6 +96,8 @@ namespace Logic.Data
             CatRep.Edit(obj);
         }
 
+        //Property
+
         public void AddProperty(Property prop)
         {
             Property newprop = propData.Add(prop);
@@ -107,7 +109,7 @@ namespace Logic.Data
         {
             propData.AddValue(value, id);
             Property prop = PropRep.GetById(id);
-            PropRep.AddValue(prop._name, value);
+            PropRep.AddValue(prop, value);
         }
 
         public void DeletePropertyById(int id)
@@ -142,6 +144,18 @@ namespace Logic.Data
         {
             bookData.AddEquipmentToBooking(eq, bk);
             BookRep.AddEquipmentToBooking(eq, bk);
+        }
+
+        public void RentBooking(int id)
+        {
+            bookData.RentBooking(id);
+            BookRep.RentBooking(id);
+        }
+
+        public void DeleteBooking(int id)
+        {
+            bookData.DeleteById(id);
+            BookRep.DeleteById(id);
         }
 
 

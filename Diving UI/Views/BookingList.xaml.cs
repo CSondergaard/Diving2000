@@ -34,13 +34,20 @@ namespace Diving_UI.Views
         public BookingList()
         {
             InitializeComponent();
-            OnBookingListLoad(BookRep.GetAllBookings());
+
+            OnLoad();
 
             search.Search += new SearchBookingList.SearchEventHandler(BookingGetSearched);
 
         }
 
-        private void BookingGetSearched(string id)
+        public void OnLoad()
+        {
+            string phone = ((MainWindow)System.Windows.Application.Current.MainWindow).SearchTermTextBox.Text;
+            BookingGetSearched(phone);
+        }
+
+        public void BookingGetSearched(string id)
         {
             List<Logic.Booking> list = BookRep.GetByPhone(id);
 
@@ -76,7 +83,7 @@ namespace Diving_UI.Views
                     Label BookInfo = new Label();
 
                     string StartDate = item2._startDate.ToString("dd-MM-yyyy");
-                    string EndDate = item2._startDate.ToString("dd-MM-yyyy");
+                    string EndDate = item2._endDate.ToString("dd-MM-yyyy");
 
                     BookPhone.Content = "TLF: " + item2._phone;
                     BookInfo.Content = "Udlejet fra: " + StartDate + " til " + EndDate;
@@ -87,32 +94,33 @@ namespace Diving_UI.Views
                     spBookInfo.Children.Add(BookInfo);
                     bigDG.Children.Add(spBookInfo);
 
+                    Button RentBtn = new Button();
+                    Grid.SetRow(RentBtn, 0);
+                    RentBtn.HorizontalAlignment = HorizontalAlignment.Right;
+                    RentBtn.VerticalAlignment = VerticalAlignment.Center;
+                    RentBtn.Height = 20;
+                    RentBtn.Width = 60;
+                    RentBtn.Margin = new Thickness(0, 0, 20, 0);
+
+
+
+                    RentBtn.Tag = item2._id;
+
                     if (item2._status == false)
                     {
-                        Button RentBtn = new Button();
-                        Grid.SetRow(RentBtn, 0);
-                        RentBtn.HorizontalAlignment = HorizontalAlignment.Right;
-                        RentBtn.VerticalAlignment = VerticalAlignment.Center;
-                        RentBtn.Height = 20;
-                        RentBtn.Width = 60;
-                        RentBtn.Margin = new Thickness(0, 0, 20, 0);
-                        RentBtn.Background = new SolidColorBrush(Colors.Green);
-                        RentBtn.Content = "Udlej";
+                        RentBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5FD080"));
                         RentBtn.Click += btnRent;
-                        RentBtn.Tag = item2._id;
-                        bigDG.Children.Add(RentBtn);
+                        RentBtn.Content = "Afhentet";
                     }
                     else
                     {
-                        Label RentLbl = new Label();
-                        Grid.SetRow(RentLbl, 0);
-                        RentLbl.HorizontalAlignment = HorizontalAlignment.Right;
-                        RentLbl.Height = 30;
-                        RentLbl.Width = 60;
-                        RentLbl.Margin = new Thickness(0, 0, 20, 0);
-                        RentLbl.Content = "Udlejet";
-                        bigDG.Children.Add(RentLbl);
+                        RentBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#C9302C"));
+                        RentBtn.Click += btnRentDelete;
+                        RentBtn.Content = "Afleveret";
+
                     }
+
+                    bigDG.Children.Add(RentBtn);
 
                     StackPanel RentedItems = new StackPanel();
                     Grid.SetRow(RentedItems, 1);
@@ -157,7 +165,7 @@ namespace Diving_UI.Views
 
                         Label lb = new Label();
                         lb.VerticalAlignment = VerticalAlignment.Center;
-                        lb.Content = item._name;
+                        lb.Content = Cat._name;
                         Grid.SetColumn(lb, 0);
                         DG.Children.Add(lb);
 
@@ -192,7 +200,28 @@ namespace Diving_UI.Views
         private void btnRent(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32((sender as Button).Tag);
+            if ((System.Windows.Forms.MessageBox.Show("Er du sikker på du vil melde denne booking som afhentet?", "Bekræftelse",
+               System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question,
+               System.Windows.Forms.MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
+            {
+                DataFac.RentBooking(id);
+                OnLoad();
+            };
 
+        }
+
+        private void btnRentDelete(object sender, RoutedEventArgs e)
+        {
+            int id = Convert.ToInt32((sender as Button).Tag);
+            if ((System.Windows.Forms.MessageBox.Show("Er du sikker på du vil fjerne denne booking?", "Bekræftelse",
+               System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question,
+               System.Windows.Forms.MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
+            {
+
+                DataFac.DeleteBooking(id);
+                OnLoad();
+
+            };
 
 
         }

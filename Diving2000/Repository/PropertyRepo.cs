@@ -16,9 +16,8 @@ namespace Logic.Repository
             PropertyList.Add(obj);
         }
 
-        public void AddValue(string property, string value)
+        public void AddValue(Property prop, string value)
         {
-            Property prop = GetByName(property);
             prop._values.Add(value);
             Edit(prop);
         }
@@ -28,6 +27,19 @@ namespace Logic.Repository
             Property prop = GetById(id);
 
             PropertyList.Remove(prop);
+        }
+
+        public void DeleteValue(string ValueName, int id)
+        {
+            Property prop = GetById(id);
+            List<string> list = prop._values;
+
+            if (list.Any(x => x == ValueName))
+                list.Remove(ValueName);
+
+            prop._values = list;
+            Edit(prop);
+           
         }
 
         public void Edit(Property obj)

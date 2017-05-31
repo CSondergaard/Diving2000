@@ -10,6 +10,7 @@ using System.Linq;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using Diving_UI.Model;
 
 namespace Diving_UI.Views
 {
@@ -50,16 +51,22 @@ namespace Diving_UI.Views
         {
             Property prop = PropRep.GetByName(CBDefinition.Text);
 
-            if (PropForCatList.Any(x => x._name == prop._name))
+            if (CBDefinition.SelectedValue != null)
             {
 
-            }
-            else
-            {
-                PropForCatList.Add(prop);
-            }
+                if (PropForCatList.Any(x => x._name == prop._name))
+                {
 
-            WriteValueOut();
+                }
+                else
+                {
+                    PropForCatList.Add(prop);
+                }
+
+                WriteValueOut();
+
+
+            }
         }
 
         private void WriteValueOut()
@@ -195,6 +202,15 @@ namespace Diving_UI.Views
 
             FillOutProperty();
 
+
+        }
+
+        private void btnEditCategory_Click(object sender, RoutedEventArgs e)
+        {
+
+            (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
+            (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\EditCategory.xaml", UriKind.RelativeOrAbsolute);
 
         }
     }

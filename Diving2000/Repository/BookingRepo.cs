@@ -51,6 +51,13 @@ namespace Logic.Repository
 
         }
 
+        public void RentBooking(int id)
+        {
+            Booking bk = GetById(id);
+
+            bk._status = true;
+        }
+
         public List<Booking> GetAllBookings()
         {
             return BookingList;

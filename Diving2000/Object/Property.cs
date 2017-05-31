@@ -17,6 +17,7 @@ namespace Logic
         {
             _id = id;
             _name = name;
+            _values = new List<string>();
         }
         public Property(int id, string name, List<string> value)
         {
@@ -28,6 +29,8 @@ namespace Logic
         public Property(string name)
         {
             _name = name;
+            _values = new List<string>();
+
         }
 
 

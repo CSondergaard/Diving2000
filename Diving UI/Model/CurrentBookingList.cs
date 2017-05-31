@@ -41,8 +41,14 @@ namespace Diving_UI.Model
 
         public void AddItemToBookingList(Equipment eq)
         {
-            eqlist.Add(eq);
-            OnItemAdded();
+            if (eqlist.Any(x => x._id == eq._id)) { }
+
+            else
+            {
+                eqlist.Add(eq);
+                OnItemAdded();
+            }
+
         }
 
         public DateTime? GetStartdate()

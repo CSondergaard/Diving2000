@@ -54,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Diving UI\Diving UI.csproj">
+      <Project>{53ced5c2-86fd-427e-933e-cf0e64418fdc}</Project>
+      <Name>Diving UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Diving2000\Logic.csproj">
       <Project>{e32d4546-54f9-4d0f-b4fc-1a7b1529c224}</Project>
       <Name>Logic</Name>

@@ -36,7 +36,6 @@ namespace Logic.Repository
         {
             Equipment OldObj = GetById(obj._id);
 
-            OldObj._name = obj._name;
             OldObj._catId = obj._catId;
             OldObj._values = obj._values;
             OldObj._service = obj._service;

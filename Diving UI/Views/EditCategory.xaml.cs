@@ -28,7 +28,6 @@ namespace Diving_UI.Views
         PropertyRepo PropRep = new PropertyRepo();
         DataFacade DataFac = DataFacade.Instance;
         CategoryRepo CatRep = new CategoryRepo();
-        Edit ed = Edit.Instance;
 
         List<Property> PropForCatList = new List<Property>();
         Category cat;
@@ -36,13 +35,30 @@ namespace Diving_UI.Views
         public EditCategory()
         {
             InitializeComponent();
-
-
-            cat = CatRep.GetById(ed.GetCatId());
-
             FillOutProperty();
+            FillCategory();
+
+        }
+
+        public void FillCategory()
+        {
+            ObservableCollection<string> list = new ObservableCollection<string>();
+
+            List<Category> catlist = CatRep.GetAll();
+
+            foreach (Category item in catlist)
+            {
+                list.Add(item._name);
+            }
+
+            cbName.ItemsSource = list;
+
+        }
+
+        public void FillOutData()
+        {
+            cat = CatRep.GetByName(cbName.SelectedValue.ToString());
             PropForCatList = cat._values;
-            WriteValueOut();
             txtName.Text = cat._name;
             txtAlarm.Text = cat._alarm.ToString();
             lbUploadName.Content = cat._thumbnail;
@@ -51,6 +67,7 @@ namespace Diving_UI.Views
             else
                 RBNo.IsChecked = true;
 
+            WriteValueOut();
         }
 
 
@@ -74,16 +91,21 @@ namespace Diving_UI.Views
         {
             Property prop = PropRep.GetByName(CBDefinition.Text);
 
-            if (PropForCatList.Any(x => x._name == prop._name))
+            if (CBDefinition.SelectedValue != null)
             {
+                if (PropForCatList.Any(x => x._name == prop._name))
+                {
 
-            }
-            else
-            {
-                PropForCatList.Add(prop);
+                }
+                else
+                {
+                    PropForCatList.Add(prop);
+                }
+
+                WriteValueOut();
             }
 
-            WriteValueOut();
+            
 
         }
 
@@ -171,6 +193,7 @@ namespace Diving_UI.Views
             }
             else
             {
+
                 DataFac.EditCategory(new Category(
                     cat._id,
                     txtName.Text,
@@ -236,6 +259,11 @@ namespace Diving_UI.Views
             FillOutProperty();
 
 
+        }
+
+        private void cbName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FillOutData();
         }
     }
 }
