@@ -12,7 +12,7 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <Label Content="Kunde Tlf nr: "></Label>
-                    <TextBox x:Name="txtPhone" Width="175" Height="20" ></TextBox>
+                    <TextBox PreviewTextInput="Phone_PreviewTextInput" x:Name="txtPhone" Width="175" Height="20" ></TextBox>
                     <Label x:Name="txtPhoneError" Foreground="Red"></Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
