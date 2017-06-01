@@ -91,8 +91,6 @@ namespace Diving_UI.Views.filter
             FilterListWithCategory();
 
         }
-
-
         private ComboBox CreateCombobox(string name)
         {
             ComboBox cbox = new ComboBox();
@@ -149,24 +147,13 @@ namespace Diving_UI.Views.filter
             else
             {
                 lbDateError.Content = "";
-                Dictionary<string, string> propList = new Dictionary<string, string>();
+                Dictionary<string, string> propList = FillOutProperty();
 
-                foreach (ComboBox cb in FindVisualChildren<ComboBox>(spProp))
-                {
-                    if (cb.SelectedValue != null)
-                        if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
-                            propList.Add(cb.Tag.ToString(), cb.SelectedValue.ToString());
-                }
 
-                foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
-                {
-                    if (!string.IsNullOrWhiteSpace(tb.Text))
-                        propList.Add(tb.Tag.ToString(), tb.Text);
-                }
 
                 FilterListWithCategory();
-                if (dpStartDate != null && dpEndDate != null && dpStartDate.Text != "Select a date")
-                    eqlist = bookingSearch.GetEquipmentsNotRentedBetweenDates(Convert.ToDateTime(dpStartDate.Text), Convert.ToDateTime(dpEndDate.Text), eqlist);
+
+                eqlist = bookingSearch.GetEquipmentsNotRentedBetweenDates(Convert.ToDateTime(dpStartDate.Text), Convert.ToDateTime(dpEndDate.Text), eqlist);
 
                 eqlist = EqSearch.SearchEquipment(propList, eqlist);
 
@@ -174,6 +161,27 @@ namespace Diving_UI.Views.filter
 
                 crbooklist.SetDates(Convert.ToDateTime(dpStartDate.Text), Convert.ToDateTime(dpEndDate.Text));
             }
+        }
+
+        private Dictionary<string, string> FillOutProperty()
+        {
+            Dictionary<string, string> propList = new Dictionary<string, string>();
+
+
+            foreach (ComboBox cb in FindVisualChildren<ComboBox>(spProp))
+            {
+                if (cb.SelectedValue != null)
+                    if (!string.IsNullOrWhiteSpace(cb.SelectedValue.ToString()))
+                        propList.Add(cb.Tag.ToString(), cb.SelectedValue.ToString());
+            }
+
+            foreach (TextBox tb in FindVisualChildren<TextBox>(spProp))
+            {
+                if (!string.IsNullOrWhiteSpace(tb.Text))
+                    propList.Add(tb.Tag.ToString(), tb.Text);
+            }
+
+            return propList;
         }
 
         private void FilterListWithCategory()

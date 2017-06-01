@@ -184,10 +184,7 @@ namespace Diving_UI.Views
                 }
 
             }
-
-
-
-        }
+        }   
 
         private void KeepSelectedValues()
         {
