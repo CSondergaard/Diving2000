@@ -35,6 +35,7 @@ namespace Logic
             _thumbnail = thumb;
             _service = service;
             _alarm = alarm;
+            _values = new List<Property>();
         }
 
         public Category(string name, string thumb, bool service, int alarm)
@@ -43,6 +44,8 @@ namespace Logic
             _thumbnail = thumb;
             _service = service;
             _alarm = alarm;
+            _values = new List<Property>();
+
         }
 
         public Category(string name, string thumb, List<Property> prop, bool service, int alarm)

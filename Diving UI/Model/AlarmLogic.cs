@@ -31,6 +31,10 @@ namespace Diving_UI.Model
             if (NoPickupList.Count > 0)
                 nr = nr + NoPickupList.Count;
 
+            List<Equipment> eqlist = AlarmForEquipmentService();
+            if (eqlist.Count > 0)
+                nr = nr + eqlist.Count;
+
             return nr;
         }
 
@@ -75,11 +79,24 @@ namespace Diving_UI.Model
             List<Booking> bookList = new List<Booking>();
             foreach (Booking bk in bkRep.GetAllBookings())
             {
-                if (bk._startDate.Ticks > DateTime.Now.Ticks && bk._status == false)
+                if (bk._startDate.Ticks < DateTime.Now.Ticks && bk._status == false)
                     bookList.Add(bk);
             }
 
             return bookList;
+        }
+
+        public List<Equipment> AlarmForEquipmentService()
+        {
+            List<Equipment> eqList = new List<Equipment>();
+
+            foreach (Equipment item in eqRep.GetAllEquipments())
+            {
+                if (Convert.ToDateTime(item._service).Ticks <= DateTime.Now.Ticks)
+                    eqList.Add(item);
+            }
+
+            return eqList;
         }
 
 

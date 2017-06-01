@@ -86,7 +86,6 @@ namespace Logic.Data
 
             if (dtbook != null)
             {
-
                 foreach (DataRow rw in dtbook.Rows)
                 {
 
@@ -116,7 +115,7 @@ namespace Logic.Data
 
             DataTable dtEqId = db.GetData(cmdEqId);
 
-            if (dtEqId == null)
+            if (dtEqId  != null)
             {
                 foreach (DataRow eq in dtEqId.Rows)
                 {

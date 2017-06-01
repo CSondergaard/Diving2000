@@ -86,7 +86,7 @@
             <Rectangle x:Name="MainView" Width="660" Height="660" VerticalAlignment="Top" HorizontalAlignment="Center" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="1" Margin="25,8,29,0" />
             <Frame x:Name="FrameChart" Width="330" Height="25" Grid.Row="0" HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Margin="35,0,0,0" />
             <ScrollViewer Grid.Row="1" ScrollViewer.CanContentScroll="True" Margin="14,8,25,0" Width="675" Height="658" VerticalAlignment="Top" >
-                <Frame Source="\Views\FrontPage.xaml" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="10,25,10,10" />
+                <Frame Source="\Views\FrontPage.xaml" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="20,25,10,10" />
             </ScrollViewer>
             <Button Grid.Row="0" Click="btnAlarm_Click"  x:Name="btnAlarm" HorizontalAlignment="Right" Margin="0,0,35,0" Width="30" Height="30" Background="Transparent" BorderThickness="0">
                 <Image x:Name="imgAlarm" Source="/Resources/Icons/bellwithalarm.png"/>

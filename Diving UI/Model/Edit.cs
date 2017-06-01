@@ -12,6 +12,9 @@ namespace Diving_UI.Model
 
         private int catid;
 
+        public delegate void AlarmUpdateEventHandler();
+        public event AlarmUpdateEventHandler RunAlarm;
+
         #region Singleton Region
         private static volatile Edit instance;
 
@@ -27,6 +30,16 @@ namespace Diving_UI.Model
             }
         }
         #endregion
+
+        public void runAlarm()
+        {
+            OnAlarmRun();
+        }
+
+        protected virtual void OnAlarmRun()
+        {
+            RunAlarm?.Invoke();
+        }
 
         public void SetEqId(int id)
         {

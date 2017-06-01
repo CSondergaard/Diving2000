@@ -78,7 +78,7 @@ namespace Diving_UI.Views
                 br.Child = DG;
 
                 Canvas cv = new Canvas();
-                cv.Width = 618;
+                cv.Width = 613;
                 cv.ClipToBounds = true;
 
                 Label lbRentDates = new Label();

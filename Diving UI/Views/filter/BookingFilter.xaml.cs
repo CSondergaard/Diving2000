@@ -208,5 +208,19 @@ namespace Diving_UI.Views.filter
                 }
             }
         }
+
+        private void dpStartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dpStartDate.SelectedDate == null || dpEndDate.SelectedDate == null)
+                lbDateError.Content = "Vælg start og slut dato!";
+
+            else if (dpStartDate.SelectedDate > dpEndDate.SelectedDate)
+                lbDateError.Content = "Start dato skal være før slut dato!";
+
+            else
+                lbDateError.Content = "";
+
+
+        }
     }
 }

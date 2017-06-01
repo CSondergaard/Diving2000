@@ -266,7 +266,7 @@ namespace Diving_UI.Views
 
         private void btnDeleteEq_Click(object sender, RoutedEventArgs e)
         {
-
+            ed.runAlarm();
 
             if ((System.Windows.Forms.MessageBox.Show("Er du sikker på du vil slette dette item?", "Bekræftelse",
                 System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question,
