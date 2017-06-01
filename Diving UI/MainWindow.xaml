@@ -30,7 +30,7 @@
                 <Button.Template>
                     <ControlTemplate>
                         <Image x:Name="image" Grid.Column="0" Source="Resources/18217764_1871114903128407_1044267123_n.png" />
-                        
+
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="image" Property="Source" Value="Resources/18217764_1871114903128407_1044267123_n.png" />
@@ -85,10 +85,27 @@
             <Rectangle Width="660" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="0" Margin="25,6,29,5" />
             <Rectangle x:Name="MainView" Width="660" Height="660" VerticalAlignment="Top" HorizontalAlignment="Center" Stroke="#363636" StrokeDashArray="4 2" Fill="White" Grid.Column="0" Grid.Row="1" Margin="25,8,29,0" />
             <Frame x:Name="FrameChart" Width="330" Height="25" Grid.Row="0" HorizontalAlignment="Left" NavigationUIVisibility="Hidden" Margin="35,0,0,0" />
-            <ScrollViewer Grid.Row="1" ScrollViewer.CanContentScroll="True" Margin="15,9,0,0" Width="675" Height="658" VerticalAlignment="Top" >
+            <ScrollViewer Grid.Row="1" ScrollViewer.CanContentScroll="True" Margin="14,8,25,0" Width="675" Height="658" VerticalAlignment="Top" >
                 <Frame Source="\Views\FrontPage.xaml" x:Name="FrameContent" NavigationUIVisibility="Hidden" Margin="10,25,10,10" />
             </ScrollViewer>
+            <Button Grid.Row="0" Click="btnAlarm_Click"  x:Name="btnAlarm" HorizontalAlignment="Right" Margin="0,0,35,0" Width="30" Height="30" Background="Transparent" BorderThickness="0">
+                <Image x:Name="imgAlarm" Source="/Resources/Icons/bellwithalarm.png"/>
+            </Button>
+
+
+            <Canvas Opacity="0" ClipToBounds="False" x:Name="cvAlarm" HorizontalAlignment="Right" Width="400" Margin="0,-250,32,0">
+                <Border BorderThickness="1" BorderBrush="Black">
+                    <ScrollViewer ScrollViewer.CanContentScroll="True" Width="400" Height="200" VerticalAlignment="Top" >
+                        <StackPanel Background="White" x:Name="spAlarm" Height="200" Width="400" HorizontalAlignment="right" >
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Canvas>
+
+            <Label Foreground="White" x:Name="lbalarmNr" Height="25"  HorizontalAlignment="Right"></Label>
+
         </Grid>
+        
 
 
 

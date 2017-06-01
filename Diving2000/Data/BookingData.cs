@@ -116,9 +116,13 @@ namespace Logic.Data
 
             DataTable dtEqId = db.GetData(cmdEqId);
 
-            foreach (DataRow eq in dtEqId.Rows)
+            if (dtEqId == null)
             {
-                eqList.Add(EqRep.GetById(Convert.ToInt32(eq["EquipmentId"])));
+                foreach (DataRow eq in dtEqId.Rows)
+                {
+                    eqList.Add(EqRep.GetById(Convert.ToInt32(eq["EquipmentId"])));
+                }
+
             }
 
             return eqList;

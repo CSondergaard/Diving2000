@@ -26,7 +26,7 @@ public class dbConn
         }
         catch(MySqlException ex)
         {
-            MessageBox.Show("Et problem er opstået: " + ex);
+            MessageBox.Show(ex.Message);
         }
 
         return dtreturn;
@@ -47,7 +47,7 @@ public class dbConn
         }
         catch(MySqlException ex)
         {
-            MessageBox.Show("Et problem er opstået: " + ex);
+            MessageBox.Show(ex.Message);
         }
         finally
         {
@@ -75,7 +75,7 @@ public class dbConn
         }
         catch (MySqlException ex)
         {
-            MessageBox.Show("Et problem er opstået: " + ex);
+            MessageBox.Show("Et problem er opstået: " + ex.Message);
         }
         finally
         {
