@@ -8,7 +8,7 @@
              d:DesignHeight="400" d:DesignWidth="500">
     <Grid Background="White">
 
-        <Label Content="Rediger Kategori:" FontSize="24"/>
+        <Label Content="Rediger Kategori:" FontSize="24" Foreground="#0A1E3F" FontWeight="Bold" />
 
         <StackPanel Width="350" Margin="0,65,0, 10">
             <Label x:Name="lbError" Foreground="Red"></Label>
@@ -26,43 +26,43 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
-                <Label Content="Vælg Kategori" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"></Label>
+                <Label Content="Vælg Kategori" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="#0A1E3F" FontWeight="Bold" ></Label>
                 <ComboBox Width="250" Height="25"  x:Name="cbName" SelectionChanged="cbName_SelectionChanged"  Grid.Column="1" Grid.Row="0" ></ComboBox>
-                
-                <Label Content="Kategorinavn: " Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+
+                <Label Content="Kategorinavn: " Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Foreground="#0A1E3F" FontWeight="Bold"  />
                 <TextBox Width="250" Height="25"  x:Name="txtName" Grid.Column="1" Grid.Row="1" ></TextBox>
 
 
-                <Label Content="Alarm:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+                <Label Content="Alarm:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Foreground="#0A1E3F" FontWeight="Bold"  />
                 <TextBox Width="250" Height="25"  x:Name="txtAlarm" Grid.Column="1" Grid.Row="2" ></TextBox>
 
 
-                <Label Content="Service: " Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" />
+                <Label Content="Service: " Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Foreground="#0A1E3F" FontWeight="Bold"  />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Width="250" Grid.Row="3" >
                     <ItemsControl x:Name="RBService" KeyboardNavigation.IsTabStop="False" KeyboardNavigation.TabNavigation="Once" KeyboardNavigation.DirectionalNavigation="Contained">
-                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                            <RadioButton x:Name="RBYes" Content="Ja" KeyboardNavigation.TabIndex="1" />
-                            <Separator Width="15" Background="Transparent"/>
-                            <RadioButton x:Name="RBNo"  Content="Nej" KeyboardNavigation.TabIndex="2" />
+                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                            <RadioButton x:Name="RBYes" Content="Ja" KeyboardNavigation.TabIndex="1" Foreground="#0A1E3F" FontWeight="Bold"  />
+                            <Separator Width="15" Background="Transparent"  />
+                            <RadioButton x:Name="RBNo"  Content="Nej" KeyboardNavigation.TabIndex="2" Foreground="#0A1E3F" FontWeight="Bold" />
                         </StackPanel>
                     </ItemsControl>
                 </StackPanel>
 
 
-                <Button x:Name="btnUpload" Content="Tilføj billede" Click="btnUpload_Click" Width="100" Height="25" Grid.Column="0" Grid.Row="4" ></Button>
-                <Label x:Name="lbUploadName" Content="" Grid.Column="1" Grid.Row="4" />
+                <Button x:Name="btnUpload" Content="Tilføj billede" Background="#0A1F3C" FontFamily="Myriad Pro"  BorderBrush="Transparent" Foreground="White" Click="btnUpload_Click" Width="100" Height="25" Grid.Column="0" Grid.Row="4" ></Button>
+                <Label x:Name="lbUploadName" Content="" Grid.Column="1" Grid.Row="4" Foreground="#0A1E3F" FontWeight="Bold" />
 
 
-                <Label Content="Defination: " Grid.Column="0" Grid.Row="5"  VerticalAlignment="Center"/>
+                <Label Content="Defination: " Grid.Column="0" Grid.Row="5"  VerticalAlignment="Center" Foreground="#0A1E3F" FontWeight="Bold" />
                 <ComboBox x:Name="CBDefinition" Width="150" Height="25" Grid.Column="1"  Grid.Row="5" ></ComboBox>
-                <Button x:Name="btnCreateNewDefinition" Click="btnCreateNewDefinition_Click"  Content="Opret Defination" Height="25" Width="100" Grid.Column="0" Grid.Row="6" ></Button>
-                <Button x:Name="btnDefinition" Click="btnDefinition_Click"  Content="Tilføj Defination" Height="25" Width="150" Grid.Column="1" Grid.Row="6" ></Button>
+                <Button x:Name="btnCreateNewDefinition" Click="btnCreateNewDefinition_Click" Background="#0A1F3C" FontFamily="Myriad Pro"  BorderBrush="Transparent" Foreground="White"  Content="Opret Defination" Height="25" Width="100" Grid.Column="0" Grid.Row="6" ></Button>
+                <Button x:Name="btnDefinition" Click="btnDefinition_Click" Background="#0A1F3C" FontFamily="Myriad Pro"  BorderBrush="Transparent" Foreground="White"  Content="Tilføj Defination" Height="25" Width="150" Grid.Column="1" Grid.Row="6" ></Button>
             </Grid>
             <StackPanel x:Name="spProp">
             </StackPanel>
             <StackPanel Orientation="Horizontal" Width="250">
-                <Button Content="Slet" Width="100" Height="25" x:Name="btnDelete" Click="btnDelete_Click" Background="#C9302C" BorderThickness="0" Margin="25,0,25,0"/>
-                <Button Content="Gem" Width="100" Height="25" x:Name="btnSave" Click="btnSave_Click" Background="#5FD080"  BorderThickness="0" />
+                <Button Content="Slet" Width="100" Height="25" Foreground="White" x:Name="btnDelete" Click="btnDelete_Click" Background="#C9302C" BorderThickness="0" Margin="25,0,25,0"/>
+                <Button Content="Gem" Width="100" Height="25" x:Name="btnSave" Click="btnSave_Click" Background="#0A1F3C" FontFamily="Myriad Pro"  BorderBrush="Transparent" Foreground="White" />
             </StackPanel>
 
         </StackPanel>

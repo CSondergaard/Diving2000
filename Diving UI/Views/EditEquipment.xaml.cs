@@ -49,6 +49,16 @@ namespace Diving_UI.Views
         {
             SpProp.Children.Clear();
 
+            if (cat._service == false)
+            {
+                dtpService.Text = "";
+                dtpService.IsReadOnly = true;
+            }
+            else
+            {
+                dtpService.IsReadOnly = false;
+            }
+
             foreach (Property item in cat._values)
             {
 
@@ -227,9 +237,13 @@ namespace Diving_UI.Views
                 }
             }
 
-            if (!DateTime.TryParse(dtpService.Text, out date))
+            if (dtpService.IsReadOnly == false && !DateTime.TryParse(dtpService.Text, out date))
             {
                 lbError.Content = "Du skal udfylde en dato for service";
+            }
+            else if (dtpService.IsReadOnly == false && Convert.ToDateTime(dtpService.Text).Ticks < DateTime.Now.Ticks)
+            {
+                lbError.Content = "Sæt en korrekt service";
             }
             else if (missing)
             {
@@ -237,17 +251,19 @@ namespace Diving_UI.Views
             }
             else
             {
-                foreach (KeyValuePair<string, string> item in eq._values)
-                {
-                    Property pro = PropRep.GetByName(item.Key);
-                    DataFac.DeleteEquipmentValue(item.Value, eq._id, pro._id);
-                }
-                
+
+                DateTime? dateend;
+
+                if (string.IsNullOrWhiteSpace(dtpService.Text))
+                    dateend = null;
+                else
+                    dateend = Convert.ToDateTime(dtpService.Text);
+
 
                 Equipment equip = new Equipment(
                     eq._id,
                     cat._id,
-                    Convert.ToDateTime(dtpService.Text),
+                    dateend,
                     propList
                     );
 

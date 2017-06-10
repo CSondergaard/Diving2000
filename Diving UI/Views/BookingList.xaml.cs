@@ -80,17 +80,20 @@ namespace Diving_UI.Views
                     br.Child = bigDG;
 
                     Label BookPhone = new Label();
+                    Label Status = new Label();
                     Label BookInfo = new Label();
 
                     string StartDate = item2._startDate.ToString("dd-MM-yyyy");
                     string EndDate = item2._endDate.ToString("dd-MM-yyyy");
 
                     BookPhone.Content = "TLF: " + item2._phone;
+                   
                     BookInfo.Content = "Udlejet fra: " + StartDate + " til " + EndDate;
                     BookInfo.FontSize = 15;
                     Grid.SetRow(BookInfo, 0);
                     StackPanel spBookInfo = new StackPanel();
                     spBookInfo.Children.Add(BookPhone);
+                    spBookInfo.Children.Add(Status);
                     spBookInfo.Children.Add(BookInfo);
                     bigDG.Children.Add(spBookInfo);
 
@@ -108,12 +111,14 @@ namespace Diving_UI.Views
 
                     if (item2._status == false)
                     {
+                        Status.Content = "Status: Afventer pickup";
                         RentBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5FD080"));
                         RentBtn.Click += btnRent;
                         RentBtn.Content = "Afhentet";
                     }
                     else
                     {
+                        Status.Content = "Status: Afhentet";
                         RentBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#C9302C"));
                         RentBtn.Click += btnRentDelete;
                         RentBtn.Content = "Afleveret";
@@ -138,11 +143,11 @@ namespace Diving_UI.Views
                         Grid DG = new Grid();
                         Grid.SetRow(DG, 1);
                         ColumnDefinition col1 = new ColumnDefinition();
-                        col1.Width = new GridLength(190);
+                        col1.Width = new GridLength(150);
                         ColumnDefinition col2 = new ColumnDefinition();
-                        col2.Width = new GridLength(190);
+                        col2.Width = new GridLength(375);
                         ColumnDefinition col3 = new ColumnDefinition();
-                        col3.Width = new GridLength(198);
+                        col3.Width = new GridLength(103);
                         DG.ColumnDefinitions.Add(col1);
                         DG.ColumnDefinitions.Add(col2);
                         DG.ColumnDefinitions.Add(col3);
@@ -159,7 +164,7 @@ namespace Diving_UI.Views
                         Delbtn.Foreground = Brushes.White;
                         Delbtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#C9302C"));
                         Delbtn.Content = "Slet";
-                        Delbtn.HorizontalAlignment = HorizontalAlignment.Right;
+                        Delbtn.HorizontalAlignment = HorizontalAlignment.Center;
                         Delbtn.VerticalAlignment = VerticalAlignment.Center;
                         DG.Children.Add(Delbtn);
 

@@ -79,6 +79,22 @@ namespace Logic.Data
         public void DeleteCategory(int id)
         {
             List<Equipment> eqlist = eqRep.GetEquipmentsFromCategory(id, eqRep.GetAllEquipments());
+            List<Booking> bookList = BookRep.GetAllBookings();
+
+            foreach (Booking bk in bookList)
+            {
+                if (bk._equipment != null)
+                {
+                    foreach (Equipment eq in bk._equipment.ToList())
+                    {
+                        bool check = eqlist.Any(x => x._id == eq._id);
+                        if (check)
+                        {
+                            DeleteEquipmentFromBooking(eq, bk);
+                        }
+                    }
+                }
+            }
 
             foreach (Equipment item in eqlist)
             {
@@ -125,7 +141,7 @@ namespace Logic.Data
         {
             Booking book = bookData.Add(obj);
             BookRep.Add(book);
-               
+
         }
 
         public void DeleteBookingById(int id)

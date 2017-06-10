@@ -9,9 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="window">
-        <Label Content="Opret Item: " FontSize="24" FontWeight="Bold"></Label>
+        <Label Content="Opret Item: " FontSize="24" FontWeight="Bold"  Foreground="#0A1E3F"></Label>
         <StackPanel Width="450" Margin="0,50,0,0">
-            <Label x:Name="lbError" Foreground="Red"></Label>
+            <Label x:Name="lbError" Foreground="Red" ></Label>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
@@ -22,10 +22,10 @@
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
 
-                <Label Content="Vælg kategori:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                <Label Content="Vælg kategori:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"   Foreground="#0A1E3F" FontWeight="Bold"  />
                 <ComboBox x:Name="CBCategory" SelectionChanged="CBCategory_SelectionChanged" Grid.Row="0" Grid.Column="1" Width="250" Height="25" />
 
-                <Label Content="Service:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+                <Label Content="Service:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"  Foreground="#0A1E3F" FontWeight="Bold" />
                 <xctk:DateTimePicker x:Name="dtpService" Grid.Row="1" Grid.Column="1" Width="250" Height="25">
                 </xctk:DateTimePicker>
             </Grid>
@@ -33,7 +33,7 @@
 
             </StackPanel>
             <Separator Width="100" Height="10" Background="Transparent" />
-            <Button Content="Opret Equipment" Width="100" Height="25" x:Name="btnCreateEq" Click="btnCreateEq_Click" />
+            <Button Content="Opret Equipment" Width="100" Height="25" x:Name="btnCreateEq" Click="btnCreateEq_Click" Background="#0A1F3C" FontFamily="Myriad Pro"  BorderBrush="Transparent" Foreground="White" />
         </StackPanel>
 
     </Grid>

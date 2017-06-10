@@ -8,4 +8,5 @@
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
     </Application.Resources>
+
 </Application>

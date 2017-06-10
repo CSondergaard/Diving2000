@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="window">
-        <Label Content="Rediger item: " FontSize="24" FontWeight="Bold"></Label>
+        <Label Content="Rediger item: " FontSize="24" FontWeight="Bold" Foreground="#0A1E3F"></Label>
         <StackPanel Width="450" Margin="0,50,0,0">
             <Label x:Name="lbError" Foreground="Red"></Label>
             <Grid>
@@ -22,10 +22,10 @@
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
 
-                <Label Content="Kategori" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
-                <Label x:Name="lbCategory" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                <Label Content="Kategori" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#0A1E3F" FontWeight="Bold"  />
+                <Label x:Name="lbCategory" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  Foreground="#0A1E3F" FontWeight="Bold" />
 
-                <Label Content="Service:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+                <Label Content="Service:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#0A1E3F" FontWeight="Bold"  />
                 <xctk:DateTimePicker x:Name="dtpService" Grid.Row="1" Grid.Column="1" Width="250" Height="25">
                 </xctk:DateTimePicker>
             </Grid>
@@ -34,8 +34,8 @@
             </StackPanel>
             <Separator Width="100" Height="10" Background="Transparent" />
             <StackPanel Orientation="Horizontal" Width="250">
-                <Button Content="Slet" Width="100" Height="25" x:Name="btnDeleteEq" Click="btnDeleteEq_Click" Background="#C9302C" BorderThickness="0" Margin="25,0,25,0"/>
-                <Button Content="Gem" Width="100" Height="25" x:Name="btnCreateEq" Click="btnCreateEq_Click" Background="#5FD080"  BorderThickness="0" />
+                <Button Content="Slet" Width="100" Height="25" x:Name="btnDeleteEq" Click="btnDeleteEq_Click" Foreground="White" FontFamily="Myriad Pro" Background="#C9302C" BorderThickness="0" Margin="25,0,25,0"/>
+                <Button Content="Gem" Width="100" Height="25" x:Name="btnCreateEq" Click="btnCreateEq_Click" Background="#0A1F3C" FontFamily="Myriad Pro"  BorderBrush="Transparent" Foreground="White" BorderThickness="0" />
             </StackPanel>
         </StackPanel>
 

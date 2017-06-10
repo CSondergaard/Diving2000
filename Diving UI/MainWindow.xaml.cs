@@ -35,6 +35,8 @@ namespace Diving_UI
         public MainWindow()
         {
             InitializeComponent();
+
+
             fac.GetAll();
             CheckForAlarms();
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();

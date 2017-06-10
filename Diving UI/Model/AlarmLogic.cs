@@ -20,7 +20,7 @@ namespace Diving_UI.Model
             int nr = 0;
 
             List<Category> catlist = AlarmForCategory();
-            if(catlist.Count > 0)
+            if (catlist.Count > 0)
                 nr = nr + catlist.Count;
 
             List<Booking> bklist = AlarmForBooking();
@@ -44,7 +44,7 @@ namespace Diving_UI.Model
             List<Category> catList = new List<Category>();
             foreach (Category cat in catRep.GetAll())
             {
-                int alarm = cat._alarm;              
+                int alarm = cat._alarm;
                 foreach (Equipment item in eqRep.GetEquipmentsFromCategory(cat._id, eqRep.GetAllEquipments()))
                 {
                     nreq++;
@@ -92,9 +92,15 @@ namespace Diving_UI.Model
 
             foreach (Equipment item in eqRep.GetAllEquipments())
             {
-                if (Convert.ToDateTime(item._service).Ticks <= DateTime.Now.Ticks)
-                    eqList.Add(item);
+                Category cat = catRep.GetById(item._catId);
+
+                if (cat._service)
+                {
+                    if (Convert.ToDateTime(item._service).Ticks <= DateTime.Now.Ticks)
+                        eqList.Add(item);
+                }
             }
+
 
             return eqList;
         }

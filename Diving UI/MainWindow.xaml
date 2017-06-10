@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:Diving_UI"
         mc:Ignorable="d"
         Title="Booking Manager V2.1.204" Height="768" Width="1024" MinWidth="1024" MinHeight="768" MaxHeight="768" MaxWidth="1024" ResizeMode="CanMinimize">
+
+
     <Grid Name="Template">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="310" />
@@ -105,9 +107,11 @@
             <Label Foreground="White" x:Name="lbalarmNr" Height="25"  HorizontalAlignment="Right"></Label>
 
         </Grid>
-        
+
 
 
 
     </Grid>
+
+    
 </Window>

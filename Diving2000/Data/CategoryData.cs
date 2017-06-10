@@ -70,6 +70,12 @@ namespace Logic.Data
 
             foreach (Property val in obj._values)
             {
+                MySqlCommand del = new MySqlCommand("DELETE FROM CategoryValues WHERE CategoryId = @catid AND ValueId = @valid");
+                del.Parameters.AddWithValue("@catid", obj._id);
+                del.Parameters.AddWithValue("@valid", val._id);
+                db.ModifyData(del);
+
+
                 MySqlCommand check = new MySqlCommand("SELECT COUNT(*) AS nr FROM CategoryValues WHERE CategoryId = @catid AND ValueId = @valid");
                 check.Parameters.AddWithValue("@catid", obj._id);
                 check.Parameters.AddWithValue("@valid", val._id);
@@ -81,7 +87,7 @@ namespace Logic.Data
                     MySqlCommand cmdtwo = new MySqlCommand("INSERT INTO CategoryValues (CategoryId, ValueId) VALUES (@catid, @valid)");
                     cmdtwo.Parameters.AddWithValue("@catid", obj._id);
                     cmdtwo.Parameters.AddWithValue("@valid", val._id);
-                    db.ModifyData(cmd);
+                    db.ModifyData(cmdtwo);
                 }
             }
 

@@ -259,6 +259,12 @@
     <Resource Include="Resources\Icons\bellwithalarm.png" />
     <Resource Include="Resources\Icons\bellwithout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CategoryPic\vaddragt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CategoryPic\tank.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
