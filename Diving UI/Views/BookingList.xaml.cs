@@ -115,6 +115,7 @@ namespace Diving_UI.Views
                         RentBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#5FD080"));
                         RentBtn.Click += btnRent;
                         RentBtn.Content = "Afhentet";
+                        RentBtn.Foreground = Brushes.White;
                     }
                     else
                     {
@@ -122,6 +123,7 @@ namespace Diving_UI.Views
                         RentBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#C9302C"));
                         RentBtn.Click += btnRentDelete;
                         RentBtn.Content = "Afleveret";
+                        RentBtn.Foreground = Brushes.White;
 
                     }
 
@@ -200,6 +202,8 @@ namespace Diving_UI.Views
 
             DataFac.DeleteEquipmentFromBooking(eq, book);
             BookingGetSearched(search.GetPhone());
+
+
         }
 
         private void btnRent(object sender, RoutedEventArgs e)
@@ -212,6 +216,9 @@ namespace Diving_UI.Views
                 DataFac.RentBooking(id);
                 OnLoad();
             };
+            Edit ed = Edit.Instance;
+            ed.runAlarm();
+
 
         }
 
@@ -227,6 +234,9 @@ namespace Diving_UI.Views
                 OnLoad();
 
             };
+
+            Edit ed = Edit.Instance;
+            ed.runAlarm();
 
 
         }

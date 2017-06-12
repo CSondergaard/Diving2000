@@ -107,7 +107,7 @@ namespace Diving_UI
         }
 
         private void CheckForAlarms()
-        {
+        { 
             int nr = alarm.GetAlarms();
             if (nr > 0)
             {
@@ -141,6 +141,7 @@ namespace Diving_UI
 
         private void ShowAlarmItems()
         {
+            spAlarm.Children.Clear();
             WriteAlarmCategory();
             WriteAlarmBooking();
             WriteAlarmBookingPickup();

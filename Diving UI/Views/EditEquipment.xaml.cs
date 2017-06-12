@@ -271,6 +271,9 @@ namespace Diving_UI.Views
 
                 MessageBox.Show("Udstyret" + cat._name + " er nu oprettet");
 
+                Edit ed = Edit.Instance;
+                ed.runAlarm();
+
                 (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
                 (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
                 (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
