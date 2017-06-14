@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diving_UI"
         mc:Ignorable="d"
-        Title="Booking Manager V2.1.204" Height="768" Width="1024" MinWidth="1024" MinHeight="768" MaxHeight="768" MaxWidth="1024" ResizeMode="CanMinimize">
+        Title="Diving 2000 Inventory Manager" Height="768" Width="1024" MinWidth="1024" MinHeight="768" MaxHeight="768" MaxWidth="1024" ResizeMode="CanMinimize">
 
 
     <Grid Name="Template">

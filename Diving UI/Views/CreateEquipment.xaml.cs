@@ -16,6 +16,7 @@ using Logic;
 using Logic.Repository;
 using Logic.Data;
 using System.Collections.ObjectModel;
+using Diving_UI.Model;
 
 namespace Diving_UI.Views
 {
