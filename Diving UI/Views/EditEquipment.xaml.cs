@@ -293,6 +293,9 @@ namespace Diving_UI.Views
             {
                 DataFac.DeleteEquipmentById(eq._id);
 
+                Edit ed = Edit.Instance;
+                ed.runAlarm();
+
                 (Application.Current.MainWindow.FindName("FrameFilter") as Frame).Source = null;
                 (Application.Current.MainWindow.FindName("FrameChart") as Frame).Source = null;
                 (Application.Current.MainWindow.FindName("FrameContent") as Frame).Source = new Uri(@"\Views\FrontPage.xaml", UriKind.RelativeOrAbsolute);
