@@ -67,11 +67,15 @@ namespace Logic.Data
         {
             MySqlCommand cmd = new MySqlCommand("DELETE FROM Property WHERE Id = @id");
             cmd.Parameters.AddWithValue("@id", id);
-            MySqlCommand cmdTwo = new MySqlCommand("DELTE FROM VALUE WHERE PropertyId = @id");
+            MySqlCommand cmdTwo = new MySqlCommand("DELETE FROM VALUE WHERE PropertyId = @id");
             cmdTwo.Parameters.AddWithValue("@id", id);
+            MySqlCommand cmdThree = new MySqlCommand("DELETE FROM CategoryValues WHERE ValueId = @id");
+            cmdThree.Parameters.AddWithValue("@id", id);
+
 
             db.ModifyData(cmd);
             db.ModifyData(cmdTwo);
+            db.ModifyData(cmdThree);
         }
 
         public void GetAll()
